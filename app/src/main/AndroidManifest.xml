@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="fr.wcs.wildcommunitysocks">
+=======
+    package="com.example.wilder.wildsockscommunity">
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+<<<<<<< HEAD
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MyProfil"
             android:label="@string/app_name">
+=======
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

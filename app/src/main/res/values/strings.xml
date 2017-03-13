@@ -1,6 +1,10 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">WildCommunitySocks</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+=======
+    <string name="app_name">WildSocksCommunity</string>
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
 </resources>

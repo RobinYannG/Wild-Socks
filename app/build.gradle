@@ -4,13 +4,21 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
+<<<<<<< HEAD
         applicationId "fr.wcs.wildcommunitysocks"
         minSdkVersion 19
+=======
+        applicationId "com.example.wilder.wildsockscommunity"
+        minSdkVersion 15
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+<<<<<<< HEAD
         vectorDrawables.useSupportLibrary = true
+=======
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
     }
     buildTypes {
         release {
@@ -25,9 +33,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+<<<<<<< HEAD
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'com.android.support:support-vector-drawable:25.1.1'
     compile 'com.roughike:bottom-bar:2.1.1'
+=======
+    compile 'com.android.support:appcompat-v7:25.2.0'
+>>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
     testCompile 'junit:junit:4.12'
 }
