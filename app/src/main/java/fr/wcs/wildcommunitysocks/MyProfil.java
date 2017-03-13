@@ -2,10 +2,7 @@ package fr.wcs.wildcommunitysocks;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/WildCommunitySocks.iml" filepath="$PROJECT_DIR$/WildCommunitySocks.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/WildSocksCommunity.iml" filepath="$PROJECT_DIR$/WildSocksCommunity.iml" />
->>>>>>> 80b74f2247a84cea5fe7e357fb74ceb40f347add
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
