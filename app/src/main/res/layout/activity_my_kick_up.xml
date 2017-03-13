@@ -19,13 +19,13 @@
         app:bb_tabXmlResource="@xml/bottombar_tabs_color_changing" />
 
     <TextView
-        android:id="@+id/messageViewMyProfil"
+        android:id="@+id/messageViewMyKickUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="87dp"
         android:layout_marginTop="126dp"
         android:layout_toStartOf="@+id/bottomBar"
-        android:text="JE SUIS SUR LA PAGE HOME" />
+        android:text="TextView" />
 
 </RelativeLayout>
