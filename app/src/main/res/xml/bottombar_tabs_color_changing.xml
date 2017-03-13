@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home"
+        title="Mon Profil"
+        barColorWhenSelected="@color/colorAccent" />
+    <tab
+        id="@+id/tab_flux"
+        icon="@drawable/ic_flux"
+        title="Flux"
+        barColorWhenSelected="#5D4037" />
+    <tab
+        id="@+id/tab_add"
+        icon="@drawable/ic_add"
+        title="Ajouter photo"
+        barColorWhenSelected="#7B1FA2" />
+    <tab
+        id="@+id/tab_classement"
+        icon="@drawable/ic_star"
+        title="Classement"
+        barColorWhenSelected="#FF5252" />
+    <tab
+        id="@+id/tab_favoris"
+        icon="@drawable/ic_favoris"
+        title="Mes Kick Up"
+        barColorWhenSelected="#FF9800" />
+</tabs>
