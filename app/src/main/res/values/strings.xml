@@ -2,5 +2,10 @@
 
 
     <string name="app_name">WildSocksCommunity</string>
+    <string name="button_start_id">S\'identifier</string>
+    <string name="button_start_new">Créer un compte</string>
+    <string name="confirm">Ok</string>
+    <string name="cancel">Annuler</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

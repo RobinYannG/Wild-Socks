@@ -18,13 +18,20 @@
         <activity android:name=".Flux" android:label="FLUX"/>
         <activity android:name=".Classement" android:label="Classement" />
         <activity android:name=".AddPhotos" android:label="AJOUTER PHOTOS" />
-        <activity android:name=".MyKickUp" android:label="Mes KickUP">
+        <activity android:name=".MyKickUp" android:label="Mes KickUP"/>
+
+        <activity
+            android:name=".MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".NewAccountActivity" />
+        <activity android:name=".IdentificationActivity"></activity>
     </application>
 
 </manifest>
