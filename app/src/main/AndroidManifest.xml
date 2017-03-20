@@ -9,29 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MyProfil"
-            android:label="PROFIL"
-            android:theme="@style/AppTheme">
-        </activity>
-
-        <activity android:name=".Flux" android:label="FLUX"/>
-        <activity android:name=".Classement" android:label="Classement" />
-        <activity android:name=".AddPhotos" android:label="AJOUTER PHOTOS" />
-        <activity android:name=".MyKickUp" android:label="Mes KickUP"/>
-
-        <activity
-            android:name=".MainActivity" >
-
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".NewAccountActivity" />
-        <activity android:name=".IdentificationActivity"></activity>
+        <activity android:name=".IdentificationActivity" />
+        <activity android:name=".Navigation"/>
+
+
     </application>
 
 </manifest>

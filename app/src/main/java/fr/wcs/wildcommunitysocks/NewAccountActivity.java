@@ -19,7 +19,7 @@ public class NewAccountActivity extends AppCompatActivity {
         button_new_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_create= new Intent(NewAccountActivity.this, MyProfil.class);
+                Intent intent_create= new Intent(NewAccountActivity.this, Navigation.class);
                 /**
                  * After checking the mandatory information is complete :
                  * Pseudo
