@@ -23,5 +23,24 @@
         android:layout_alignParentStart="true"
         app:bb_behavior="shifting|underNavbar"
         app:bb_tabXmlResource="@xml/bottombar_tabs_color_changing" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/buttonLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/btn_dialog" />
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintTop_toBottomOf="@+id/textViewProfile" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

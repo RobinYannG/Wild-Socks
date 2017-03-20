@@ -7,6 +7,29 @@
     <string name="confirm">Ok</string>
     <string name="cancel">Annuler</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="signUp">Pas encore de compte? Inscris-toi ici!</string>
+    <string name="create">Créer mon profil</string>
+    <string name="newAccount"> Complétez tes informations pour créer ton compte</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="Email">Email</string>
+    <string name="pwd">Mot de Passe</string>
+    <string name="footSize">Ta Pointure?</string>
+    <string name="moto">Quelle est ta devise?</string>
+    <string name="picture">Ajoute ta photo de profil!</string>
+    <string name="signIn">Bienvenue! Connecte-toi:</string>
+    <string name="toastDefaultAccountInformation">Merci de compléter le Pseudo, l\'Email et le mot de passe</string>
+    <string name="toastDefaultPwd">Merci d\'indiquer un mot de passe</string>
+    <string name="toastDefaultEmail">Merci de compléter ton Email</string>
+    <string name="toastDefaultSignIn">Merci d\'indiquer ton Email et Mot de passe</string>
+    <string name="signed_in_fmt">Bienvenue</string>
+    <string name="signInSuccess">Bienvenue</string>
+    <string name="signInFailed">Bienvenue</string>
+    <string name="signInPending">Identification en cours...</string>
+    <string name="registrationPending">Enregistrement en cours</string>
+    <string name="alreadyRegistered">Déjà inscrit? Connectes-toi ici!</string>
+    <string name="registrationFailed">Problème lors de la création de compte!</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

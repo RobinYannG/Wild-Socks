@@ -2,12 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fr.wcs.wildcommunitysocks.MyProfil">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:id="@+id/textViewProfile"
+        android:layout_height="wrap_content"
         android:text="MON PROFIL" />
+
+
+
+
 
 </FrameLayout>
