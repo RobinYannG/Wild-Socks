@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "377659717646",
+    "firebase_url": "https://wild-socks.firebaseio.com",
+    "project_id": "wild-socks",
+    "storage_bucket": "wild-socks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377659717646:android:babcfb658368f6c2",
+        "android_client_info": {
+          "package_name": "fr.wcs.wildcommunitysocks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377659717646-llj0c2ia4hit00jngf47o0sobrqudj9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.wcs.wildcommunitysocks",
+            "certificate_hash": "bd3526c21a1acd06bc3d3be25cb65b06b55affe0"
+          }
+        },
+        {
+          "client_id": "377659717646-so979ohosngu3hp2kps0h2kroli7rlor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-pwly72TU-GJ4ay5qhHqYLigTbkqoqrA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377659717646-so979ohosngu3hp2kps0h2kroli7rlor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
