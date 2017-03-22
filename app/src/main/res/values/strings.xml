@@ -28,6 +28,10 @@
     <string name="registrationPending">Enregistrement en cours</string>
     <string name="alreadyRegistered">Déjà inscrit? Connectes-toi ici!</string>
     <string name="registrationFailed">Problème lors de la création de compte!</string>
+    <string name="gallery">Album</string>
+    <string name="camera">Camera</string>
+    <string name="sockName">Légende?</string>
+    <string name="newSocks">Ajoutes une nouvelle photo!</string>
 
 
 

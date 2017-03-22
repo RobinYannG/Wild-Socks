@@ -21,7 +21,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
     private FirebaseAuth firebaseAuth;
 
     //view objects
-    private TextView textViewUserEmail;
+    private TextView textViewUserName;
     private ImageButton buttonLogout;
 
     @Override
@@ -47,10 +47,10 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         //initializing views
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         buttonLogout=(ImageButton) findViewById(R.id.buttonLogout);
-        textViewUserEmail=(TextView) findViewById(R.id.textViewUserEmail);
+        textViewUserName=(TextView) findViewById(R.id.textViewUserName);
 
         //displaying logged in user name
-        textViewUserEmail.setText("Welcome "+user.getEmail());
+        textViewUserName.setText("Welcome "+user.getDisplayName());
 
         //adding listener to button
         buttonLogout.setOnClickListener(this);
