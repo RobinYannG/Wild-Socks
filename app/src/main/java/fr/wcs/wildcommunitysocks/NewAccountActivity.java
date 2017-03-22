@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,17 +17,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class NewAccountActivity extends AppCompatActivity implements View.OnClickListener{
 
     //defining view objects
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextUserName;
     private TextView textViewSignIn;
     private Button buttonSignup;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
+
+    private String email;
+    private String password;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,7 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         textViewSignIn = (TextView) findViewById(R.id.alreadyRegistered);
         editTextEmail = (EditText) findViewById(R.id.editEmail);
         editTextPassword = (EditText) findViewById(R.id.editPwd);
+        editTextUserName=(EditText) findViewById(R.id.editPseudo);
 
         progressDialog = new ProgressDialog(this);
 
@@ -61,8 +70,9 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
 
     public void registerUser(){
         //getting email and password from edit texts
-        String email = editTextEmail.getText().toString().trim();
-        String password  = editTextPassword.getText().toString().trim();
+        email = editTextEmail.getText().toString().trim();
+        password  = editTextPassword.getText().toString().trim();
+        userName = editTextUserName.getText().toString().trim();
 
 
         //checking if email and passwords are empty
@@ -90,8 +100,23 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if(task.isSuccessful()){
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), Navigation.class));
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(userName)
+                                    //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                    .build();
+
+                            user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Log.d("TAG", "User profile update.");
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(), Navigation.class));
+                                    }
+                                }
+                            });
                         }else{
                             //display some message here
                            // Log.e(TAG, "Sign-in Failed: " + task.getException().getMessage());
