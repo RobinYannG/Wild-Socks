@@ -82,6 +82,14 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         /**Ensure there is a camera activity to handle the Intent*/
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+        /**    takePictureIntent.setType("image/*");
+            takePictureIntent.putExtra("crop", "true");
+            takePictureIntent.putExtra("scale", "true");
+            takePictureIntent.putExtra("outputX", 200);
+            takePictureIntent.putExtra("outputY", 200);
+            takePictureIntent.putExtra("aspectX", 1);
+            takePictureIntent.putExtra("aspectY", 1);
+            takePictureIntent.putExtra("return-data", "true");**/
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             /** Create the file where the photo should go
              */
@@ -93,9 +101,16 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),
-                        "com.example.android.fileprovider", photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                Uri photoURI;
+                try {
+                    photoURI = FileProvider.getUriForFile(getActivity(),"com.example.android.fileprovider", photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                }
+                //Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                 //       "com.example.android.fileprovider", photoFile);
+               // takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
             }
 
@@ -120,6 +135,29 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             Bundle extras = data.getExtras();
             imageUri=data.getData();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            /**scaling the image
+            // Get the dimensions of the View
+            int targetW = 200;
+            int targetH = 200;
+
+            // Get the dimensions of the bitmap
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            // Determine how much to scale down the image
+            int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+            // Decode the image file into a Bitmap sized to fill the View
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+            bmOptions.inPurgeable = true;
+
+            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+            showPhoto.setImageBitmap(bitmap);
+            //**/
             showPhoto.setImageBitmap(imageBitmap);
 
             galleryAddPic();
