@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 public class MyKickUp extends Fragment {
     public static MyKickUp newInstance() {
@@ -20,6 +21,25 @@ public class MyKickUp extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_kick_up, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_flux, container, false);
+
+        GridView gridview = (GridView) view.findViewById(R.id.GridViewFlux);
+        gridview.setAdapter(new ImageAdapter(getActivity()));
+
+
+      /*  gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), #####.class);
+                startActivity(intent);
+
+
+            }
+        });  */
+
+
+
+        return view;
     }
 }
