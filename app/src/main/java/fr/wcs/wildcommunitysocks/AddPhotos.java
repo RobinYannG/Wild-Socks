@@ -1,6 +1,7 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,12 +14,18 @@ import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +51,12 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private Button buttonUpload;
     private String mCurrentPhotoPath;
     private StorageReference mStorageRef;
+    private Chaussette mChaussette;
+    private EditText mEditTextLegende;
+    private FirebaseAuth firebaseAuth;
+
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
 
 
     public static AddPhotos newInstance() {
@@ -60,12 +73,14 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mStorageRef= FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
         View view = inflater.inflate(R.layout.fragment_add_photos, container, false);
 
         showPhoto = (ImageView) view.findViewById(R.id.imageView);
         buttonSelectFromGallery = (Button) view.findViewById(R.id.galleryButton);
         buttonTakePicture=(Button) view.findViewById(R.id.cameraButton);
         buttonUpload=(Button) view.findViewById(R.id.buttonUpload);
+        mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
 
         buttonTakePicture.setOnClickListener(this);
         buttonSelectFromGallery.setOnClickListener(this);
@@ -122,6 +137,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             imageUri = data.getData();
             showPhoto.setImageURI(imageUri);
             //galleryAddPic();
+
             return;
         }
 
@@ -158,12 +174,20 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         getActivity().sendBroadcast(mediaScanIntent);
     }
 
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = getActivity().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     private void uploadFile(){
         if(imageUri!=null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Chargement en cours...");
             progressDialog.show();
-            StorageReference picRef = mStorageRef.child("images/"+sdf+".jpg");
+
+
+            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS+ System.currentTimeMillis()+"."+getFileExtension(imageUri));
 
             picRef.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -171,6 +195,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
+                            mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),mEditTextLegende.getText().toString().trim(),FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                            //adding an upload to firebase database
+                            String uploadId = mDatabase.push().getKey();
+                            mDatabase.child(uploadId).setValue(mChaussette);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -191,6 +220,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
                     });
+
         }
         else{
             Toast.makeText(getActivity(),"Foirage", Toast.LENGTH_SHORT);
@@ -210,5 +240,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         }
 
     }
+
+
 
 }

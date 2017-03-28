@@ -1,46 +1,56 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.media.Image;
+import android.net.Uri;
+
+import com.google.firebase.auth.FirebaseUser;
 
 public class Chaussette {
 
-    private Image mImgChaussette;
-    private String mLegende;
-    private int mIdChaussette, mIdUser;
-    private double mNote;
+    private String urlChaussette;
+    private String legende;
+    private String idUser;
+    private int idChaussette;
+    private double note;
+    public static int nId;
 
     private Chaussette () {
     }
 
-    public Chaussette (Image imgChaussette, String legende, int idChaussette, int idUser){
-        this.mImgChaussette = imgChaussette;
-        this.mLegende = legende;
-        this.mIdChaussette = idChaussette;
-        this.mIdUser = idUser;
-        this.mNote=0;
+    public Chaussette (String urlChaussette, String legende, String idUser){
+        this.urlChaussette = urlChaussette;
+        this.legende = legende;
+        this.idChaussette = ++ nId;
+        this.idUser = idUser;
+        this.note=0;
     }
 
-    public Image getmImgChaussette() {
-        return mImgChaussette;
+    public String getmImgChaussette() {
+        return urlChaussette;
     }
 
     public String getmLegende() {
-        return mLegende;
+
+        return legende;
     }
 
     public int getmIdChaussette() {
-        return mIdChaussette;
+
+        return idChaussette;
     }
 
-    public int getmIdUser() {
-        return mIdUser;
+    public String getmIdUser() {
+
+        return idUser;
     }
 
     public double getmNote() {
-        return mNote;
+
+        return note;
     }
 
-    public void setmNote(double mNote) {
-        this.mNote = mNote;
+    public void setNote(double note) {
+        this.note = note;
     }
 }
+
