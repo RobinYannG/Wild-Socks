@@ -134,8 +134,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == PICK_PHOTO) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            showPhoto.setImageBitmap(imageBitmap);
             imageUri = data.getData();
-            showPhoto.setImageURI(imageUri);
+            //showPhoto.setImageURI(imageUri);
             //galleryAddPic();
 
             return;
