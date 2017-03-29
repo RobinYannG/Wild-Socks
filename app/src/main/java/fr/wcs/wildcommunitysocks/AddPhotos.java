@@ -37,13 +37,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
+import static fr.wcs.wildcommunitysocks.R.id.imageView;
 
 public class AddPhotos extends Fragment implements View.OnClickListener{
 
     //private StorageReference mStorageRef;
     private static final int PICK_PHOTO = 100;
+    private static final int PICK_IMAGE_REQUEST=255;
     private static final int REQUEST_IMAGE_CAPTURE = 234;
-    private String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
     ImageView showPhoto;
     private Uri imageUri;
     private Button buttonTakePicture;
@@ -76,7 +78,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
         View view = inflater.inflate(R.layout.fragment_add_photos, container, false);
 
-        showPhoto = (ImageView) view.findViewById(R.id.imageView);
+        showPhoto = (ImageView) view.findViewById(imageView);
         buttonSelectFromGallery = (Button) view.findViewById(R.id.galleryButton);
         buttonTakePicture=(Button) view.findViewById(R.id.cameraButton);
         buttonUpload=(Button) view.findViewById(R.id.buttonUpload);
@@ -92,7 +94,21 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
     private void openGallery() {
-         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent gallery = new Intent();
+        gallery.setType("image/*");
+
+        gallery.putExtra("crop", "true");
+        gallery.putExtra("scale", true);
+        gallery.putExtra("outputX", 256);
+        gallery.putExtra("outputY", 256);
+        gallery.putExtra("aspectX", 1);
+        gallery.putExtra("aspectY", 1);
+        gallery.putExtra("return-data", true);
+
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE_REQUEST);
+        /**
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
          gallery.setType("image/*");
 
          gallery.putExtra("crop", "true");
@@ -104,6 +120,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
          gallery.putExtra("return-data", true);
 
          startActivityForResult(gallery, PICK_PHOTO);
+         **/
     }
 
     private void dispatchTakePictureIntent() {
@@ -133,15 +150,18 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == PICK_PHOTO) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            showPhoto.setImageBitmap(imageBitmap);
+        super.onActivityResult(requestCode, resultCode,data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
+            //Bundle extras = data.getExtras();
             imageUri = data.getData();
-            //showPhoto.setImageURI(imageUri);
-            //galleryAddPic();
+            try {
+               // Bitmap imageBitmap = (Bitmap) extras.get("data");
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                showPhoto.setImageBitmap(bitmap);
 
-            return;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -154,6 +174,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             return;
         }
     }
+
+
+
     private File createImageFile() throws IOException {
        // Create an image file name
         String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -191,6 +214,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
             StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS+ System.currentTimeMillis()+"."+getFileExtension(imageUri));
+
 
             picRef.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
