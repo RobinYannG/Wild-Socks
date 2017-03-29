@@ -6,6 +6,15 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <!--
     <GridView
         android:id="@+id/GridViewFlux"
         android:layout_width="wrap_content"
@@ -18,4 +27,5 @@
         android:verticalSpacing="1dp"
         tools:layout_editor_absoluteX="-6dp"
         tools:layout_editor_absoluteY="6dp" />
+        -->
 </FrameLayout>

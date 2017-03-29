@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
 public class MyProfil extends Fragment {
     public static MyProfil newInstance() {
@@ -23,10 +22,10 @@ public class MyProfil extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_flux, container, false);
-
+/**
         GridView gridview = (GridView) view.findViewById(R.id.GridViewFlux);
         gridview.setAdapter(new ImageAdapter(getActivity()));
-
+**/
 
       /*  gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

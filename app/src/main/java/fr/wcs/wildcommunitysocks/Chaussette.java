@@ -1,56 +1,71 @@
 package fr.wcs.wildcommunitysocks;
 
-import android.media.Image;
-import android.net.Uri;
-
-import com.google.firebase.auth.FirebaseUser;
-
 public class Chaussette {
 
-    private String urlChaussette;
-    private String legende;
-    private String idUser;
-    private int idChaussette;
-    private double note;
-    public static int nId;
+    private String mImgChaussette;
+    private String mLegende;
+    private String mIdUser;
+    private int mIdChaussette;
+    private double mNote;
+    public static int mNId;
 
     private Chaussette () {
     }
 
     public Chaussette (String urlChaussette, String legende, String idUser){
-        this.urlChaussette = urlChaussette;
-        this.legende = legende;
-        this.idChaussette = ++ nId;
-        this.idUser = idUser;
-        this.note=0;
+        mImgChaussette = urlChaussette;
+        mLegende = legende;
+        mIdChaussette = ++ mNId;
+        mIdUser = idUser;
+        mNote=0;
     }
 
     public String getmImgChaussette() {
-        return urlChaussette;
+        return mImgChaussette;
+    }
+
+    public void setmImgChaussette(String mUrlChaussette) {
+        this.mImgChaussette = mUrlChaussette;
     }
 
     public String getmLegende() {
-
-        return legende;
+        return mLegende;
     }
 
-    public int getmIdChaussette() {
-
-        return idChaussette;
+    public void setmLegende(String mLegende) {
+        this.mLegende = mLegende;
     }
 
     public String getmIdUser() {
+        return mIdUser;
+    }
 
-        return idUser;
+    public void setmIdUser(String mIdUser) {
+        this.mIdUser = mIdUser;
+    }
+
+    public int getmIdChaussette() {
+        return mIdChaussette;
+    }
+
+    public void setmIdChaussette(int mIdChaussette) {
+        this.mIdChaussette = mIdChaussette;
     }
 
     public double getmNote() {
-
-        return note;
+        return mNote;
     }
 
-    public void setNote(double note) {
-        this.note = note;
+    public void setmNote(double mNote) {
+        this.mNote = mNote;
+    }
+
+    public static int getmNId() {
+        return mNId;
+    }
+
+    public static void setmNId(int mNId) {
+        Chaussette.mNId = mNId;
     }
 }
 

@@ -2,12 +2,9 @@ package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,11 +15,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flux extends Fragment {
-    public static Flux newInstance() {
-        Flux fragment = new Flux();
-        return fragment;
-    }
+public class SocksActivity extends AppCompatActivity {
+
     //recyclerview object
     private RecyclerView recyclerView;
 
@@ -38,35 +32,19 @@ public class Flux extends Fragment {
     //list to hold all the uploaded images
     private List<Chaussette> uploads;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_socks);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_flux, container, false);
-/**
-        GridView gridview = (GridView) view.findViewById(R.id.GridViewFlux);
-        gridview.setAdapter(new ImageAdapter(getActivity()));
-**/
-        recyclerView =(RecyclerView) view.findViewById(R.id.recyclerView2);
-        uploads = new ArrayList<>();
-
-        adapter = new MyAdapter(getActivity().getApplicationContext(),uploads);
+        recyclerView =(RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(this);
 
-
-
-        //creating adapter
-
-
-        recyclerView.setAdapter(adapter);
+        uploads = new ArrayList<>();
 
         //displaying progress dialog while fetching images
         progressDialog.setMessage("Please wait...");
@@ -83,7 +61,13 @@ public class Flux extends Fragment {
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Chaussette sock = postSnapshot.getValue(Chaussette.class);
                     uploads.add(sock);
-                    adapter.notifyDataSetChanged();
+
+                    //creating adapter
+                    adapter = new MyAdapter(getApplicationContext(),uploads);
+
+                    //adding adapter to recyclerView
+                    recyclerView.setAdapter(adapter);
+
 
                 }
             }
@@ -93,22 +77,6 @@ public class Flux extends Fragment {
                 progressDialog.dismiss();
             }
         });
-
-      /*  gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), #####.class);
-                startActivity(intent);
-
-
-            }
-        });  */
-
-
-
-        return view;
-
-
 
 
 
