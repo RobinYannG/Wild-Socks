@@ -57,13 +57,14 @@ public class SocksActivity extends AppCompatActivity {
                 //Dismiss the progress dialog
                 progressDialog.dismiss();
 
-                //iterating through al the values in the database
+                //iterating through all the values in the database
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Chaussette sock = postSnapshot.getValue(Chaussette.class);
                     uploads.add(sock);
 
                     //creating adapter
                     adapter = new MyAdapter(getApplicationContext(),uploads);
+                    //viewHolder = new RecyclerView().ViewHolder
 
                     //adding adapter to recyclerView
                     recyclerView.setAdapter(adapter);

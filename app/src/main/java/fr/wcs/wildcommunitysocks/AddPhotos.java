@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +46,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private static final int REQUEST_IMAGE_CAPTURE = 234;
 
     ImageView showPhoto;
-    private Uri imageUri;
+    private Uri imageUri, newUri;
     private Button buttonTakePicture;
     private Button buttonSelectFromGallery;
     private Button buttonUpload;
@@ -95,8 +94,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
     private void openGallery() {
         Intent gallery = new Intent();
-        gallery.setType("image/*");
 
+        gallery.setType("image/*");
+/**
         gallery.putExtra("crop", "true");
         gallery.putExtra("scale", true);
         gallery.putExtra("outputX", 256);
@@ -104,7 +104,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         gallery.putExtra("aspectX", 1);
         gallery.putExtra("aspectY", 1);
         gallery.putExtra("return-data", true);
-
+**/
         gallery.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE_REQUEST);
         /**
@@ -156,8 +156,13 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             imageUri = data.getData();
             try {
                // Bitmap imageBitmap = (Bitmap) extras.get("data");
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                showPhoto.setImageBitmap(bitmap);
+                Bitmap bitmapOrg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+
+                //Bitmap resized = Bitmap.createScaledBitmap(bitmapOrg, 200, 200, true);
+               // bitmapOrg = rotateImageIfRequired(bitmapOrg, imageUri);
+               // newUri =getImageUri(getContext(),resized);
+                showPhoto.setImageBitmap(bitmapOrg);
+                //galleryAddPic();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -168,15 +173,23 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             Bundle extras = data.getExtras();
             imageUri=data.getData();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //Bitmap resized = Bitmap.createScaledBitmap(imageBitmap, 200, 200, true);
+            //newUri =getImageUri(getActivity(),resized);
             showPhoto.setImageBitmap(imageBitmap);
             //photo.setImageURI(imageUri);
+
             galleryAddPic();
             return;
         }
     }
-
-
-
+/**
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+**/
     private File createImageFile() throws IOException {
        // Create an image file name
         String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -206,6 +219,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+
+
     private void uploadFile(){
         if(imageUri!=null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
@@ -224,9 +239,16 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                             Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
                             mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),mEditTextLegende.getText().toString().trim(),FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+
+
                             //adding an upload to firebase database
-                            String uploadId = mDatabase.push().getKey();
-                            mDatabase.child(uploadId).setValue(mChaussette);
+                            //String uploadId = mDatabase.push().getKey();
+                            //mDatabase.child(uploadId).setValue(mChaussette);
+
+                            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
+                            mDatabase.child(idUser).child(idChaussette).setValue(mChaussette);
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
