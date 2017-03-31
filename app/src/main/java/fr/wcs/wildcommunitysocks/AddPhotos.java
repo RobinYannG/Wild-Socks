@@ -75,7 +75,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mStorageRef= FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         View view = inflater.inflate(R.layout.fragment_add_photos, container, false);
 
         showPhoto = (ImageView) view.findViewById(imageView);
@@ -243,13 +243,13 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
                             //adding an upload to firebase database
-                            //String uploadId = mDatabase.push().getKey();
+                            String uploadId = mDatabase.push().getKey();
                             //mDatabase.child(uploadId).setValue(mChaussette);
-                            key= (int)(Math.random()*1000000);
+                            //key= (int)(Math.random()*1000000);
                             String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            String socKey = idUser+Integer.toString(key);
+                            //String socKey = idUser+Integer.toString(key);
                             //String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
-                            mDatabase.child(idUser).child(socKey).setValue(mChaussette);
+                            mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
                             //mDatabase.child(idUser).setValue(mChaussette);
 
                         }

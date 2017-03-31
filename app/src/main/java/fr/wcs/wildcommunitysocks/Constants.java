@@ -9,6 +9,9 @@ package fr.wcs.wildcommunitysocks;
 public class Constants {
 
     public static final String STORAGE_PATH_UPLOADS = "uploads/";
+    public static final String DATABASE_PATH_SOCKS = "socks";
     public static final String DATABASE_PATH_UPLOADS = "uploads";
+    public static final String DATABASE_PATH_MYKICKS = "mykicks";
+    public static final String DATABASE_PATH_PROFIL = "profil";
 }
 
