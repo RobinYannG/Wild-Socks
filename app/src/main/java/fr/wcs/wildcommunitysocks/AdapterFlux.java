@@ -1,5 +1,8 @@
 package fr.wcs.wildcommunitysocks;
 
+/**
+ * Created by robingoudy on 30/03/2017.
+ */
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.content.Context;
@@ -14,25 +17,21 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-/**
- * Created by wilder on 29/03/17.
- */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class AdapterFlux extends RecyclerView.Adapter<AdapterFlux.ViewHolder> {
     private Context context;
     private List<Chaussette> chaussettes;
 
-    public MyAdapter(Context context, List<Chaussette> uploads) {
+    public AdapterFlux(Context context, List<Chaussette> uploads) {
         this.chaussettes = uploads;
         this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sock_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sock_item, null);
+        ViewHolder rcv = new ViewHolder(layoutView);
+        return rcv;
     }
 
     @Override

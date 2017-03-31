@@ -33,6 +33,7 @@
     <string name="sockName">Légende?</string>
     <string name="newSocks">Ajoutes une nouvelle photo!</string>
     <string name="createSocks">Enregistrer</string>
+    <string name="sockLegend">Legend</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
