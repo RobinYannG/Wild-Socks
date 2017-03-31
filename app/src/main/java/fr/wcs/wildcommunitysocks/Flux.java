@@ -76,32 +76,6 @@ public class Flux extends Fragment {
 
 
 
-        /** Delete ?
-         @Override
-         public boolean onCreateOptionsMenu(Menu menu) {
-         // Inflate the menu; this adds items to the action bar if it is present.
-         getMenuInflater().inflate(R.menu.menu_main, menu);
-         return true;
-         }
-         @Override
-         public boolean onOptionsItemSelected(MenuItem item) {
-         // Handle action bar item clicks here. The action bar will
-         // automatically handle clicks on the Home/Up button, so long
-         // as you specify a parent activity in AndroidManifest.xml.
-         int id = item.getItemId();
-         //noinspection SimplifiableIfStatement
-         if (id == R.id.action_settings) {
-         return true;
-         }
-         if(id == R.id.action_refresh){
-         Toast.makeText(Flux2.this, "Refresh App", Toast.LENGTH_LONG).show();
-         }
-         if(id == R.id.action_new){
-         Toast.makeText(Flux2.this, "Create Text", Toast.LENGTH_LONG).show();
-         }
-         return super.onOptionsItemSelected(item);  */
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
         Query query = mDatabase.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addValueEventListener(new ValueEventListener() {
