@@ -5,9 +5,9 @@ public class Chaussette {
     private String mImgChaussette;
     private String mLegende;
     private String mIdUser;
-    private int mIdChaussette;
+    //private int mIdChaussette;
     private double mNote;
-    public static int mNId;
+    //public static int mNId;
 
     private Chaussette () {
     }
@@ -15,7 +15,7 @@ public class Chaussette {
     public Chaussette (String urlChaussette, String legende, String idUser){
         mImgChaussette = urlChaussette;
         mLegende = legende;
-        mIdChaussette = ++ mNId;
+        //mIdChaussette = ++ mNId;
         mIdUser = idUser;
         mNote=0;
     }
@@ -44,13 +44,15 @@ public class Chaussette {
         this.mIdUser = mIdUser;
     }
 
-    public int getmIdChaussette() {
+  /**  public int getmIdChaussette() {
         return mIdChaussette;
     }
+
 
     public void setmIdChaussette(int mIdChaussette) {
         this.mIdChaussette = mIdChaussette;
     }
+   **/
 
     public double getmNote() {
         return mNote;
@@ -59,7 +61,7 @@ public class Chaussette {
     public void setmNote(double mNote) {
         this.mNote = mNote;
     }
-
+  /**
     public static int getmNId() {
         return mNId;
     }
@@ -67,5 +69,7 @@ public class Chaussette {
     public static void setmNId(int mNId) {
         Chaussette.mNId = mNId;
     }
+      **/
 }
+
 

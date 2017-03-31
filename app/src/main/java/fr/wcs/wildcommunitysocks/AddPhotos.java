@@ -55,6 +55,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private Chaussette mChaussette;
     private EditText mEditTextLegende;
     private FirebaseAuth firebaseAuth;
+    private int key;
 
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
@@ -244,10 +245,12 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                             //adding an upload to firebase database
                             //String uploadId = mDatabase.push().getKey();
                             //mDatabase.child(uploadId).setValue(mChaussette);
-
+                            key= (int)(Math.random()*1000000);
                             String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
-                            mDatabase.child(idUser).child(idChaussette).setValue(mChaussette);
+                            String socKey = idUser+Integer.toString(key);
+                            //String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
+                            mDatabase.child(idUser).child(socKey).setValue(mChaussette);
+                            //mDatabase.child(idUser).setValue(mChaussette);
 
                         }
                     })

@@ -3,7 +3,6 @@ package fr.wcs.wildcommunitysocks;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -12,13 +11,13 @@ import android.widget.Toast;
 
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView textViewName;
+   // public TextView textViewName;
     public ImageView imageView;
 
     public RecyclerViewHolders(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
-        textViewName = (TextView) itemView.findViewById(R.id.sockLegend);
+        //textViewName = (TextView) itemView.findViewById(R.id.sockLegend);
         imageView = (ImageView)itemView.findViewById(R.id.sockImage);
     }
 

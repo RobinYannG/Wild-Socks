@@ -38,7 +38,7 @@ public class AdapterFlux extends RecyclerView.Adapter<AdapterFlux.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Chaussette sock = chaussettes.get(position);
 
-        holder.textViewName.setText(sock.getmLegende());
+//        holder.textViewName.setText(sock.getmLegende());
 
         Glide.with(context).load(sock.getmImgChaussette()).into(holder.imageView);
     }
