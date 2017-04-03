@@ -224,7 +224,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                             //String socKey = idUser+Integer.toString(key);
                             //String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
                             mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
-                            //mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).setValue(mChaussette);
+                            mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
                             //mDatabase.child(idUser).setValue(mChaussette);
 
                         }
