@@ -97,31 +97,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         Intent gallery = new Intent();
 
         gallery.setType("image/*");
-/**
-        gallery.putExtra("crop", "true");
-        gallery.putExtra("scale", true);
-        gallery.putExtra("outputX", 256);
-        gallery.putExtra("outputY", 256);
-        gallery.putExtra("aspectX", 1);
-        gallery.putExtra("aspectY", 1);
-        gallery.putExtra("return-data", true);
-**/
+
         gallery.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE_REQUEST);
-        /**
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-         gallery.setType("image/*");
 
-         gallery.putExtra("crop", "true");
-         gallery.putExtra("scale", true);
-         gallery.putExtra("outputX", 256);
-         gallery.putExtra("outputY", 256);
-         gallery.putExtra("aspectX", 1);
-         gallery.putExtra("aspectY", 1);
-         gallery.putExtra("return-data", true);
 
-         startActivityForResult(gallery, PICK_PHOTO);
-         **/
     }
 
     private void dispatchTakePictureIntent() {
@@ -183,14 +163,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             return;
         }
     }
-/**
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-**/
+
+
     private File createImageFile() throws IOException {
        // Create an image file name
         String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -250,6 +224,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                             //String socKey = idUser+Integer.toString(key);
                             //String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
                             mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
+                            mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
                             //mDatabase.child(idUser).setValue(mChaussette);
 
                         }

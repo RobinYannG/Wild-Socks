@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +76,7 @@ public class Flux extends Fragment {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
-        Query query = mDatabase.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -93,9 +92,51 @@ public class Flux extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 progressDialog.dismiss();
             }
-
         });
+            /**
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                progressDialog.dismiss();
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
+                    rowListItem.add(sock);
+                    rcAdapter.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                progressDialog.dismiss();
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
+                    rowListItem.add(sock);
+                    rcAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
+                    rowListItem.remove(sock);
+                    rcAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressDialog.dismiss();
+            }
+        });
+**/
 
 
 
