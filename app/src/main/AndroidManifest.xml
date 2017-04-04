@@ -34,20 +34,28 @@
 
         <activity android:name=".MainActivity">
 
+
         </activity>
-        <activity android:name=".NewAccountActivity" />
-        <activity android:name=".IdentificationActivity" />
+        <activity android:name=".NewAccountActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+        <activity android:name=".IdentificationActivity">
+
+        </activity>
         <activity
             android:name=".Navigation"
             android:theme="@style/AppTheme.TransNav" />
         <activity android:name=".SocksActivity" />
         <activity android:name=".ModifyProfil">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>
