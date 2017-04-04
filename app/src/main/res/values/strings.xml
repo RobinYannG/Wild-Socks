@@ -41,8 +41,22 @@
     <string name="modify_photo">Modifier la photo de profil</string>
     <string name="btn_modify">MODIFIER</string>
     <string name="delete">Supprimer ton compte</string>
+    <string name="modify_profil">Modifier le profil</string>
+    <string name="modify_pwd">Mot de passe oublié ?</string>
+
+    // Modify Password
+
+    <string name="whyModify">Vous ne vous rappelez plus de votre mot de passe ? Indiquez- nous votre email, pour générer un nouveau mot de passe.</string>
+    <string name="send">Envoyer</string>
+    <string name="msg_send">Le message a été envoyé !</string>
+    <string name="success">Succès !</string>
+    <string name="error">Erreur !</string>
+    <string name="send_fail">Es-tu sûr d\'avoir un compte à cette adresse email ?</string>
+    <string name="email_empty">Tu dois renseigner une adresse email !</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 
 </resources>

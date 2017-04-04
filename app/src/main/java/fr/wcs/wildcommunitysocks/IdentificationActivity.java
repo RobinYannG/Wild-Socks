@@ -23,6 +23,7 @@ public class IdentificationActivity extends AppCompatActivity implements View.On
     private TextView textViewSignUp;
     private EditText editTextUserPwd;
     private EditText editTextuserEmail;
+    private TextView textViewModifyPwd;
 
     private ProgressDialog progressDialog;
 
@@ -50,11 +51,13 @@ public class IdentificationActivity extends AppCompatActivity implements View.On
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         editTextUserPwd =(EditText) findViewById(R.id.editUserPwd);
         editTextuserEmail=(EditText) findViewById(R.id.editUserEmail);
+        textViewModifyPwd = (TextView) findViewById(R.id.textViewModifyPwd);
 
         progressDialog = new ProgressDialog(this);
 
         buttonLogIn.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
+        textViewModifyPwd.setOnClickListener(this);
     }
 
     public void userLogin(){
@@ -103,6 +106,9 @@ public class IdentificationActivity extends AppCompatActivity implements View.On
         }
         if(v==textViewSignUp){
             startActivity(new Intent(IdentificationActivity.this,NewAccountActivity.class));
+        }
+        if (v == textViewModifyPwd) {
+            startActivity(new Intent(IdentificationActivity.this,ModifyPassword.class));
         }
     }
 }

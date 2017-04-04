@@ -1,24 +1,48 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.wcs.wildcommunitysocks.MyProfil">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MON PROFIL" />
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="87dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+        <TextView
+            android:id="@+id/textViewDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/buttonModifyProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="@string/modify_profil" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewMyProfile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_height="342dp"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="3dp"
+        android:layout_marginTop="50dp"
         android:stretchMode="spacingWidthUniform"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp">
 
     </android.support.v7.widget.RecyclerView>
 
