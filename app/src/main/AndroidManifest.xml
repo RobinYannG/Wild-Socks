@@ -42,7 +42,9 @@
         <activity
             android:name=".Navigation"
             android:theme="@style/AppTheme.TransNav"></activity>
-        <activity android:name=".SocksActivity"></activity>
+        <activity android:name=".SocksActivity">
+
+        </activity>
     </application>
 
 </manifest>

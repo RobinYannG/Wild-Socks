@@ -1,6 +1,7 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,11 +36,14 @@ public class Flux extends Fragment {
     //database reference
     private DatabaseReference mDatabase;
 
+
     //progress dialog
     private ProgressDialog progressDialog;
 
     //list to hold all the uploaded images
     private List<Chaussette> rowListItem;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,6 @@ public class Flux extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_flux, container, false);
 
-
-            /* to delete?
-            setContentView(R.layout.activity_navigation);
-            setTitle(null);  */
 
 
        final List<Chaussette> rowListItem = getAllItemList();
@@ -93,57 +93,30 @@ public class Flux extends Fragment {
                 progressDialog.dismiss();
             }
         });
-            /**
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                progressDialog.dismiss();
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
-                    rowListItem.add(sock);
-                    rcAdapter.notifyDataSetChanged();
-                }
-            }
+        rView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        int itemPosition = rView.getChildLayoutPosition(view);
+                        Chaussette item = rowListItem.get(itemPosition);
+                        Intent intent = new Intent(getActivity(), SocksActivity.class);
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                progressDialog.dismiss();
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
-                    rowListItem.add(sock);
-                    rcAdapter.notifyDataSetChanged();
-                }
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
-                    rowListItem.remove(sock);
-                    rcAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+                        intent.putExtra("sock",item);
+                        intent.putExtra("position",itemPosition);
 
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
-**/
+                        startActivity(intent);
+                    }
 
-
-
-
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
         return view;
     }
+
+
 
     private List<Chaussette> getAllItemList(){
 
@@ -152,4 +125,8 @@ public class Flux extends Fragment {
 
         return allItems;
     }
+
+
+
+
 }

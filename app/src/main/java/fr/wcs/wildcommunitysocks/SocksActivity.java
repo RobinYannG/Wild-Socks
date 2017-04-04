@@ -1,85 +1,144 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 
 public class SocksActivity extends AppCompatActivity {
 
-    //recyclerview object
-    private RecyclerView recyclerView;
-
-    //adapter object
-    private RecyclerView.Adapter adapter;
 
     //database reference
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     //progress dialog
     private ProgressDialog progressDialog;
 
-    //list to hold all the uploaded images
-    private List<Chaussette> uploads;
+    //Layout elements
+    private ImageView thisSock;
+    private TextView thisLegend, owner, thisRating;
+    private RatingBar ratingBar;
+    private String url;
+    private Button ratingButton;
+    private float myRate=0;
+    private float initialRate;
 
 
-    @Override
+
+
+ @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_socks);
-
-        recyclerView =(RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        progressDialog = new ProgressDialog(this);
-
-        uploads = new ArrayList<>();
-
-        //displaying progress dialog while fetching images
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Dismiss the progress dialog
-                progressDialog.dismiss();
-
-                //iterating through all the values in the database
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
-                    uploads.add(sock);
-
-                    //creating adapter
-                    adapter = new MyAdapter(getApplicationContext(),uploads);
-                    //viewHolder = new RecyclerView().ViewHolder
-
-                    //adding adapter to recyclerView
-                    recyclerView.setAdapter(adapter);
+     super.onCreate(savedInstanceState);
+     setContentView(R.layout.activity_socks);
 
 
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
+     thisSock = (ImageView) findViewById(R.id.sockImage);
+     thisLegend = (TextView) findViewById(R.id.sockLegend);
+     owner = (TextView) findViewById(R.id.sockOwner);
+     thisRating = (TextView) findViewById(R.id.sockRating);
+     ratingButton = (Button) findViewById(R.id.ratingButton);
+     ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 
+     /**Retrieve the object**/
 
+     Intent onStart = getIntent();
+     final Chaussette result = onStart.getParcelableExtra("sock");
+
+     String leg = result.getmLegende();
+     String user = result.getmDisplayNameUser();
+
+     url = result.getmImgChaussette();
+     initialRate = result.getmNote();
+     thisLegend.setText(leg);
+     owner.setText(user);
+
+     thisRating.setText(String.valueOf(initialRate));
+
+     ratingButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             myRate = ratingBar.getRating();
+             if (myRate == 0.0) {
+                 Toast.makeText(SocksActivity.this, String.valueOf(myRate), Toast.LENGTH_LONG);
+             } else {
+                 upDateRate(result, myRate);
+             }
+
+         }
+     });
+
+
+     new SockImage(thisSock).execute(url);
+
+ }
+
+
+
+    public void upDateRate(Chaussette ratedSock, float rate){
+
+        String uploadId = ratedSock.getmIdChaussette();
+        String idU = ratedSock.getmIdUser();
+        ratedSock.setmNote(ratedSock.getmNote()+rate);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+        mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
+        mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
+        initialRate = ratedSock.getmNote();
+        ratingBar.setRating(0);
+        thisRating.setText(String.valueOf(initialRate));
+    }
+
+
+    public Bitmap loadImageFromNetwork(String src) {
+        try {
+            java.net.URL url = new java.net.URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url .openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) { return null; }
+    }
+
+
+    private class SockImage extends AsyncTask<String, Void, Bitmap>{
+
+        private ImageView miMv;
+
+        public SockImage (ImageView iMv){
+            miMv = iMv;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            return loadImageFromNetwork(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            thisSock.setImageBitmap(bitmap);
+        }
     }
 }
+

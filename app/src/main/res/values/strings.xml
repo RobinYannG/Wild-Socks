@@ -34,6 +34,8 @@
     <string name="newSocks">Ajoutes une nouvelle photo!</string>
     <string name="createSocks">Enregistrer</string>
     <string name="sockLegend">Legend</string>
+    <string name="ratingUpdate">Noter</string>
+    <string name="noRate">Tu ne peux pas noter 0!</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
