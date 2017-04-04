@@ -39,7 +39,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = mAuth.getCurrentUser();
 
         userEmail = (EditText) findViewById(R.id.editTextChangeEmail);
-        userPassword = (EditText) findViewById(R.id.editTextChangePassword);
+
         userName = (EditText) findViewById(R.id.editTextChangePseudo);
         userImg = (ImageView) findViewById(R.id.imageViewProfil);
 

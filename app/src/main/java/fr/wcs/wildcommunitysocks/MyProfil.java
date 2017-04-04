@@ -82,13 +82,13 @@ public class MyProfil extends Fragment implements View.OnClickListener {
         rView.setHasFixedSize(true);
         rView.setLayoutManager(lLayout);
 
-        progressDialog = new ProgressDialog(getActivity());
+        //progressDialog = new ProgressDialog(getActivity());
 
         rcAdapter = new AdapterFlux(getActivity(), rowListItem);
         rView.setAdapter(rcAdapter);
 
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
+        //progressDialog.setMessage("Please wait...");
+        //progressDialog.show();
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
