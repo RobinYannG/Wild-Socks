@@ -1,24 +1,50 @@
 package fr.wcs.wildcommunitysocks;
 
-public class Chaussette {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Chaussette implements Parcelable {
 
     private String mImgChaussette;
     private String mLegende;
     private String mIdUser;
-    //private int mIdChaussette;
-    private double mNote;
+    private String mDisplayNameUser;
+    private String mIdChaussette;
+    private float mNote;
     //public static int mNId;
 
     private Chaussette () {
     }
 
-    public Chaussette (String urlChaussette, String legende, String idUser){
+    public Chaussette (String urlChaussette, String legende, String idUser, String displayNameUser,float note){
         mImgChaussette = urlChaussette;
         mLegende = legende;
-        //mIdChaussette = ++ mNId;
+        mIdChaussette ="";
         mIdUser = idUser;
-        mNote=0;
+        mDisplayNameUser = displayNameUser;
+        mNote=note;
     }
+
+    protected Chaussette(Parcel in) {
+        mImgChaussette = in.readString();
+        mLegende = in.readString();
+        mIdChaussette = in.readString();
+        mIdUser = in.readString();
+        mDisplayNameUser = in.readString();
+        mNote = in.readFloat();
+    }
+
+    public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
+        @Override
+        public Chaussette createFromParcel(Parcel in) {
+            return new Chaussette(in);
+        }
+
+        @Override
+        public Chaussette[] newArray(int size) {
+            return new Chaussette[size];
+        }
+    };
 
     public String getmImgChaussette() {
         return mImgChaussette;
@@ -44,32 +70,42 @@ public class Chaussette {
         this.mIdUser = mIdUser;
     }
 
-  /**  public int getmIdChaussette() {
+    public String getmIdChaussette() {
         return mIdChaussette;
     }
 
-
-    public void setmIdChaussette(int mIdChaussette) {
+    public void setmIdChaussette(String mIdChaussette) {
         this.mIdChaussette = mIdChaussette;
     }
-   **/
 
-    public double getmNote() {
+    public float getmNote() {
         return mNote;
     }
 
-    public void setmNote(double mNote) {
-        this.mNote = mNote;
-    }
-  /**
-    public static int getmNId() {
-        return mNId;
+    public String getmDisplayNameUser(){
+        return mDisplayNameUser;
     }
 
-    public static void setmNId(int mNId) {
-        Chaussette.mNId = mNId;
+
+    public void setmNote(float mNote) {
+        this.mNote = mNote;
     }
-      **/
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mImgChaussette);
+        dest.writeString(mLegende);
+        dest.writeString(mIdChaussette);
+        dest.writeString(mIdUser);
+        dest.writeString(mDisplayNameUser);
+        dest.writeFloat(mNote);
+    }
+
 }
 
 

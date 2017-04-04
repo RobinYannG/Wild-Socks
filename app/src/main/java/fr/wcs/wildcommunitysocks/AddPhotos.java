@@ -133,17 +133,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
-            //Bundle extras = data.getExtras();
+
             imageUri = data.getData();
             try {
-               // Bitmap imageBitmap = (Bitmap) extras.get("data");
                 Bitmap bitmapOrg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-
-                //Bitmap resized = Bitmap.createScaledBitmap(bitmapOrg, 200, 200, true);
-               // bitmapOrg = rotateImageIfRequired(bitmapOrg, imageUri);
-               // newUri =getImageUri(getContext(),resized);
                 showPhoto.setImageBitmap(bitmapOrg);
-                //galleryAddPic();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -154,10 +148,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             Bundle extras = data.getExtras();
             imageUri=data.getData();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            //Bitmap resized = Bitmap.createScaledBitmap(imageBitmap, 200, 200, true);
-            //newUri =getImageUri(getActivity(),resized);
+
             showPhoto.setImageBitmap(imageBitmap);
-            //photo.setImageURI(imageUri);
 
             galleryAddPic();
             return;
@@ -212,20 +204,22 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
-                            mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),mEditTextLegende.getText().toString().trim(),FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            String displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                            mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),
+                                    mEditTextLegende.getText().toString().trim(),
+                                    idUser,
+                                    displayName,
+                                    0);
 
 
 
                             //adding an upload to firebase database
                             String uploadId = mDatabase.push().getKey();
-                            //mDatabase.child(uploadId).setValue(mChaussette);
-                            //key= (int)(Math.random()*1000000);
-                            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            //String socKey = idUser+Integer.toString(key);
-                            //String idChaussette = String.valueOf(mChaussette.getmIdChaussette());
+                            mChaussette.setmIdChaussette(uploadId);
                             mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
                             mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
-                            //mDatabase.child(idUser).setValue(mChaussette);
+
 
                         }
                     })
