@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,9 +26,10 @@ import java.net.HttpURLConnection;
 public class SocksActivity extends AppCompatActivity {
 
 
-    //database reference
+    //Firebase references
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+
 
     //progress dialog
     private ProgressDialog progressDialog;
@@ -49,6 +51,19 @@ public class SocksActivity extends AppCompatActivity {
      super.onCreate(savedInstanceState);
      setContentView(R.layout.activity_socks);
 
+     //initializing Firebase authentification objects
+     mAuth = FirebaseAuth.getInstance();
+
+     //if the user is not logged in that means current user will return null
+     if(mAuth.getCurrentUser() == null){
+         //closing this activity
+         finish();
+         //starting login activity
+         startActivity(new Intent(this, IdentificationActivity.class));
+     }
+
+
+
 
      thisSock = (ImageView) findViewById(R.id.sockImage);
      thisLegend = (TextView) findViewById(R.id.sockLegend);
@@ -64,12 +79,12 @@ public class SocksActivity extends AppCompatActivity {
      final Chaussette result = onStart.getParcelableExtra("sock");
 
      String leg = result.getmLegende();
-     String user = result.getmDisplayNameUser();
+     String author = result.getmDisplayNameUser();
 
      url = result.getmImgChaussette();
      initialRate = result.getmNote();
      thisLegend.setText(leg);
-     owner.setText(user);
+     owner.setText(author);
 
      thisRating.setText(String.valueOf(initialRate));
 
@@ -78,9 +93,21 @@ public class SocksActivity extends AppCompatActivity {
          public void onClick(View v) {
              myRate = ratingBar.getRating();
              if (myRate == 0.0) {
-                 Toast.makeText(SocksActivity.this, String.valueOf(myRate), Toast.LENGTH_LONG);
+                 Toast.makeText(SocksActivity.this, R.string.noRate, Toast.LENGTH_LONG).show();
              } else {
+                 //Increase the rate attribute of the object
                  upDateRate(result, myRate);
+
+                 /**Get the photo to the MyKicks node*******************************/
+
+                 //getting current user
+                 FirebaseUser user = mAuth.getCurrentUser();
+
+                 //Reaching the MyKick file
+                 mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+
+                 //Uploading the object
+                 mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_MYKICKS).child(result.getmIdChaussette()).setValue(result);
                  finish();
              }
 

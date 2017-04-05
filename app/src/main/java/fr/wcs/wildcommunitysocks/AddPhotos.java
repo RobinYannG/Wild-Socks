@@ -57,7 +57,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
     private int key;
 
-    private FirebaseDatabase database;
+
     private DatabaseReference mDatabase;
 
 

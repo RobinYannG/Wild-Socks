@@ -33,6 +33,9 @@
     <string name="sockName">Légende?</string>
     <string name="newSocks">Ajoutes une nouvelle photo!</string>
     <string name="createSocks">Enregistrer</string>
+
+
+    //Sock Activity
     <string name="sockLegend">Legend</string>
     <string name="ratingUpdate">Noter</string>
     <string name="noRate">Tu ne peux pas noter 0!</string>
