@@ -67,6 +67,8 @@ public class Flux extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
 
+
+
         rcAdapter = new AdapterFlux(getActivity(), rowListItem);
         rView.setAdapter(rcAdapter);
 
@@ -81,8 +83,11 @@ public class Flux extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressDialog.dismiss();
+                rowListItem.clear();
+
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Chaussette sock = postSnapshot.getValue(Chaussette.class);
+
                     rowListItem.add(sock);
                     rcAdapter.notifyDataSetChanged();
                 }

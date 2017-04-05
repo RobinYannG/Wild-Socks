@@ -81,7 +81,6 @@ public class SocksActivity extends AppCompatActivity {
                  Toast.makeText(SocksActivity.this, String.valueOf(myRate), Toast.LENGTH_LONG);
              } else {
                  upDateRate(result, myRate);
-                 startActivity(new Intent(SocksActivity.this,Navigation.class));
                  finish();
              }
 

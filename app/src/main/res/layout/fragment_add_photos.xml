@@ -5,10 +5,6 @@
     android:measureAllChildren="true"
     tools:context="fr.wcs.wildcommunitysocks.AddPhotos">
 
-    <!-- TODO: Update blank fragment layout
-
-
-    -->
     <TextView
         android:id="@+id/newSocks"
         android:layout_width="wrap_content"

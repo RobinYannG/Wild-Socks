@@ -56,6 +56,8 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         buttonLogout.setOnClickListener(this);
 
 
+        bottomBar.selectTabAtPosition(1);
+
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {

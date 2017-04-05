@@ -96,7 +96,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Chaussette sock = postSnapshot.getValue(Chaussette.class);
                     rowListItem.add(sock);
@@ -106,7 +106,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Chaussette sock = postSnapshot.getValue(Chaussette.class);
                     rowListItem.add(sock);
