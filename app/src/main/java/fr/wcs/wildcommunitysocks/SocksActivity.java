@@ -126,6 +126,7 @@ public class SocksActivity extends AppCompatActivity {
         String uploadId = ratedSock.getmIdChaussette();
         String idU = ratedSock.getmIdUser();
         ratedSock.setmNote(ratedSock.getmNote()+rate);
+        ratedSock.setmSubNote(ratedSock.getmSubNote()-rate);
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
@@ -134,6 +135,7 @@ public class SocksActivity extends AppCompatActivity {
         ratingBar.setRating(0);
         thisRating.setText(String.valueOf(initialRate));
     }
+    
 
 
     public Bitmap loadImageFromNetwork(String src) {

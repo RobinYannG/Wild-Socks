@@ -11,7 +11,8 @@ public class Chaussette implements Parcelable {
     private String mDisplayNameUser;
     private String mIdChaussette;
     private float mNote;
-    //public static int mNId;
+    private float mSubNote;
+
 
     private Chaussette () {
     }
@@ -23,6 +24,7 @@ public class Chaussette implements Parcelable {
         mIdUser = idUser;
         mDisplayNameUser = displayNameUser;
         mNote=note;
+        mSubNote=-note;
     }
 
     protected Chaussette(Parcel in) {
@@ -32,6 +34,7 @@ public class Chaussette implements Parcelable {
         mIdUser = in.readString();
         mDisplayNameUser = in.readString();
         mNote = in.readFloat();
+        mSubNote=in.readFloat();
     }
 
     public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
@@ -91,6 +94,14 @@ public class Chaussette implements Parcelable {
         this.mNote = mNote;
     }
 
+    public float getmSubNote() {
+        return mSubNote;
+    }
+
+    public void setmSubNote(float mSubNote) {
+        this.mSubNote = mSubNote;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -104,6 +115,7 @@ public class Chaussette implements Parcelable {
         dest.writeString(mIdUser);
         dest.writeString(mDisplayNameUser);
         dest.writeFloat(mNote);
+        dest.writeFloat(mSubNote);
     }
 
 }
