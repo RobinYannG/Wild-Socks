@@ -11,24 +11,40 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ModifyProfil extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
     private EditText userEmail;
-    private EditText userPassword;
     private EditText userName;
     private Button modifyProfil;
     private ImageView userImg;
     private TextView deleteProfil;
+    private TextView modifyPassword;
+    private TextView modifyPhoto;
+    private CircleImageView civProfilePic;
+
+
+    private Uri imageUri;
+    private StorageReference mStorageRef;
+
+    private static final int PICK_IMAGE_REQUEST = 256;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +53,10 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+        mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
         userEmail = (EditText) findViewById(R.id.editTextChangeEmail);
-
+        civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
         userName = (EditText) findViewById(R.id.editTextChangePseudo);
         userImg = (ImageView) findViewById(R.id.imageViewProfil);
 
@@ -49,7 +66,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
         userEmail.setText(email);
         userName.setText(pseudo);
-        userImg.setImageURI(photoUrl);
+        civProfilePic.setImageURI(photoUrl);
 
         modifyProfil = (Button) findViewById(R.id.buttonModify);
         modifyProfil.setOnClickListener(this);
@@ -57,6 +74,13 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         deleteProfil = (TextView) findViewById(R.id.textViewDeleteProfil);
         deleteProfil.setOnClickListener(this);
 
+        modifyPassword = (TextView) findViewById(R.id.textViewModifyPassword);
+        modifyPassword.setOnClickListener(this);
+
+        modifyPhoto = (TextView) findViewById(R.id.textViewModifyPhoto);
+        modifyPhoto.setOnClickListener(this);
+
+        downloadPicture();
     }
 
     public void changeProfil() {
@@ -108,6 +132,80 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private void openGallery() {
+        Intent gallery = new Intent();
+
+        gallery.setType("image/*");
+
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE_REQUEST);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
+
+            if (data == null) {
+                //Display an error
+                return;
+            }
+            imageUri = data.getData();
+            uploadPicture(imageUri);
+            downloadPicture();
+
+        }
+    }
+
+    private void uploadPicture(final Uri uri) {
+
+        StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName()+ "_avatar");
+
+        picRef.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        // Get a URL to the uploaded content
+                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setPhotoUri(downloadUrl)
+                                .build();
+
+                        user.updateProfile(profileUpdates);
+                        downloadPicture();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
+
+    }
+
+    private void downloadPicture () {
+
+        StorageReference userPicture = mStorageRef.child(mAuth.getCurrentUser().getDisplayName()+"_avatar");
+        userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(ModifyProfil.this)
+                        .load(uri)
+                        .into(civProfilePic);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+            }
+        });
+
+    }
     @Override
     public void onClick (View v) {
         if (v == modifyProfil) {
@@ -159,6 +257,13 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
                     })
                     .show();
+        }
+        if (v == modifyPassword){
+            finish();
+            startActivity(new Intent(ModifyProfil.this,ModifyPassword.class));
+        }
+        if (v == modifyPhoto) {
+            openGallery();
         }
     }
 }

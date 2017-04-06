@@ -60,5 +60,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    //Dialog box delete
+    <string name="longClick">Supprimer?</string>
+    <string name="deleteSocks">Es-tu certain de vouloir supprimer?</string>
+
+    //Dialog box un-kick
+   
+    <string name="like_or_not">Sortir de tes kicks?</string>
+    <string name="still_like">Annuler</string>
+    <string name="like_no_more">Retirer mon kick!</string>
+    <string name="longClickkick">retirer kick</string>
+    <string name="modify_password">Modifier mon mot de passe</string>
+    <string name="download_fail">Le téléchargement a échoué !</string>
+
 
 </resources>

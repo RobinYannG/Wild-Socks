@@ -1,9 +1,11 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -115,7 +117,21 @@ public class MyKickUp extends Fragment {
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
+                        int itemPosition = rView.getChildLayoutPosition(view);
+                        final Chaussette item = rowListItem.get(itemPosition);
+
+                        AlertDialog.Builder unlike = new AlertDialog.Builder(getActivity());
+                        unlike.setTitle(getString(R.string.longClickkick));
+                        unlike.setMessage(getString(R.string.like_or_not));
+                        unlike.setNegativeButton(getString(R.string.still_like), null);
+                        unlike.setPositiveButton(getString(R.string.like_no_more), new AlertDialog.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //rowListItem.add(sock);
+                                mDatabase.child(mAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_MYKICKS).child(item.getmIdChaussette()).removeValue();
+                            }
+                        });
+                        unlike.show();
                     }
                 })
         );

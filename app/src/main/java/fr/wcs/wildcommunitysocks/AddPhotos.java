@@ -120,8 +120,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),"com.example.android.fileprovider", photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                imageUri = FileProvider.getUriForFile(getActivity(),"com.example.android.fileprovider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
             }
 
@@ -145,8 +145,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
+
             imageUri=data.getData();
+            Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             showPhoto.setImageBitmap(imageBitmap);
@@ -244,7 +245,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
         }
         else{
-            Toast.makeText(getActivity(),"Foirage", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity(),"Foirage", Toast.LENGTH_SHORT).show();
         }
     }
 
