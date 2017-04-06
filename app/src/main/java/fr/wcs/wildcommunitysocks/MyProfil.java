@@ -156,6 +156,25 @@ public class MyProfil extends Fragment implements View.OnClickListener {
         });
 **/
 
+        rView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        int itemPosition = rView.getChildLayoutPosition(view);
+                        Chaussette item = rowListItem.get(itemPosition);
+                        Intent intent = new Intent(getActivity(), MySocksActivity.class);
+
+                        intent.putExtra("sock",item);
+                        intent.putExtra("position",itemPosition);
+
+
+                        startActivity(intent);
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
         return view;
 

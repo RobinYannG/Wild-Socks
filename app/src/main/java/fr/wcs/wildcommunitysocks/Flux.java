@@ -101,8 +101,11 @@ public class Flux extends Fragment {
         rView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
+
                         int itemPosition = rView.getChildLayoutPosition(view);
                         Chaussette item = rowListItem.get(itemPosition);
+
+
                         Intent intent = new Intent(getActivity(), SocksActivity.class);
 
                         intent.putExtra("sock",item);
