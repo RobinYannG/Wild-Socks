@@ -70,6 +70,8 @@
     <string name="still_like">Annuler</string>
     <string name="like_no_more">Retirer mon kick!</string>
     <string name="longClickkick">retirer kick</string>
+    <string name="modify_password">Modifier mon mot de passe</string>
+    <string name="download_fail">Le téléchargement a échoué !</string>
 
 
 </resources>

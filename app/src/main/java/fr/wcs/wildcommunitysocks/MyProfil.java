@@ -142,7 +142,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int which) {
                                 //rowListItem.add(sock);
                                 mDatabase.child(firebaseAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(item.getmIdChaussette()).removeValue();
-                                mDatabase.child(firebaseAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_ALL_UPLOADS).child(item.getmIdChaussette()).removeValue();
+                                mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(item.getmIdChaussette()).removeValue();
                             }
                         });
                         delete.show();
