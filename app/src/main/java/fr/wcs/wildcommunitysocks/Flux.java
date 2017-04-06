@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,8 +34,9 @@ public class Flux extends Fragment {
     //adapter object
     AdapterFlux rcAdapter;
 
-    //database reference
+    //Firebase references
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
 
     //progress dialog
@@ -103,13 +105,14 @@ public class Flux extends Fragment {
                     @Override public void onItemClick(View view, int position) {
                         int itemPosition = rView.getChildLayoutPosition(view);
                         Chaussette item = rowListItem.get(itemPosition);
-                        Intent intent = new Intent(getActivity(), SocksActivity.class);
+                        mAuth=FirebaseAuth.getInstance();
+                        String userId = item.getmIdUser();
+                        String uid =mAuth.getCurrentUser().getUid();
 
-                        intent.putExtra("sock",item);
-                        intent.putExtra("position",itemPosition);
-
-
-                        startActivity(intent);
+                        Intent socks = new Intent(getActivity(), SocksActivity.class);
+                        socks.putExtra("sock",item);
+                        socks.putExtra("position",itemPosition);
+                        startActivity(socks);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
