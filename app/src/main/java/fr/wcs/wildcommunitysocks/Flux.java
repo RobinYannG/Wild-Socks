@@ -106,9 +106,6 @@ public class Flux extends Fragment {
 
                         int itemPosition = rView.getChildLayoutPosition(view);
                         Chaussette item = rowListItem.get(itemPosition);
-<<<<<<< HEAD
-
-
                         Intent intent = new Intent(getActivity(), SocksActivity.class);
 
                         intent.putExtra("sock",item);
@@ -116,16 +113,15 @@ public class Flux extends Fragment {
 
 
                         startActivity(intent);
-=======
+                        /**
                         mAuth=FirebaseAuth.getInstance();
                         String userId = item.getmIdUser();
                         String uid =mAuth.getCurrentUser().getUid();
-
+**/
                         Intent socks = new Intent(getActivity(), SocksActivity.class);
                         socks.putExtra("sock",item);
                         socks.putExtra("position",itemPosition);
                         startActivity(socks);
->>>>>>> d0b8793d6e01d9459dfb3e1ad5ea4c038b87f412
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

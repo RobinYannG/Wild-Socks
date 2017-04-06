@@ -1,22 +1,16 @@
 package fr.wcs.wildcommunitysocks;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -36,16 +30,10 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseAuth mAuth;
 
 
-    //progress dialog
-    private ProgressDialog progressDialog;
-
     //Layout elements
     private ImageView thisSock;
     private TextView thisLegend, owner, thisRating;
-    private RatingBar ratingBar;
     private String url;
-    private Button ratingButton;
-    private float myRate=0;
     private float initialRate;
     private Button modifyButton;
     private Button removeButton;
@@ -55,21 +43,7 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_socks);
-
-     /**   //initializing Firebase authentification objects
-        mAuth = FirebaseAuth.getInstance();
-
-        //if the user is not logged in that means current user will return null
-        if(mAuth.getCurrentUser() == null){
-            //closing this activity
-            finish();
-            //starting login activity
-            startActivity(new Intent(this, IdentificationActivity.class));
-        }  */
-
-
-
+        setContentView(R.layout.activity_my_socks);
 
         thisSock = (ImageView) findViewById(R.id.sockImage);
         thisLegend = (TextView) findViewById(R.id.sockLegend);
@@ -82,17 +56,8 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
         removeButton = (Button) findViewById(R.id.buttonRemove);
         removeButton.setOnClickListener(this);
 
-
-
-
-       /** ratingButton = (Button) findViewById(R.id.ratingButton);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);  */
-
-
-        /**Retrieve the object**/
-
         Intent onStart = getIntent();
-        final Chaussette result = onStart.getParcelableExtra("sock");
+        Chaussette result = onStart.getParcelableExtra("sock");
 
         String leg = result.getmLegende();
         String author = result.getmDisplayNameUser();
@@ -105,29 +70,9 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
         thisRating.setText(String.valueOf(initialRate));
 
 
-
         new MySocksActivity.SockImage(thisSock).execute(url);
 
     }
-
-
-
-  /**  public void upDateRate(Chaussette ratedSock, float rate){
-
-        String uploadId = ratedSock.getmIdChaussette();
-        String idU = ratedSock.getmIdUser();
-        ratedSock.setmNote(ratedSock.getmNote()+rate);
-        ratedSock.setmSubNote(ratedSock.getmSubNote()-rate);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
-        mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
-        mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
-        initialRate = ratedSock.getmNote();
-        ratingBar.setRating(0);
-        thisRating.setText(String.valueOf(initialRate));
-    }  */
-
-
 
     public Bitmap loadImageFromNetwork(String src) {
         try {
@@ -164,13 +109,13 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void removeButton() {
-
-        mAuth = FirebaseAuth.getInstance();
-
-        Intent onStart = getIntent();
-        final Chaussette result = onStart.getParcelableExtra("sock");
-
-        mDatabase.child(mAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(result.getmIdChaussette()).removeValue();
+       mAuth = FirebaseAuth.getInstance();
+       FirebaseUser user = mAuth.getCurrentUser();
+       mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+       Intent onStart = getIntent();
+       Chaussette result = onStart.getParcelableExtra("sock");
+       mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(result.getmIdChaussette()).removeValue();
+       mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(result.getmIdChaussette()).removeValue();
     }
 
 
@@ -180,7 +125,6 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, ModifyMySocksActivity.class));
         }
         if (v == removeButton) {
-
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Tu changes de Chaussettes ?")
                     .setContentText("Es tu sûr de vouloir supprimer ta photo ?")
@@ -197,14 +141,6 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
                                     .setCancelClickListener(null)
                                     .setConfirmClickListener(null)
                                     .changeAlertType(SweetAlertDialog.ERROR_TYPE);
-
-                            // or you can new a SweetAlertDialog to show
-                               /* sDialog.dismiss();
-                                new SweetAlertDialog(SampleActivity.this, SweetAlertDialog.ERROR_TYPE)
-                                        .setTitleText("Cancelled!")
-                                        .setContentText("Your imaginary file is safe :)")
-                                        .setConfirmText("OK")
-                                        .show();*/
                         }
                     })
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -219,7 +155,7 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
                                             finish();
-                                            startActivity(new Intent(MySocksActivity.this,MyProfil.class));
+                                            //startActivity(new Intent(MySocksActivity.this,Navigation.class));
                                         }
                                     })
                                     .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);

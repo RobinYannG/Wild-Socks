@@ -18,6 +18,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -54,6 +56,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private StorageReference mStorageRef;
     private Chaussette mChaussette;
     private EditText mEditTextLegende;
+    private TextView textViewLegend;
     private FirebaseAuth firebaseAuth;
     private int key;
 
@@ -83,6 +86,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonTakePicture=(Button) view.findViewById(R.id.cameraButton);
         buttonUpload=(Button) view.findViewById(R.id.buttonUpload);
         mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
+        textViewLegend =(TextView) view.findViewById(R.id.sockName);
 
         buttonTakePicture.setOnClickListener(this);
         buttonSelectFromGallery.setOnClickListener(this);
@@ -194,11 +198,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Chargement en cours...");
             progressDialog.show();
-
-
-            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS+ System.currentTimeMillis()+"."+getFileExtension(imageUri));
-
-
+            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS+ System.currentTimeMillis()
+                    +"."+getFileExtension(imageUri));
             picRef.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -213,14 +214,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                                     displayName,
                                     0);
 
-
-
                             //adding an upload to firebase database
                             String uploadId = mDatabase.push().getKey();
                             mChaussette.setmIdChaussette(uploadId);
                             mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
                             mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
-
 
                         }
                     })
@@ -229,7 +227,6 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onFailure(@NonNull Exception exception) {
                             progressDialog.dismiss();
                             Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_LONG);
-
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
@@ -237,7 +234,6 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                             progressDialog.setMessage("Uploaded :"+(int)progress+"%");
-
                         }
 
 
@@ -245,7 +241,47 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
         }
         else{
-            Toast.makeText(getActivity(),"Foirage", Toast.LENGTH_SHORT).show();
+            showPhoto.setDrawingCacheEnabled(true);
+            Bitmap imagebitmap = showPhoto.getDrawingCache();
+
+            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Chargement en cours...");
+            progressDialog.show();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS);
+
+            UploadTask uploadTask = picRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
+                    String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                    mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),
+                            mEditTextLegende.getText().toString().trim(),
+                            idUser,
+                            displayName,
+                            0);
+
+
+                    //adding an upload to firebase database
+                    String uploadId = mDatabase.push().getKey();
+                    mChaussette.setmIdChaussette(uploadId);
+                    mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
+                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+
+                }
+            });
         }
     }
 
@@ -259,6 +295,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         }
         if (v == buttonUpload) {
             uploadFile();
+            mEditTextLegende.setEnabled(false);
+            textViewLegend.setText(R.string.textViewLeg);
+
         }
 
     }

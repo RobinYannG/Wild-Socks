@@ -72,6 +72,7 @@
     <string name="longClickkick">retirer kick</string>
     <string name="modify_password">Modifier mon mot de passe</string>
     <string name="download_fail">Le téléchargement a échoué !</string>
+    <string name="textViewLeg">Légende :</string>
 
 
 </resources>
