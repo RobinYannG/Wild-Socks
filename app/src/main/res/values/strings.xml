@@ -57,6 +57,10 @@
     <string name="send_fail">Es-tu sûr d\'avoir un compte à cette adresse email ?</string>
     <string name="email_empty">Tu dois renseigner une adresse email !</string>
 
+    // Modify My Socks
+    <string name="Caption">Légende</string>
+    <string name="Finish">Terminé</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
