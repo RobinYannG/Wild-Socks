@@ -118,10 +118,9 @@ public class Flux extends Fragment {
                         String userId = item.getmIdUser();
                         String uid =mAuth.getCurrentUser().getUid();
 **/
-                        Intent socks = new Intent(getActivity(), SocksActivity.class);
-                        socks.putExtra("sock",item);
-                        socks.putExtra("position",itemPosition);
-                        startActivity(socks);
+
+
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

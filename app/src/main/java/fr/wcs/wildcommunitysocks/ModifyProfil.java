@@ -58,7 +58,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         userEmail = (EditText) findViewById(R.id.editTextChangeEmail);
         civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
         userName = (EditText) findViewById(R.id.editTextChangePseudo);
-        userImg = (ImageView) findViewById(R.id.imageViewProfil);
+
 
         String pseudo = user.getDisplayName();
         String email = user.getEmail();
