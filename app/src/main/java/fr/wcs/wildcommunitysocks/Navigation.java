@@ -17,18 +17,24 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Navigation extends AppCompatActivity implements View.OnClickListener{
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
+    private StorageReference mStorageRef;
 
     //view objects
     private TextView textViewUserName;
     private ImageButton buttonLogout;
+
+    private CircleImageView civProfilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
         //initializing Firebase authentification objects
         firebaseAuth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
         //if the user is not logged in that means current user will return null
         if(firebaseAuth.getCurrentUser() == null){
@@ -49,6 +56,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         //getting current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
 
         //initializing views
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
@@ -97,20 +105,39 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         transaction.replace(R.id.frame_layout, Flux.newInstance());
         transaction.commit();
 
+        downloadPicture ();
+
     }
 
+    private void downloadPicture () {
+
+        StorageReference userPicture = mStorageRef.child(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar");
+        userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(Navigation.this)
+                        .load(uri)
+                        .into(civProfilePic);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+            }
+        });
+
+    }
 
     @Override
     public void onClick(View v) {
         if(v==buttonLogout){
-            if(v==buttonLogout){
+
                 //logging out the user
                 firebaseAuth.signOut();
                 //closing activity
                 finish();
                 //starting login activity
                 startActivity(new Intent(getApplicationContext(),IdentificationActivity.class));
-            }
+
         }
     }
 

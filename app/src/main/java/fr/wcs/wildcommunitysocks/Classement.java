@@ -76,7 +76,7 @@ public class Classement extends Fragment {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
-        Query query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mName");
+        Query query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mSubNote");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
