@@ -1,18 +1,21 @@
 package fr.wcs.wildcommunitysocks;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +27,11 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,6 +46,8 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
     private TextView modifyPassword;
     private TextView modifyPhoto;
     private CircleImageView civProfilePic;
+    private String mCurrentPhotoPath;
+    private static final int REQUEST_IMAGE_CAPTURE = 234;
 
 
     private Uri imageUri;
@@ -156,36 +165,85 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             downloadPicture();
 
         }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            imageUri=data.getData();
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            civProfilePic.setImageBitmap(imageBitmap);
+
+            galleryAddPic();
+            return;
+        }
     }
 
     private void uploadPicture(final Uri uri) {
 
-        StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName()+ "_avatar");
+        if (uri!=null) {
+            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName() + "_avatar");
 
-        picRef.putFile(uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            picRef.putFile(uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            // Get a URL to the uploaded content
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setPhotoUri(downloadUrl)
-                                .build();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setPhotoUri(downloadUrl)
+                                    .build();
 
-                        user.updateProfile(profileUpdates);
-                        downloadPicture();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                    }
-                });
+                            user.updateProfile(profileUpdates);
+                            downloadPicture();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                            // ...
+                        }
+                    });
+        }
+        else{
+
+            civProfilePic.setDrawingCacheEnabled(true);
+            Bitmap imagebitmap = civProfilePic.getDrawingCache();
+
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName() + "_avatar");
+
+            UploadTask uploadTask = picRef.putBytes(data);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            // Get a URL to the uploaded content
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setPhotoUri(downloadUrl)
+                                    .build();
+
+                            user.updateProfile(profileUpdates);
+                            downloadPicture();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                            // ...
+                        }
+                    });
+        }
 
     }
 
@@ -206,6 +264,61 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        /**Ensure there is a camera activity to handle the Intent*/
+        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
+            /** Create the file where the photo should go
+             */
+            File photoFile=null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                //Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                imageUri = FileProvider.getUriForFile(this,"com.example.android.fileprovider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+            }
+
+
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + sdf + "_";
+        File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = this.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     @Override
     public void onClick (View v) {
         if (v == modifyProfil) {
@@ -263,7 +376,31 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(ModifyProfil.this,ModifyPassword.class));
         }
         if (v == modifyPhoto) {
-            openGallery();
+
+
+            new SweetAlertDialog(this)
+                    .setCancelText("Ma bibliothèque")
+                    .setConfirmText("Appareil Photo")
+                    .showCancelButton(true)
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            // reuse previous dialog instance, keep widget user state, reset them if you need
+                            openGallery();
+                            sDialog.cancel();
+                        }
+                    })
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+
+                            dispatchTakePictureIntent();
+                            sDialog.cancel();
+
+                        }
+
+                    })
+                    .show();
         }
     }
 }
