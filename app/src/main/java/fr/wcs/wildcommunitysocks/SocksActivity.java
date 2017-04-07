@@ -42,6 +42,7 @@ public class SocksActivity extends AppCompatActivity {
     private Button ratingButton;
     private float myRate=0;
     private float initialRate;
+    private static Chaussette result;
 
 
 
@@ -76,7 +77,7 @@ public class SocksActivity extends AppCompatActivity {
      /**Retrieve the object**/
 
      Intent onStart = getIntent();
-     final Chaussette result = onStart.getParcelableExtra("sock");
+     result = onStart.getParcelableExtra("sock");
 
      String leg = result.getmLegende();
      String author = result.getmDisplayNameUser();

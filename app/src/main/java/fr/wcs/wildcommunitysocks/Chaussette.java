@@ -12,15 +12,16 @@ public class Chaussette implements Parcelable {
     private String mIdChaussette;
     private float mNote;
     private float mSubNote;
+   // private Category mCategory;
 
 
     private Chaussette () {
     }
 
-    public Chaussette (String urlChaussette, String legende, String idUser, String displayNameUser,float note){
+    public Chaussette (String idChaussette, String urlChaussette, String legende, String idUser, String displayNameUser,float note){
         mImgChaussette = urlChaussette;
         mLegende = legende;
-        mIdChaussette ="";
+        mIdChaussette =idChaussette;
         mIdUser = idUser;
         mDisplayNameUser = displayNameUser;
         mNote=note;
@@ -30,11 +31,11 @@ public class Chaussette implements Parcelable {
     protected Chaussette(Parcel in) {
         mImgChaussette = in.readString();
         mLegende = in.readString();
-        mIdChaussette = in.readString();
         mIdUser = in.readString();
         mDisplayNameUser = in.readString();
+        mIdChaussette = in.readString();
         mNote = in.readFloat();
-        mSubNote=in.readFloat();
+        mSubNote = in.readFloat();
     }
 
     public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
@@ -53,8 +54,8 @@ public class Chaussette implements Parcelable {
         return mImgChaussette;
     }
 
-    public void setmImgChaussette(String mUrlChaussette) {
-        this.mImgChaussette = mUrlChaussette;
+    public void setmImgChaussette(String mImgChaussette) {
+        this.mImgChaussette = mImgChaussette;
     }
 
     public String getmLegende() {
@@ -73,6 +74,14 @@ public class Chaussette implements Parcelable {
         this.mIdUser = mIdUser;
     }
 
+    public String getmDisplayNameUser() {
+        return mDisplayNameUser;
+    }
+
+    public void setmDisplayNameUser(String mDisplayNameUser) {
+        this.mDisplayNameUser = mDisplayNameUser;
+    }
+
     public String getmIdChaussette() {
         return mIdChaussette;
     }
@@ -84,11 +93,6 @@ public class Chaussette implements Parcelable {
     public float getmNote() {
         return mNote;
     }
-
-    public String getmDisplayNameUser(){
-        return mDisplayNameUser;
-    }
-
 
     public void setmNote(float mNote) {
         this.mNote = mNote;
@@ -111,13 +115,12 @@ public class Chaussette implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mImgChaussette);
         dest.writeString(mLegende);
-        dest.writeString(mIdChaussette);
         dest.writeString(mIdUser);
         dest.writeString(mDisplayNameUser);
+        dest.writeString(mIdChaussette);
         dest.writeFloat(mNote);
         dest.writeFloat(mSubNote);
     }
-
 }
 
 

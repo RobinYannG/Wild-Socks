@@ -14,5 +14,11 @@ public class Constants {
     public static final String DATABASE_PATH_ALL_UPLOADS ="allSocks";
     public static final String DATABASE_PATH_MYKICKS = "mykicks";
     public static final String DATABASE_PATH_PROFIL = "profil";
+    public static final String DATABASE_PATH_CATEGORY="Category";
+    public static final String DATABASE_PATH_CATEGORY_1 = "Socks";
+    public static final String DATABASE_PATH_CATEGORY_2="Slippers";
+    public static final String DATABASE_PATH_CATEGORY_3 ="Tongs";
+    public static final String DATABASE_PATH_NO_CATEGORY ="";
+
 }
 

@@ -73,6 +73,9 @@
     <string name="modify_password">Modifier mon mot de passe</string>
     <string name="download_fail">Le téléchargement a échoué !</string>
     <string name="textViewLeg">Légende :</string>
+    <string name="pick_category">Choisi la catégorie de ta photo :</string>
+    <string name="category_1">Chaussettes</string>
+    <string name="category_2">Chaussons</string>
 
 
 </resources>

@@ -1,7 +1,9 @@
 package fr.wcs.wildcommunitysocks;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -58,7 +60,12 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private EditText mEditTextLegende;
     private TextView textViewLegend;
     private FirebaseAuth firebaseAuth;
-    private int key;
+    private static String uploadId;
+    private static String legend;
+    private static String urlSock;
+    private static String idUser;
+    private static String displayName;
+
 
 
     private DatabaseReference mDatabase;
@@ -87,10 +94,18 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonUpload=(Button) view.findViewById(R.id.buttonUpload);
         mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
         textViewLegend =(TextView) view.findViewById(R.id.sockName);
+        uploadId = mDatabase.push().getKey();
 
         buttonTakePicture.setOnClickListener(this);
         buttonSelectFromGallery.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+
+        idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        mChaussette = new Chaussette(uploadId,"none","legend",
+                idUser,
+                displayName,
+                0);
 
         return view;
     }
@@ -206,17 +221,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
-                            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            String displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                            mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),
-                                    mEditTextLegende.getText().toString().trim(),
-                                    idUser,
-                                    displayName,
-                                    0);
 
-                            //adding an upload to firebase database
-                            String uploadId = mDatabase.push().getKey();
-                            mChaussette.setmIdChaussette(uploadId);
+                            urlSock = taskSnapshot.getDownloadUrl().toString();
+                            mChaussette.setmImgChaussette(urlSock);
                             mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
                             mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
 
@@ -248,7 +255,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             progressDialog.setMessage("Chargement en cours...");
             progressDialog.show();
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
             StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS);
@@ -265,24 +272,17 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
-                    String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    String displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                    mChaussette = new Chaussette(taskSnapshot.getDownloadUrl().toString(),
-                            mEditTextLegende.getText().toString().trim(),
-                            idUser,
-                            displayName,
-                            0);
-
 
                     //adding an upload to firebase database
-                    String uploadId = mDatabase.push().getKey();
-                    mChaussette.setmIdChaussette(uploadId);
-                    mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
-                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
 
+                    urlSock = taskSnapshot.getDownloadUrl().toString();
+                    mChaussette.setmImgChaussette(urlSock);
+                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                 }
             });
         }
+
     }
 
     @Override
@@ -294,7 +294,28 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             openGallery();
         }
         if (v == buttonUpload) {
+            legend=mEditTextLegende.getText().toString().trim();
+            mChaussette.setmLegende(legend);
             uploadFile();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.pick_category)
+                    .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case 0:
+                                    mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_1).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    break;
+                                case 1:
+                                    mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_2).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    break;
+                                case 2:
+                                    mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_3).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    break;
+                            }
+                        }
+                    });
+            builder.show();
+
             mEditTextLegende.setEnabled(false);
             textViewLegend.setText(R.string.textViewLeg);
 
