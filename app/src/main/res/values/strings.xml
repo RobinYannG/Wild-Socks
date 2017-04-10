@@ -83,6 +83,10 @@
     <string name="pick_category">Choisi la catégorie de ta photo :</string>
     <string name="category_1">Chaussettes</string>
     <string name="category_2">Chaussons</string>
+    <string name="ranking_all">Classement général</string>
+    <string name="category1">Chaussons</string>
+    <string name="category2">Chaussette</string>
+    <string name="category3">Tongs</string>
 
     //Comment Activity
     <string name="add_comment">Ajouter un commentaire</string>

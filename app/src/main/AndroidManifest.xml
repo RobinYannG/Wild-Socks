@@ -50,6 +50,8 @@
         <activity android:name=".MySocksActivity" />
         <activity android:name=".ModifyMySocksActivity" />
         <activity android:name=".CommentActivity"></activity>
+        <activity android:name=".RankingResult"></activity>
+
     </application>
 
 </manifest>

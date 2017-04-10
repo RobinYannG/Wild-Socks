@@ -21,15 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/profile_image"
         android:layout_toEndOf="@+id/profile_image"
-        android:text="TextView" />
+        android:text="Comment" />
 
     <TextView
         android:id="@+id/comment_author"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/comment_line"
         android:layout_alignBottom="@+id/profile_image"
-        android:layout_toEndOf="@+id/profile_image"
-        android:text="TextView" />
+        android:layout_alignRight="@+id/comment_line"
+        android:text="Author"
+        android:layout_toEndOf="@+id/profile_image" />
 
 </RelativeLayout>
