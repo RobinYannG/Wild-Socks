@@ -69,7 +69,7 @@
     <string name="deleteSocks">Es-tu certain de vouloir supprimer?</string>
 
     //Dialog box un-kick
-   
+
     <string name="like_or_not">Sortir de tes kicks?</string>
     <string name="still_like">Annuler</string>
     <string name="like_no_more">Retirer mon kick!</string>
@@ -77,9 +77,17 @@
     <string name="modify_password">Modifier mon mot de passe</string>
     <string name="download_fail">Le téléchargement a échoué !</string>
     <string name="textViewLeg">Légende :</string>
+
+
+    //Dialog box category
     <string name="pick_category">Choisi la catégorie de ta photo :</string>
     <string name="category_1">Chaussettes</string>
     <string name="category_2">Chaussons</string>
+
+    //Comment Activity
+    <string name="add_comment">Ajouter un commentaire</string>
+    <string name="button_comment">Poster</string>
+    <string name="noCommentToast">Tu n\'as pas entré de commentaire</string>
 
 
 </resources>

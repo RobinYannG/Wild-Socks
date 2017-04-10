@@ -40,6 +40,7 @@ public class SocksActivity extends AppCompatActivity {
     private RatingBar ratingBar;
     private String url;
     private Button ratingButton;
+    private TextView seeComments;
     private float myRate=0;
     private float initialRate;
     private static Chaussette result;
@@ -72,6 +73,7 @@ public class SocksActivity extends AppCompatActivity {
      thisRating = (TextView) findViewById(R.id.sockRating);
      ratingButton = (Button) findViewById(R.id.ratingButton);
      ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+     seeComments =(TextView) findViewById(R.id.textViewComment);
 
 
      /**Retrieve the object**/
@@ -112,6 +114,15 @@ public class SocksActivity extends AppCompatActivity {
                  finish();
              }
 
+         }
+     });
+
+     seeComments.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent comments = new Intent(SocksActivity.this,CommentActivity.class);
+             comments.putExtra("sock",result);
+             startActivity(comments);
          }
      });
 

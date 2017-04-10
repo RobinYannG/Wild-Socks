@@ -19,6 +19,7 @@ public class Constants {
     public static final String DATABASE_PATH_CATEGORY_2="Slippers";
     public static final String DATABASE_PATH_CATEGORY_3 ="Tongs";
     public static final String DATABASE_PATH_NO_CATEGORY ="";
+    public static final String DATABASE_PATH_COMMENTS="comments";
 
 }
 

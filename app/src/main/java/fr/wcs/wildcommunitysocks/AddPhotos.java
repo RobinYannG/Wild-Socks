@@ -165,8 +165,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            imageUri=data.getData();
+
             Bundle extras = data.getExtras();
+            
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             showPhoto.setImageBitmap(imageBitmap);
@@ -259,7 +260,6 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
             StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS);
-
             UploadTask uploadTask = picRef.putBytes(data);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override

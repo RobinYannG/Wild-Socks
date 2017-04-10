@@ -32,11 +32,13 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
 
     //Layout elements
     private ImageView thisSock;
-    private TextView thisLegend, owner, thisRating;
+    private TextView thisLegend, owner, thisRating, seeComments;
     private String url;
     private float initialRate;
     private Button modifyButton;
     private Button removeButton;
+    private static Chaussette result;
+
 
 
 
@@ -49,6 +51,8 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
         thisLegend = (TextView) findViewById(R.id.sockLegend);
         owner = (TextView) findViewById(R.id.sockOwner);
         thisRating = (TextView) findViewById(R.id.sockRating);
+        seeComments =(TextView) findViewById(R.id.textViewComment);
+        seeComments.setOnClickListener(this);
 
         modifyButton = (Button) findViewById(R.id.buttonModify);
         modifyButton.setOnClickListener(this);
@@ -57,7 +61,7 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
         removeButton.setOnClickListener(this);
 
         Intent onStart = getIntent();
-        Chaussette result = onStart.getParcelableExtra("sock");
+        result = onStart.getParcelableExtra("sock");
 
         String leg = result.getmLegende();
         String author = result.getmDisplayNameUser();
@@ -121,9 +125,20 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick (View v) {
-        if (v == modifyButton) {
-            startActivity(new Intent(this, ModifyMySocksActivity.class));
+        if(v==seeComments){
+            Intent comments =new Intent(MySocksActivity.this,CommentActivity.class);
+            comments.putExtra("sock",result);
+            startActivity(comments);
         }
+
+
+        if (v == modifyButton) {
+            Intent intent = new Intent(this, ModifyMySocksActivity.class);
+            intent.putExtra("sock", result);
+            startActivity(intent);
+        }
+
+
         if (v == removeButton) {
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Tu changes de Chaussettes ?")

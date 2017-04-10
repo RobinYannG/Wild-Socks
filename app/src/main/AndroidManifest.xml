@@ -39,16 +39,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewAccountActivity"></activity>
-        <activity android:name=".IdentificationActivity"></activity>
+        <activity android:name=".NewAccountActivity" />
+        <activity android:name=".IdentificationActivity" />
         <activity
             android:name=".Navigation"
             android:theme="@style/AppTheme.TransNav" />
         <activity android:name=".SocksActivity" />
-        <activity android:name=".ModifyProfil"></activity>
+        <activity android:name=".ModifyProfil" />
         <activity android:name=".ModifyPassword" />
-        <activity android:name=".MySocksActivity"></activity>
-        <activity android:name=".ModifyMySocksActivity"></activity>
+        <activity android:name=".MySocksActivity" />
+        <activity android:name=".ModifyMySocksActivity" />
+        <activity android:name=".CommentActivity"></activity>
     </application>
 
 </manifest>
