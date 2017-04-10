@@ -60,7 +60,7 @@ public class Flux extends Fragment {
 
 
 
-       final List<Chaussette> rowListItem = getAllItemList();
+        final List<Chaussette> rowListItem = getAllItemList();
         lLayout = new GridLayoutManager(getActivity(), 3);
 
         rView = (RecyclerView) view.findViewById(R.id.recyclerView2);
@@ -113,13 +113,6 @@ public class Flux extends Fragment {
 
 
                         startActivity(intent);
-                        /**
-                        mAuth=FirebaseAuth.getInstance();
-                        String userId = item.getmIdUser();
-                        String uid =mAuth.getCurrentUser().getUid();
-**/
-
-
 
                     }
 
@@ -131,8 +124,6 @@ public class Flux extends Fragment {
 
         return view;
     }
-
-
 
     private List<Chaussette> getAllItemList(){
 

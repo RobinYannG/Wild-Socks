@@ -31,7 +31,7 @@ public class RankingResult extends AppCompatActivity {
     private GridLayoutManager lLayout;
 
     //adapter object
-    AdapterFlux rcAdapter;
+    MyAdapter rcAdapter;
 
     //database reference
     private DatabaseReference mDatabase;
@@ -60,7 +60,7 @@ public class RankingResult extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(RankingResult.this);
 
-        rcAdapter = new AdapterFlux(RankingResult.this, rowListItem);
+        rcAdapter = new MyAdapter(RankingResult.this, rowListItem);
         rView.setAdapter(rcAdapter);
 
         progressDialog.setMessage("Please wait...");

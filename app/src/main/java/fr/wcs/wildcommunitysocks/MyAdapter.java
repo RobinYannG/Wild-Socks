@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -27,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sock_item, parent, false);
+                .inflate(R.layout.sock_item_ranking, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -39,6 +40,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         //holder.textViewName.setText(sock.getmLegende());
 
         Glide.with(context).load(sock.getmImgChaussette()).into(holder.imageView);
+
+        String myNote = Float.toString(sock.getmNote());
+        holder.textView.setText(myNote + " Kicks Up");
     }
 
     @Override
@@ -50,12 +54,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
       //  public TextView textViewName;
         public ImageView imageView;
+        public TextView textView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
            // textViewName = (TextView) itemView.findViewById(R.id.sockLegend);
             imageView = (ImageView) itemView.findViewById(R.id.sockImage);
+            textView = (TextView) itemView.findViewById(R.id.textViewNbrKickUp);
         }
     }
 
