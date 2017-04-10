@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -174,6 +176,9 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             civProfilePic.setImageBitmap(imageBitmap);
 
             galleryAddPic();
+            uploadPicture(imageUri);
+            downloadPicture();
+
             return;
         }
     }
@@ -219,6 +224,8 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             byte[] data = baos.toByteArray();
             StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName() + "_avatar");
 
+
+
             UploadTask uploadTask = picRef.putBytes(data);
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -239,8 +246,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
-                            // ...
+                            Toast.makeText(ModifyProfil.this, "Raté", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

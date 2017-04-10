@@ -69,7 +69,7 @@
     <string name="deleteSocks">Es-tu certain de vouloir supprimer?</string>
 
     //Dialog box un-kick
-   
+
     <string name="like_or_not">Sortir de tes kicks?</string>
     <string name="still_like">Annuler</string>
     <string name="like_no_more">Retirer mon kick!</string>
@@ -80,6 +80,10 @@
     <string name="pick_category">Choisi la catégorie de ta photo :</string>
     <string name="category_1">Chaussettes</string>
     <string name="category_2">Chaussons</string>
+    <string name="ranking_all">Classement général</string>
+    <string name="category1">Chaussons</string>
+    <string name="category2">Chaussette</string>
+    <string name="category3">Tongs</string>
 
 
 </resources>

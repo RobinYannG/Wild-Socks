@@ -4,19 +4,45 @@
     android:layout_height="match_parent"
     tools:context="fr.wcs.wildcommunitysocks.Flux">
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewClassement"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="3dp"
-        android:stretchMode="spacingWidthUniform"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <Button
+            android:id="@+id/buttonAllRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonCategory1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="26dp"
+            android:text="@string/ranking_all" />
+
+        <Button
+            android:id="@+id/buttonCategory2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/category1" />
+
+        <Button
+            android:id="@+id/buttonCategory1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/category2"
+            android:layout_marginBottom="71dp"
+            android:layout_above="@+id/buttonCategory3"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/buttonCategory3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="@string/category3"
+            android:layout_below="@+id/buttonCategory2"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
 </FrameLayout>

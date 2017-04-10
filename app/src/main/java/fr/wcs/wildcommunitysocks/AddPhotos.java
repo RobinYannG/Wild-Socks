@@ -311,6 +311,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                                 case 2:
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_3).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
+                                default:
+                                    break;
                             }
                         }
                     });
@@ -318,6 +320,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
             mEditTextLegende.setEnabled(false);
             textViewLegend.setText(R.string.textViewLeg);
+
+
 
         }
 

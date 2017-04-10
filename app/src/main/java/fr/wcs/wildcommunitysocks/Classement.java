@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,28 +20,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Classement extends Fragment {
+import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_CATEGORY_1INT;
+import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_CATEGORY_2INT;
+import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_CATEGORY_3INT;
+import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_NO_CATEGORY;
+
+public class Classement extends Fragment implements View.OnClickListener {
     public static Classement newInstance() {
         Classement fragment = new Classement();
         return fragment;
     }
 
-    private RecyclerView rView;
-
-    private GridLayoutManager lLayout;
-
-    //adapter object
-    AdapterFlux rcAdapter;
-
-    //database reference
-    private DatabaseReference mDatabase;
-
-
-    //progress dialog
-    private ProgressDialog progressDialog;
-
-    //list to hold all the uploaded images
-    private List<Chaussette> rowListItem;
+    private Button buttonAllRanking;
+    private Button buttonCategory1;
+    private Button buttonCategory2;
+    private Button buttonCategory3;
 
 
 
@@ -55,74 +49,43 @@ public class Classement extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_classement, container, false);
 
+        buttonAllRanking = (Button) view.findViewById(R.id.buttonAllRanking);
+        buttonCategory1 = (Button) view.findViewById(R.id.buttonCategory1);
+        buttonCategory2 = (Button) view.findViewById(R.id.buttonCategory2);
+        buttonCategory3 = (Button) view.findViewById(R.id.buttonCategory3);
 
-
-        final List<Chaussette> rowListItem = getAllItemList();
-        lLayout = new GridLayoutManager(getActivity(), 3);
-
-        rView = (RecyclerView) view.findViewById(R.id.recyclerViewClassement);
-        rView.setHasFixedSize(true);
-        rView.setLayoutManager(lLayout);
-
-        progressDialog = new ProgressDialog(getActivity());
-
-        rcAdapter = new AdapterFlux(getActivity(), rowListItem);
-        rView.setAdapter(rcAdapter);
-
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
-        Query query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mSubNote");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                rowListItem.clear();
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Chaussette sock = postSnapshot.getValue(Chaussette.class);
-                    rowListItem.add(sock);
-                    rcAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
-        rView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        int itemPosition = rView.getChildLayoutPosition(view);
-                        Chaussette item = rowListItem.get(itemPosition);
-                        Intent intent = new Intent(getActivity(), SocksActivity.class);
-
-                        intent.putExtra("sock",item);
-                        intent.putExtra("position",itemPosition);
-
-
-                        startActivity(intent);
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                })
-        );
+        buttonAllRanking.setOnClickListener(this);
+        buttonCategory1.setOnClickListener(this);
+        buttonCategory2.setOnClickListener(this);
+        buttonCategory3.setOnClickListener(this);
 
         return view;
     }
 
-
-
-    private List<Chaussette> getAllItemList(){
-
-        List<Chaussette> allItems = new ArrayList<>();
-
-
-        return allItems;
+    public void onClick(View v) {
+        if (v == buttonAllRanking){
+            Intent intent = new Intent(getActivity(), RankingResult.class);
+            intent.putExtra("I_CAME_FROM", "a0");
+            startActivity(intent);
+        }
+        if (v == buttonCategory1){
+            Intent intent = new Intent(getActivity(), RankingResult.class);
+            intent.putExtra("I_CAME_FROM", "a1");
+            startActivity(intent);
+        }
+        if (v == buttonCategory2){
+            Intent intent = new Intent(getActivity(), RankingResult.class);
+            intent.putExtra("I_CAME_FROM", "a2");
+            startActivity(intent);
+        }
+        if (v == buttonCategory3){
+            Intent intent = new Intent(getActivity(), RankingResult.class);
+            intent.putExtra("I_CAME_FROM", "a3");
+            startActivity(intent);
+        }
     }
+
+
+
+
 }

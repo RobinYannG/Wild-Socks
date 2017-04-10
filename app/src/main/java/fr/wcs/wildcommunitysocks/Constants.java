@@ -18,7 +18,10 @@ public class Constants {
     public static final String DATABASE_PATH_CATEGORY_1 = "Socks";
     public static final String DATABASE_PATH_CATEGORY_2="Slippers";
     public static final String DATABASE_PATH_CATEGORY_3 ="Tongs";
-    public static final String DATABASE_PATH_NO_CATEGORY ="";
+    public static final int DATABASE_PATH_NO_CATEGORY = 0;
+    public static final int DATABASE_PATH_CATEGORY_1INT = 1;
+    public static final int DATABASE_PATH_CATEGORY_2INT = 2;
+    public static final int DATABASE_PATH_CATEGORY_3INT = 3;
 
 }
 
