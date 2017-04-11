@@ -6,17 +6,28 @@ package fr.wcs.wildcommunitysocks;
 
 public class Comment {
 
+    private String mIdComment;
     private String mUserName;
     private String mSockId;
     private String mComment;
 
+
     private Comment(){
 
     }
-    public Comment(String userName, String sockId, String comment){
+    public Comment(String idComment, String userName, String sockId, String comment){
+        mIdComment = idComment;
         mUserName = userName;
         mSockId = sockId;
         mComment =comment;
+    }
+
+    public String getmIdComment() {
+        return mIdComment;
+    }
+
+    public void setmIdComment(String mIdComment) {
+        this.mIdComment = mIdComment;
     }
 
     public String getmUserName() {

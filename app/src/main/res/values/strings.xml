@@ -92,6 +92,7 @@
     <string name="add_comment">Ajouter un commentaire</string>
     <string name="button_comment">Poster</string>
     <string name="noCommentToast">Tu n\'as pas entré de commentaire</string>
+    <string name="deleteComment">Es-tu certain de vouloir supprimer ce commentaire?</string>
 
 
 </resources>
