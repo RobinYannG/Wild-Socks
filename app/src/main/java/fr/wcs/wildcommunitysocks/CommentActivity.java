@@ -16,10 +16,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_COMMENTS;
@@ -44,18 +41,22 @@ public class CommentActivity extends AppCompatActivity {
 
     private String sockId;
     private String authorName;
-    private String authorId;
     private String newComment;
     private String uploadId;
     private String removeId;
-
-
+    private String userId;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
+
+        /**Get current user information*/
+
+        mAuth = FirebaseAuth.getInstance();
+        authorName = mAuth.getCurrentUser().getDisplayName();
+        userId =mAuth.getCurrentUser().getUid();
 
         /**Retrieve the object**/
 
@@ -74,29 +75,9 @@ public class CommentActivity extends AppCompatActivity {
         mCommentsDataBase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS).child(DATABASE_PATH_COMMENTS).child(sockId);
         mAdapter = new CommentAdapter(mCommentsDataBase,this,R.layout.comment_item);
         commentListView.setAdapter(mAdapter);
-        allItems = new ArrayList<>();
+        progressDialog.dismiss();
 
-/***Adding an Event Listener
-        mCommentsDataBase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-                allItems.clear();
 
-                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-                    Comment item = postSnapshot.getValue(Comment.class);
-                    allItems.add(item);
-
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
-/******************************************/
         /**Delete a comment by clicking it*/
 
         commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,34 +86,35 @@ public class CommentActivity extends AppCompatActivity {
                 Comment comment = (Comment) parent.getItemAtPosition(position);
                 removeId = comment.getmIdComment();
 
-                AlertDialog.Builder delete = new AlertDialog.Builder(CommentActivity.this);
-                delete.setTitle(getString(R.string.longClick));
-                delete.setMessage(getString(R.string.deleteComment));
-                delete.setNegativeButton(getString(R.string.cancel), null);
-                delete.setPositiveButton(getString(R.string.confirm), new AlertDialog.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //rowListItem.add(sock);
-                        mCommentsDataBase.child(removeId).removeValue();
-                    }
-                });
-                delete.show();
+
+                if(userId==comment.getmAuthorId()||userId==sock.getmIdUser()){
+                    AlertDialog.Builder delete = new AlertDialog.Builder(CommentActivity.this);
+                    delete.setTitle(getString(R.string.longClick));
+                    delete.setMessage(getString(R.string.deleteComment));
+                    delete.setNegativeButton(getString(R.string.cancel), null);
+                    delete.setPositiveButton(getString(R.string.confirm), new AlertDialog.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //rowListItem.add(sock);
+                            mCommentsDataBase.child(removeId).removeValue();
+                        }
+                    });
+                    delete.show();
+
+                }else{
+                    Toast.makeText(CommentActivity.this,getString(R.string.noCommentDeletion),Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
 
         /**Propose to add a comment :*/
 
-        mAuth = FirebaseAuth.getInstance();
-        authorName = mAuth.getCurrentUser().getDisplayName();
-        authorId =mAuth.getCurrentUser().getUid();
-        StorageReference userPicture = FirebaseStorage.getInstance().getReference("users_avatar").child(authorName+"_avatar");
-        final String authorPic=userPicture.getDownloadUrl().toString();
 
 
         commentEditText = (EditText) findViewById(R.id.editTextComment);
         postCommentButton =(FloatingActionButton) findViewById(R.id.postCommentButton);
-
 
         postCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +124,7 @@ public class CommentActivity extends AppCompatActivity {
                     Toast.makeText(CommentActivity.this, getString(R.string.noCommentToast), Toast.LENGTH_SHORT).show();
                 }else{
                     uploadId = mCommentsDataBase.push().getKey();
-                    Comment newCom = new Comment(uploadId, authorId,authorName,sockId, newComment);
+                    Comment newCom = new Comment(uploadId, userId,authorName,sockId, newComment);
 
                     mCommentsDataBase.child(uploadId).setValue(newCom);
                 }

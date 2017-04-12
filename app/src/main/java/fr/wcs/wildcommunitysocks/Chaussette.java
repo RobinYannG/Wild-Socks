@@ -10,15 +10,16 @@ public class Chaussette implements Parcelable {
     private String mIdUser;
     private String mDisplayNameUser;
     private String mIdChaussette;
+    private String mCategory;
     private float mNote;
     private float mSubNote;
-   // private Category mCategory;
+
 
 
     private Chaussette () {
     }
 
-    public Chaussette (String idChaussette, String urlChaussette, String legende, String idUser, String displayNameUser,float note){
+    public Chaussette (String idChaussette, String urlChaussette, String legende, String idUser, String displayNameUser,float note,String category){
         mImgChaussette = urlChaussette;
         mLegende = legende;
         mIdChaussette =idChaussette;
@@ -26,6 +27,7 @@ public class Chaussette implements Parcelable {
         mDisplayNameUser = displayNameUser;
         mNote=note;
         mSubNote=-note;
+        mCategory=category;
     }
 
     protected Chaussette(Parcel in) {
@@ -36,6 +38,7 @@ public class Chaussette implements Parcelable {
         mIdChaussette = in.readString();
         mNote = in.readFloat();
         mSubNote = in.readFloat();
+        mCategory=in.readString();
     }
 
     public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
@@ -72,6 +75,18 @@ public class Chaussette implements Parcelable {
 
     public void setmIdUser(String mIdUser) {
         this.mIdUser = mIdUser;
+    }
+
+    public String getmCategory() {
+        return mCategory;
+    }
+
+    public void setmCategory(String mCategory) {
+        this.mCategory = mCategory;
+    }
+
+    public static Creator<Chaussette> getCREATOR() {
+        return CREATOR;
     }
 
     public String getmDisplayNameUser() {
@@ -120,6 +135,7 @@ public class Chaussette implements Parcelable {
         dest.writeString(mIdChaussette);
         dest.writeFloat(mNote);
         dest.writeFloat(mSubNote);
+        dest.writeString(mCategory);
     }
 }
 
