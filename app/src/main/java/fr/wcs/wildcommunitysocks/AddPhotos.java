@@ -105,7 +105,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         mChaussette = new Chaussette(uploadId,"none","legend",
                 idUser,
                 displayName,
-                0);
+                0,
+                "");
 
         return view;
     }
@@ -304,12 +305,15 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
                                 case 0:
+                                    mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_1);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_1).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 case 1:
+                                    mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_2);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_2).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 case 2:
+                                    mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_3);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_3).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 default:
