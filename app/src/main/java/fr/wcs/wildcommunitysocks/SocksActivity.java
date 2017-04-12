@@ -71,7 +71,9 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     public static String uploadId;
     public String sockId;
     public String userName;
+    public String userId;
     public Chaussette sock;
+    public Button buttonViewComments;
 
     boolean isAnimated = false;
 
@@ -83,6 +85,9 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
 
         ButterKnife.bind(this);
         btnSubmit.setOnClickListener(this);
+
+        buttonViewComments = (Button) findViewById(R.id.buttonViewComments);
+        buttonViewComments.setOnClickListener(this);
 
         //initializing Firebase authentification objects
         mAuth = FirebaseAuth.getInstance();
@@ -195,6 +200,11 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         if (v == btnSubmit) {
             onSubmitClick();
         }
+        if (v == buttonViewComments) {
+           Intent intent = new Intent(SocksActivity.this,CommentActivity.class);
+            intent.putExtra("sock",result);
+            startActivity(intent);
+        }
     }
 
     public void onSubmitClick() {
@@ -236,7 +246,8 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
 
             userName = mAuth.getCurrentUser().getDisplayName();
             uploadId = mCommentsDataBase.push().getKey();
-            Comment newCom = new Comment(uploadId, userName,sockId, comments);
+            userId = mAuth.getCurrentUser().getUid();
+            Comment newCom = new Comment(uploadId, userId,userName,sockId, comments);
             mCommentsDataBase.child(uploadId).setValue(newCom);
 
         }

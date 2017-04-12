@@ -164,4 +164,13 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/buttonViewComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="Button"
+        app:layout_constraintTop_toTopOf="@+id/info"
+        tools:layout_editor_absoluteX="161dp" />
+
 </android.support.constraint.ConstraintLayout>
