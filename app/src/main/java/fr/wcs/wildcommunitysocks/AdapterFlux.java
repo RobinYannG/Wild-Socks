@@ -40,7 +40,7 @@ public class AdapterFlux extends RecyclerView.Adapter<AdapterFlux.ViewHolder> {
 
 //        holder.textViewName.setText(sock.getmLegende());
 
-        Glide.with(context).load(sock.getmImgChaussette()).into(holder.imageView);
+        Glide.with(context).load(sock.getmImgChaussette()).placeholder(R.mipmap.placeholdersocks).into(holder.imageView);
     }
 
     @Override

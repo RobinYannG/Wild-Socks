@@ -93,6 +93,10 @@
     <string name="button_comment">Poster</string>
     <string name="noCommentToast">Tu n\'as pas entré de commentaire</string>
     <string name="deleteComment">Es-tu certain de vouloir supprimer ce commentaire?</string>
+    <string name="text_comments">Yeah ! Peux-tu en dire un peu plus !</string>
+    <string name="hint_commentaire">Ton commentaire ...</string>
+    <string name="text_thanks">Woah! Merci pour ta note !</string>
+    <string name="text_KickUp">Kick Up cette photo !</string>
 
 
 </resources>

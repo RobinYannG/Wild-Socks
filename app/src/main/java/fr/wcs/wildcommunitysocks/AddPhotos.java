@@ -165,7 +165,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-
+            imageUri = data.getData();
             Bundle extras = data.getExtras();
             
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -209,7 +209,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
 
-    private void uploadFile(){
+    private void uploadFile(final Uri imageUri){
         if(imageUri!=null) {
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Chargement en cours...");
@@ -249,6 +249,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
         }
         else{
+
             showPhoto.setDrawingCacheEnabled(true);
             Bitmap imagebitmap = showPhoto.getDrawingCache();
 
@@ -296,7 +297,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         if (v == buttonUpload) {
             legend=mEditTextLegende.getText().toString().trim();
             mChaussette.setmLegende(legend);
-            uploadFile();
+            uploadFile(imageUri);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.pick_category)
                     .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {

@@ -129,7 +129,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
                 progressDialog.dismiss();
             }
         });
-
+        
         rView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -157,6 +157,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
                                 //rowListItem.add(sock);
                                 mDatabase.child(firebaseAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(item.getmIdChaussette()).removeValue();
                                 mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(item.getmIdChaussette()).removeValue();
+
                             }
                         });
                         delete.show();
