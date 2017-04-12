@@ -1,5 +1,6 @@
 package fr.wcs.wildcommunitysocks;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,32 +14,43 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_COMMENTS;
 
 public class CommentActivity extends AppCompatActivity {
 
-    public Chaussette sock;
+    private Chaussette sock;
 
-    public ListView commentListView;
-
-
-    public CommentAdapter mAdapter;
-    public DatabaseReference mCommentsDataBase;
-    public FirebaseAuth mAuth;
+    private ListView commentListView;
 
 
-    public EditText commentEditText;
-    public FloatingActionButton postCommentButton;
+    private CommentAdapter mAdapter;
+    private DatabaseReference mCommentsDataBase;
+    private FirebaseAuth mAuth;
 
-    public String sockId;
-    public String authorName;
-    public String authorId;
-    public static String newComment;
-    public static String uploadId;
-    public static String removeId;
+
+    private EditText commentEditText;
+    private FloatingActionButton postCommentButton;
+    //progress dialog
+    private ProgressDialog progressDialog;
+    private List<Comment> allItems;
+
+    private String sockId;
+    private String authorName;
+    private String authorId;
+    private String newComment;
+    private String uploadId;
+    private String removeId;
 
 
 
@@ -56,16 +68,38 @@ public class CommentActivity extends AppCompatActivity {
         sockId = sock.getmIdChaussette();
 
         /**Display all the comments for this sock in the listView:*/
-
+        //displaying progress dialog while fetching images
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         commentListView =(ListView) findViewById(R.id.commentsListView);
 
         mCommentsDataBase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS).child(DATABASE_PATH_COMMENTS).child(sockId);
-
-
         mAdapter = new CommentAdapter(mCommentsDataBase,this,R.layout.comment_item);
-
         commentListView.setAdapter(mAdapter);
+        allItems = new ArrayList<>();
 
+/***Adding an Event Listener***/
+        mCommentsDataBase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                allItems.clear();
+
+                for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
+                    Comment item = postSnapshot.getValue(Comment.class);
+                    allItems.add(item);
+
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressDialog.dismiss();
+            }
+        });
+/******************************************/
         /**Delete a comment by clicking it*/
 
         commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,6 +129,8 @@ public class CommentActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         authorName = mAuth.getCurrentUser().getDisplayName();
         authorId =mAuth.getCurrentUser().getUid();
+        StorageReference userPicture = FirebaseStorage.getInstance().getReference("users_avatar").child(authorName+"_avatar");
+        final String authorPic=userPicture.getDownloadUrl().toString();
 
 
         commentEditText = (EditText) findViewById(R.id.editTextComment);

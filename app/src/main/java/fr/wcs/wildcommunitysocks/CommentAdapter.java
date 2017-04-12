@@ -40,7 +40,7 @@ public class CommentAdapter extends FirebaseListAdapter<Comment> {
     protected void populateView(View convertView, Comment model) {
         // Map an ItineraryModel object to an entry in our listview
 
-        context = convertView.getContext();
+        context = convertView.getContext().getApplicationContext();
         String author = model.getmAuthorName();
         textViewauthor = (TextView) convertView.findViewById(R.id.comment_author);
         textViewauthor.setText(author);
@@ -49,13 +49,12 @@ public class CommentAdapter extends FirebaseListAdapter<Comment> {
         textViewComment =(TextView) convertView.findViewById(R.id.comment_line);
         textViewComment.setText(comment);
 
-
         circleAuthorAvatar =(CircleImageView) convertView.findViewById(R.id.profile_image);
-        downloadPicture(model);
+        downloadPicture(model,circleAuthorAvatar);
 
     }
 
-    private void downloadPicture (Comment coco) {
+    private void downloadPicture (Comment coco, final CircleImageView circleAvatar) {
         mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
         //child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId)
 
@@ -65,7 +64,7 @@ public class CommentAdapter extends FirebaseListAdapter<Comment> {
             public void onSuccess(Uri uri) {
                 Glide.with(context)
                         .load(uri)
-                        .into(circleAuthorAvatar);
+                        .into(circleAvatar);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

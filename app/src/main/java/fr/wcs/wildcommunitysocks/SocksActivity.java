@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
@@ -26,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,6 @@ import java.net.HttpURLConnection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_COMMENTS;
 
@@ -247,6 +247,9 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
             userName = mAuth.getCurrentUser().getDisplayName();
             uploadId = mCommentsDataBase.push().getKey();
             userId = mAuth.getCurrentUser().getUid();
+
+            StorageReference userPicture = FirebaseStorage.getInstance().getReference("users_avatar").child(userName+"_avatar");
+            final String userPic=userPicture.getDownloadUrl().toString();
             Comment newCom = new Comment(uploadId, userId,userName,sockId, comments);
             mCommentsDataBase.child(uploadId).setValue(newCom);
 

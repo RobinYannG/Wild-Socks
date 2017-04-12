@@ -60,7 +60,7 @@ public class Flux extends Fragment {
 
 
 
-        final List<Chaussette> rowListItem = getAllItemList();
+        rowListItem = getAllItemList();
         lLayout = new GridLayoutManager(getActivity(), 3);
 
         rView = (RecyclerView) view.findViewById(R.id.recyclerView2);
