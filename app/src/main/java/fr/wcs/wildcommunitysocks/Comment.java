@@ -11,6 +11,7 @@ public class Comment {
     private String mAuthorId;
     private String mSockId;
     private String mComment;
+    //private String mAuthorPic;
 
 
     private Comment(){
@@ -21,6 +22,7 @@ public class Comment {
         mAuthorName = authorName;
         mSockId = sockId;
         mComment =comment;
+        //mAuthorPic=AuthorPic;
     }
 
     public String getmIdComment() {
@@ -29,10 +31,6 @@ public class Comment {
 
     public String getmAuthorId() {
         return mAuthorId;
-    }
-
-    public void setmUAuthorId(String authorId) {
-        this.mAuthorId = authorId;
     }
 
     public void setmIdComment(String mIdComment) {
@@ -62,4 +60,10 @@ public class Comment {
     public void setmComment(String mComment) {
         this.mComment = mComment;
     }
+
+    public void setmAuthorId(String mAuthorId) {
+        this.mAuthorId = mAuthorId;
+    }
+
+
 }
