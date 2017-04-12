@@ -129,7 +129,7 @@ public class MyProfil extends Fragment implements View.OnClickListener {
                 progressDialog.dismiss();
             }
         });
-        
+
         rView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), rView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -164,9 +164,15 @@ public class MyProfil extends Fragment implements View.OnClickListener {
                     }
                 })
 
+
+
         );
 
+        if (query == null) {
 
+            rView.setBackground(getResources().getDrawable(R.mipmap.first_post));
+
+        }
 
         return view;
     }
