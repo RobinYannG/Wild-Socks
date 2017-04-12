@@ -14,11 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -79,7 +76,7 @@ public class CommentActivity extends AppCompatActivity {
         commentListView.setAdapter(mAdapter);
         allItems = new ArrayList<>();
 
-/***Adding an Event Listener***/
+/***Adding an Event Listener
         mCommentsDataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
