@@ -7,17 +7,18 @@ package fr.wcs.wildcommunitysocks;
 public class Comment {
 
     private String mIdComment;
-    private String mUserName;
+    private String mAuthorName;
+    private String mAuthorId;
     private String mSockId;
     private String mComment;
 
 
     private Comment(){
-
     }
-    public Comment(String idComment, String userName, String sockId, String comment){
+    public Comment(String idComment, String authorId, String authorName, String sockId, String comment){
         mIdComment = idComment;
-        mUserName = userName;
+        mAuthorId =authorId;
+        mAuthorName = authorName;
         mSockId = sockId;
         mComment =comment;
     }
@@ -26,16 +27,24 @@ public class Comment {
         return mIdComment;
     }
 
+    public String getmAuthorId() {
+        return mAuthorId;
+    }
+
+    public void setmUAuthorId(String authorId) {
+        this.mAuthorId = authorId;
+    }
+
     public void setmIdComment(String mIdComment) {
         this.mIdComment = mIdComment;
     }
 
-    public String getmUserName() {
-        return mUserName;
+    public String getmAuthorName() {
+        return mAuthorName;
     }
 
-    public void setmUserName(String mUserId) {
-        this.mUserName = mUserId;
+    public void setmAuthorName(String authorName) {
+        this.mAuthorName = authorName;
     }
 
     public String getmSockId() {

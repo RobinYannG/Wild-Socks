@@ -40,7 +40,8 @@ public class CommentAdapter extends FirebaseListAdapter<Comment> {
     protected void populateView(View convertView, Comment model) {
         // Map an ItineraryModel object to an entry in our listview
 
-        String author = model.getmUserName();
+        context = convertView.getContext();
+        String author = model.getmAuthorName();
         textViewauthor = (TextView) convertView.findViewById(R.id.comment_author);
         textViewauthor.setText(author);
 
@@ -58,7 +59,7 @@ public class CommentAdapter extends FirebaseListAdapter<Comment> {
         mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
         //child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId)
 
-        StorageReference userPicture = mStorageRef.child(coco.getmUserName()+"_avatar");
+        StorageReference userPicture = mStorageRef.child(coco.getmAuthorName()+"_avatar");
         userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
