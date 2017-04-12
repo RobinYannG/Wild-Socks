@@ -34,7 +34,8 @@ public class CommentActivity extends AppCompatActivity {
     public FloatingActionButton postCommentButton;
 
     public String sockId;
-    public String userName;
+    public String authorName;
+    public String authorId;
     public static String newComment;
     public static String uploadId;
     public static String removeId;
@@ -92,7 +93,8 @@ public class CommentActivity extends AppCompatActivity {
         /**Propose to add a comment :*/
 
         mAuth = FirebaseAuth.getInstance();
-        userName = mAuth.getCurrentUser().getDisplayName();
+        authorName = mAuth.getCurrentUser().getDisplayName();
+        authorId =mAuth.getCurrentUser().getUid();
 
 
         commentEditText = (EditText) findViewById(R.id.editTextComment);
@@ -107,7 +109,8 @@ public class CommentActivity extends AppCompatActivity {
                     Toast.makeText(CommentActivity.this, getString(R.string.noCommentToast), Toast.LENGTH_SHORT).show();
                 }else{
                     uploadId = mCommentsDataBase.push().getKey();
-                    Comment newCom = new Comment(uploadId, userName,sockId, newComment);
+                    Comment newCom = new Comment(uploadId, authorId,authorName,sockId, newComment);
+
                     mCommentsDataBase.child(uploadId).setValue(newCom);
                 }
                 commentEditText.setText("");
