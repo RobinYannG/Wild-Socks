@@ -12,8 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:layout_above="@+id/bottomBar"
+        android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/bottomBar">
+
+
 
     </FrameLayout>
 
@@ -23,14 +25,9 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         app:bb_tabXmlResource="@xml/bottombar_tabs_color_changing"
-        app:bb_behavior="shifting"/>
+        />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/bottomBar">
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -60,6 +57,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/btn_dialog" />
 
-    </LinearLayout>
+
 
 </RelativeLayout>

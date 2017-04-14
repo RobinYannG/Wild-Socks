@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,10 +32,10 @@ public class Classement extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
-    private Button buttonAllRanking;
-    private Button buttonCategory1;
-    private Button buttonCategory2;
-    private Button buttonCategory3;
+    private ImageView imageViewAllRanking;
+    private ImageView imageViewCategory1;
+    private ImageView imageViewCategory2;
+    private ImageView imageViewCategory3;
 
 
 
@@ -49,36 +50,37 @@ public class Classement extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_classement, container, false);
 
-        buttonAllRanking = (Button) view.findViewById(R.id.buttonAllRanking);
-        buttonCategory1 = (Button) view.findViewById(R.id.buttonCategory1);
-        buttonCategory2 = (Button) view.findViewById(R.id.buttonCategory2);
-        buttonCategory3 = (Button) view.findViewById(R.id.buttonCategory3);
+        imageViewAllRanking = (ImageView) view.findViewById(R.id.imageViewAllRanking);
+        imageViewCategory1 = (ImageView) view.findViewById(R.id.imageViewCategory1);
+        imageViewCategory2 = (ImageView) view.findViewById(R.id.imageViewCategory2);
+        imageViewCategory3 = (ImageView) view.findViewById(R.id.imageViewCategory3);
 
-        buttonAllRanking.setOnClickListener(this);
-        buttonCategory1.setOnClickListener(this);
-        buttonCategory2.setOnClickListener(this);
-        buttonCategory3.setOnClickListener(this);
+
+        imageViewAllRanking.setOnClickListener(this);
+        imageViewCategory1.setOnClickListener(this);
+        imageViewCategory2.setOnClickListener(this);
+        imageViewCategory3.setOnClickListener(this);
 
         return view;
     }
 
     public void onClick(View v) {
-        if (v == buttonAllRanking){
+        if (v == imageViewAllRanking){
             Intent intent = new Intent(getActivity(), RankingResult.class);
             intent.putExtra("I_CAME_FROM", "a0");
             startActivity(intent);
         }
-        if (v == buttonCategory1){
+        if (v == imageViewCategory1){
             Intent intent = new Intent(getActivity(), RankingResult.class);
             intent.putExtra("I_CAME_FROM", "a1");
             startActivity(intent);
         }
-        if (v == buttonCategory2){
+        if (v == imageViewCategory2){
             Intent intent = new Intent(getActivity(), RankingResult.class);
             intent.putExtra("I_CAME_FROM", "a2");
             startActivity(intent);
         }
-        if (v == buttonCategory3){
+        if (v == imageViewCategory3){
             Intent intent = new Intent(getActivity(), RankingResult.class);
             intent.putExtra("I_CAME_FROM", "a3");
             startActivity(intent);
