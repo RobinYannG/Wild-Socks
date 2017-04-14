@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.wcs.wildcommunitysocks.MainActivity"
+    android:background="@drawable/bgd"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -13,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_start_new"
+        android:background="@android:color/transparent"
         android:layout_alignParentLeft="true"
         tools:ignore="MissingConstraints,RtlHardcoded"
         android:layout_marginStart="16dp"
@@ -20,14 +22,18 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintVertical_bias="0.965" />
+        android:layout_marginLeft="40dp"
+        app:layout_constraintVertical_bias="0.97"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.082" />
 
     <Button
         android:id="@+id/button_start_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_start_id"
+        android:background="@android:color/transparent"
         android:layout_alignParentRight="true"
         tools:ignore="MissingConstraints,RtlHardcoded"
         tools:layout_constraintRight_creator="1"
@@ -35,8 +41,11 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="16dp"
-        app:layout_constraintVertical_bias="0.965" />
+        android:layout_marginRight="15dp"
+        app:layout_constraintVertical_bias="0.97"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.934" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
