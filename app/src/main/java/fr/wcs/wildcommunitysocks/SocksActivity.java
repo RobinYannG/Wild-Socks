@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -73,7 +74,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     public String userName;
     public String userId;
     public Chaussette sock;
-    public Button buttonViewComments;
+    public ImageButton buttonViewComments;
 
     boolean isAnimated = false;
 
@@ -86,7 +87,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         ButterKnife.bind(this);
         btnSubmit.setOnClickListener(this);
 
-        buttonViewComments = (Button) findViewById(R.id.buttonViewComments);
+        buttonViewComments = (ImageButton) findViewById(R.id.commentView);
         buttonViewComments.setOnClickListener(this);
 
         //initializing Firebase authentification objects
