@@ -10,4 +10,10 @@
     <color name="colorAddPhotos">#ACACAC</color>
     <color name="colorClassement">#B99FA8</color>
     <color name="colorKickUp">#D5CBFF</color>
+    <color name="colorWCSOrange">#F9A02E</color>
+    <color name="colorWCSGreen">#58C4B8</color>
+    <color name="colorWCSRed">#B9184D</color>
+    <color name="colorWCSBM">#876DFF</color>
+    <color name="colorWCSGrey">#565656</color>
+
 </resources>
