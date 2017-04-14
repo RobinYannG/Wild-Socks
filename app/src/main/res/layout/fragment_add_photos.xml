@@ -1,8 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:measureAllChildren="true"
+
     tools:context="fr.wcs.wildcommunitysocks.AddPhotos">
 
     <TextView
@@ -15,47 +17,50 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
         android:scaleType="centerCrop"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="87dp"
         android:layout_gravity="center_horizontal"/>
 
 
-        <Button
-        android:id="@+id/cameraButton"
+    <ImageView
+        android:id="@+id/imageViewFrame"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/camera"
-        android:layout_marginTop="260dp"
-        android:layout_marginLeft="50dp"
-        android:layout_gravity="left" />
+        android:src="@drawable/frame_shape2"/>
 
-        <Button
-        android:id="@+id/buttonUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/createSocks"
-        android:layout_marginBottom="75dp"
-        android:layout_marginLeft="130dp"
-        android:layout_gravity="bottom"/>
-
-        <Button
+    <ImageButton
         android:id="@+id/galleryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gallery"
-        android:layout_marginTop="260dp"
+        android:src="@drawable/album"
+        android:layout_marginTop="365dp"
+        android:background="@android:color/transparent"
         android:layout_marginRight="50dp"
         android:layout_gravity="right"/>
+
+    <ImageButton
+        android:id="@+id/cameraButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        android:src="@drawable/photo_camera"
+        android:layout_marginTop="365dp"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="50dp"
+        android:layout_gravity="left"/>
 
     <TextView
         android:id="@+id/sockName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/sockName"
-        android:layout_marginBottom="170dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="30dp"
         android:layout_gravity="bottom"/>
 
     <EditText
@@ -65,9 +70,23 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint=""
-        android:layout_marginBottom="130dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_gravity="bottom"/>
+
+    <ImageButton
+        android:id="@+id/buttonUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rocket"
+        android:text="@string/createSocks"
+        android:layout_marginLeft="260dp"
+        android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="bottom"/>
+
+
 
 
 </FrameLayout>

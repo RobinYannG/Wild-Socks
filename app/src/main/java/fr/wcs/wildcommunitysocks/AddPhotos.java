@@ -17,8 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,9 +51,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
     ImageView showPhoto;
     private Uri imageUri, newUri;
-    private Button buttonTakePicture;
-    private Button buttonSelectFromGallery;
-    private Button buttonUpload;
+    private ImageButton buttonTakePicture;
+    private ImageButton buttonSelectFromGallery;
+    private ImageButton buttonUpload;
     private String mCurrentPhotoPath;
     private StorageReference mStorageRef;
     private Chaussette mChaussette;
@@ -89,9 +89,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_add_photos, container, false);
 
         showPhoto = (ImageView) view.findViewById(imageView);
-        buttonSelectFromGallery = (Button) view.findViewById(R.id.galleryButton);
-        buttonTakePicture=(Button) view.findViewById(R.id.cameraButton);
-        buttonUpload=(Button) view.findViewById(R.id.buttonUpload);
+        buttonSelectFromGallery = (ImageButton) view.findViewById(R.id.galleryButton);
+        buttonTakePicture=(ImageButton) view.findViewById(R.id.cameraButton);
+        buttonUpload=(ImageButton) view.findViewById(R.id.buttonUpload);
         mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
         textViewLegend =(TextView) view.findViewById(R.id.sockName);
         uploadId = mDatabase.push().getKey();
