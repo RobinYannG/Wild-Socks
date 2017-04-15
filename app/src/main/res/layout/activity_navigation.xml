@@ -16,7 +16,6 @@
         android:layout_alignEnd="@+id/bottomBar">
 
 
-
     </FrameLayout>
 
     <com.roughike.bottombar.BottomBar
@@ -26,37 +25,6 @@
         android:layout_alignParentBottom="true"
         app:bb_tabXmlResource="@xml/bottombar_tabs_color_changing"
         />
-
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"
-            tools:layout_editor_absoluteX="144dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_weight="0.00" />
-
-        <TextView
-            android:id="@+id/textViewUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textViewProfile" />
-
-        <ImageButton
-            android:id="@+id/buttonLogout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog" />
-
 
 
 </RelativeLayout>

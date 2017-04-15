@@ -30,17 +30,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Navigation extends AppCompatActivity implements View.OnClickListener{
+public class Navigation extends AppCompatActivity {
 
-    //firebase auth object
     private FirebaseAuth firebaseAuth;
-    private StorageReference mStorageRef;
-
-    //view objects
-    private TextView textViewUserName;
-    private ImageButton buttonLogout;
-
-    private CircleImageView civProfilePic;
+    private BottomBar bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +42,6 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
         //initializing Firebase authentification objects
         firebaseAuth = FirebaseAuth.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
         //getting current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -62,19 +54,9 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
             startActivity(new Intent(this, IdentificationActivity.class));
         }
 
-        civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
 
         //initializing views
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        buttonLogout=(ImageButton) findViewById(R.id.buttonLogout);
-        textViewUserName=(TextView) findViewById(R.id.textViewUserName);
-
-        //displaying logged in user name
-        textViewUserName.setText("Welcome "+ user.getDisplayName());
-
-        //adding listener to button
-        buttonLogout.setOnClickListener(this);
-
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
         bottomBar.selectTabAtPosition(1);
 
@@ -83,7 +65,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
             public void onTabSelected(@IdRes int tabId) {
 
                 Fragment selectedFragment = null;
-                
+
                 if (tabId == R.id.tab_flux) {
                     selectedFragment = Flux.newInstance();
                 }
@@ -111,79 +93,10 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         transaction.replace(R.id.frame_layout, Flux.newInstance());
         transaction.commit();
 
-        downloadPicture ();
+
 
     }
 
-    private void downloadPicture () {
-
-        final StorageReference userPicture = mStorageRef.child(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar");
-        userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(Navigation.this)
-                        .load(uri)
-                        .into(civProfilePic);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-            }
-        });
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // If there's an upload in progress, save the reference so you can query it later
-        if (mStorageRef != null) {
-            outState.putString(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar", mStorageRef.toString());
-        }
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        // If there was an upload in progress, get its reference and create a new StorageReference
-        final String stringRef = savedInstanceState.getString(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar");
-        if (stringRef == null) {
-            return;
-        }
-        mStorageRef = FirebaseStorage.getInstance().getReferenceFromUrl(stringRef);
-
-        // Find all UploadTasks under this StorageReference (in this example, there should be one)
-        List<UploadTask> tasks = mStorageRef.getActiveUploadTasks();
-        if (tasks.size() > 0) {
-            // Get the task monitoring the upload
-            UploadTask task = tasks.get(0);
-
-            // Add new listeners to the task using an Activity scope
-            task.addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot state) {
-                    //call a user defined function to handle the event.
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v==buttonLogout){
-
-                //logging out the user
-                firebaseAuth.signOut();
-                //closing activity
-                finish();
-                //starting login activity
-                startActivity(new Intent(getApplicationContext(),IdentificationActivity.class));
-
-        }
-    }
 
 
 }
