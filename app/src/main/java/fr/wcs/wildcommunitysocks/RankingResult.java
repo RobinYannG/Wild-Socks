@@ -2,11 +2,13 @@ package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +47,10 @@ public class RankingResult extends AppCompatActivity {
 
     private Intent intent;
     private Query query;
+    private ImageView imageViewTongs;
+    private ImageView imageViewSlipers;
+    private ImageView imageViewSocks;
+    private ImageView imageViewGeneral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +72,38 @@ public class RankingResult extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
+        imageViewSlipers = (ImageView) findViewById(R.id.imageViewSlipers);
+        imageViewSocks = (ImageView) findViewById(R.id.imageViewSocks);
+        imageViewTongs = (ImageView) findViewById(R.id.imageViewTongs);
+        imageViewGeneral = (ImageView) findViewById(R.id.imageViewGeneral);
+
+        imageViewSlipers.setVisibility(View.INVISIBLE);
+        imageViewSocks.setVisibility(View.INVISIBLE);
+        imageViewTongs.setVisibility(View.INVISIBLE);
+        imageViewGeneral.setVisibility(View.INVISIBLE);
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
 
         intent = getIntent();
         String flag = intent.getStringExtra("I_CAME_FROM");
 
         if(flag.equals("a0")){
-             query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mSubNote");
+            query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mSubNote");
+            imageViewGeneral.setVisibility(View.VISIBLE);
 
         }
         if(flag.equals("a1")){
             query = mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_1).orderByChild("mSubNote");
+            imageViewSocks.setVisibility(View.VISIBLE);
         }
         if(flag.equals("a2")){
             query = mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_2).orderByChild("mSubNote");
+            imageViewSlipers.setVisibility(View.VISIBLE);
         }
         if(flag.equals("a3")){
             query = mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_3).orderByChild("mSubNote");
+            imageViewTongs.setVisibility(View.VISIBLE);
         }
 
 
