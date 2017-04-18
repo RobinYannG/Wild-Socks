@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +28,8 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextUserName;
-    private TextView textViewSignIn;
-    private Button buttonSignup;
+    private ImageView textViewSignIn;
+    private ImageButton buttonSignup;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -55,8 +57,8 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         }
 
         //initializing views
-        buttonSignup = (Button) findViewById(R.id.button_new_confirm);
-        textViewSignIn = (TextView) findViewById(R.id.alreadyRegistered);
+        buttonSignup = (ImageButton) findViewById(R.id.button_new_confirm);
+        textViewSignIn = (ImageView) findViewById(R.id.alreadyRegistered);
         editTextEmail = (EditText) findViewById(R.id.editEmail);
         editTextPassword = (EditText) findViewById(R.id.editPwd);
         editTextUserName=(EditText) findViewById(R.id.editPseudo);
