@@ -6,13 +6,13 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +83,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     }
 
     @Override
-     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mStorageRef= FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
@@ -158,7 +158,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             imageUri = data.getData();
             try {
                 Bitmap bitmapOrg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                showPhoto.setImageBitmap(bitmapOrg);
+                showPhoto.setImageBitmap(getResizedBitmap(bitmapOrg,300,300));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -169,10 +169,10 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
             imageUri = data.getData();
             Bundle extras = data.getExtras();
-            
+
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-            showPhoto.setImageBitmap(imageBitmap);
+            showPhoto.setImageBitmap(getResizedBitmap(imageBitmap,300,300));
 
             galleryAddPic();
             return;
@@ -181,7 +181,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
     private File createImageFile() throws IOException {
-       // Create an image file name
+        // Create an image file name
         String sdf = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + sdf + "_";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -211,82 +211,64 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
 
-    private void uploadFile(final Uri imageUri){
-        if(imageUri!=null) {
-            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Chargement en cours...");
-            progressDialog.show();
-            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS + uploadId );
-            picRef.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
+    private void uploadFile(){
+        showPhoto.setDrawingCacheEnabled(true);
+        Bitmap imagebitmap = showPhoto.getDrawingCache();
 
-                            urlSock = taskSnapshot.getDownloadUrl().toString();
-                            mChaussette.setmImgChaussette(urlSock);
-                            mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(mChaussette);
-                            mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Chargement en cours...");
+        progressDialog.show();
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_LONG);
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded :"+(int)progress+"%");
-                        }
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS + uploadId );
+        UploadTask uploadTask = picRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                progressDialog.dismiss();
+                Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
 
+                //adding an upload to firebase database
 
-                    });
+                urlSock = taskSnapshot.getDownloadUrl().toString();
+                mChaussette.setmImgChaussette(urlSock);
+                mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.setMessage("Uploaded :" + (int) progress + "%");
+            }
+        });
 
-        }
-        else{
-
-            showPhoto.setDrawingCacheEnabled(true);
-            Bitmap imagebitmap = showPhoto.getDrawingCache();
-
-            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Chargement en cours...");
-            progressDialog.show();
-
-            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
-            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS);
-            UploadTask uploadTask = picRef.putBytes(data);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                    progressDialog.dismiss();
-                    Toast.makeText(getActivity(), "Upload successfull", Toast.LENGTH_LONG);
-
-                    //adding an upload to firebase database
-
-                    urlSock = taskSnapshot.getDownloadUrl().toString();
-                    mChaussette.setmImgChaussette(urlSock);
-                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
-                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
-                }
-            });
-        }
 
     }
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
 
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
     @Override
     public void onClick(View v) {
         if (v == buttonTakePicture) {
@@ -298,7 +280,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         if (v == buttonUpload) {
             legend=mEditTextLegende.getText().toString().trim();
             mChaussette.setmLegende(legend);
-            uploadFile(imageUri);
+            uploadFile();
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.pick_category)
                     .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {
@@ -322,14 +304,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                         }
                     });
             builder.show();
-
             mEditTextLegende.setEnabled(false);
             textViewLegend.setText(R.string.textViewLeg);
-
-
-
-
-
         }
 
     }
