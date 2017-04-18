@@ -20,8 +20,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon"
-        >
+        tools:replace="android:icon">
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -40,19 +39,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewAccountActivity" />
-        <activity android:name=".IdentificationActivity" />
+        <activity android:name=".NewAccountActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".IdentificationActivity"
+                  android:screenOrientation="portrait"/>
         <activity
             android:name=".Navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransNav" />
-        <activity android:name=".SocksActivity" />
-        <activity android:name=".ModifyProfil" />
-        <activity android:name=".ModifyPassword" />
-        <activity android:name=".MySocksActivity" />
-        <activity android:name=".ModifyMySocksActivity" />
-        <activity android:name=".CommentActivity"></activity>
-        <activity android:name=".RankingResult"></activity>
+
+        <activity android:name=".SocksActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ModifyProfil"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ModifyPassword"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".MySocksActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ModifyMySocksActivity"
+                  android:screenOrientation="portrait" />
+
+        <activity android:name=".CommentActivity"
+                  android:screenOrientation="portrait"/>
+
+
+        <activity android:name=".RankingResult"
+            android:screenOrientation="portrait"/>
+
 
     </application>
 
