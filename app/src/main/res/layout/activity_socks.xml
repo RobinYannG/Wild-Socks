@@ -165,12 +165,13 @@
     </LinearLayout>
     <ImageButton
         android:id="@+id/commentView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="59dp"
         android:src="@drawable/commenting"
         app:layout_constraintLeft_toRightOf="@id/ratingBar"
         app:layout_constraintBottom_toTopOf="@id/ratingBar"
         android:background="@android:color/transparent"
-        />
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="19dp" />
 
 </android.support.constraint.ConstraintLayout>
