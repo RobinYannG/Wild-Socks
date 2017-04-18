@@ -127,7 +127,7 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
        mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(result.getmIdChaussette()).removeValue();
 
         StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
-        StorageReference desertRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS).child(result.getmIdChaussette()+".jpg");
+        StorageReference desertRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS).child(result.getmIdChaussette());
         desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

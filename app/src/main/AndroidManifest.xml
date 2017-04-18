@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon"
-        android:screenOrientation="portrait">
+        >
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -44,6 +44,7 @@
         <activity android:name=".IdentificationActivity" />
         <activity
             android:name=".Navigation"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransNav" />
         <activity android:name=".SocksActivity" />
         <activity android:name=".ModifyProfil" />
