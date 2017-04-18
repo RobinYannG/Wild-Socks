@@ -216,8 +216,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Chargement en cours...");
             progressDialog.show();
-            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS+ System.currentTimeMillis()
-                    +"."+getFileExtension(imageUri));
+            StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS + uploadId );
             picRef.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
