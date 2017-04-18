@@ -261,7 +261,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         // CREATE A MATRIX FOR THE MANIPULATION
         Matrix matrix = new Matrix();
         // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
+        float scale = Math.min(scaleHeight,scaleWidth);
+        matrix.postScale(scale, scale);
 
         // "RECREATE" THE NEW BITMAP
         Bitmap resizedBitmap = Bitmap.createBitmap(
