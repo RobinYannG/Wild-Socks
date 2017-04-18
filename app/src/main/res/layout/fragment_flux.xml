@@ -2,21 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fr.wcs.wildcommunitysocks.Flux"
-    android:background="@color/colorFlux">
+    android:background="#FFFFFF">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView2"
-        android:layout_width="match_parent"
+        android:layout_width="362dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
         android:stretchMode="spacingWidthUniform"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
     </android.support.v7.widget.RecyclerView>
 

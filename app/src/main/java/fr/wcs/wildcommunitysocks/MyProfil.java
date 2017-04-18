@@ -35,7 +35,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyProfil extends Fragment implements View.OnClickListener {
+public class MyProfil extends Fragment {
 
     public static MyProfil newInstance() {
         MyProfil fragment = new MyProfil();
@@ -59,9 +59,6 @@ public class MyProfil extends Fragment implements View.OnClickListener {
     //list to hold all the uploaded images
     private List<Chaussette> rowListItem;
 
-    private TextView textViewDisplayName;
-    private Button buttonModifyProfil;
-
 
     private FirebaseAuth firebaseAuth;
 
@@ -78,18 +75,9 @@ public class MyProfil extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_my_profil, container, false);
 
-
-
-        textViewDisplayName = (TextView) view.findViewById(R.id.textViewDisplayName);
-
-        buttonModifyProfil = (Button) view.findViewById(R.id.buttonModifyProfil);
-        buttonModifyProfil.setOnClickListener(this);
-
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        // Display name User
-        textViewDisplayName.setText(user.getDisplayName());
 
         final List<Chaussette> rowListItem = getAllItemList();
         lLayout = new GridLayoutManager(getActivity(), 3);
@@ -186,13 +174,5 @@ public class MyProfil extends Fragment implements View.OnClickListener {
 
 
 
-    @Override
-    public void onClick(View v) {
 
-        if(v == buttonModifyProfil) {
-            startActivity(new Intent(getActivity(), ModifyProfil.class));
-
-        }
-
-    }
 }

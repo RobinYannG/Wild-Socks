@@ -1,10 +1,12 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -12,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button button_new;
     private Button button_id;
+    private TextView textViewCommunity;
 
     private FirebaseAuth firebaseAuth;
 
@@ -35,10 +38,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Initializing the views
         button_new = (Button) findViewById(R.id.button_start_new);
         button_id = (Button) findViewById(R.id.button_start_id);
+        textViewCommunity = (TextView) findViewById(R.id.textViewCommunity);
 
         //Adding clickListeners
         button_id.setOnClickListener(this);
         button_new.setOnClickListener(this);
+
+        Typeface communityType = Typeface.createFromAsset(getAssets(),"OleoScript-Bold.ttf");
+        textViewCommunity.setTypeface(communityType);
+
+
     }
 
     @Override

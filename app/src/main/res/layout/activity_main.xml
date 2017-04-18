@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.wcs.wildcommunitysocks.MainActivity"
-    android:background="@drawable/bgd"
+    android:background="@drawable/home"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -53,5 +53,24 @@
         android:id="@+id/guideline3"
         android:orientation="vertical"
         app:layout_constraintGuide_end="364dp" />
+
+    <TextView
+        android:id="@+id/textViewCommunity"
+        android:layout_width="447dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Wild Sock Community"
+        android:textColor="#1FA597"
+        android:textSize="38dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.063" />
+
 
 </android.support.constraint.ConstraintLayout>

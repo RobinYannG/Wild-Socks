@@ -12,10 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -42,11 +40,11 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private EditText userEmail;
     private EditText userName;
-    private Button modifyProfil;
-    private ImageView userImg;
-    private TextView deleteProfil;
-    private TextView modifyPassword;
-    private TextView modifyPhoto;
+    private EditText userPointure;
+    private ImageButton modifyProfil;
+    private ImageButton deleteProfil;
+    private ImageButton modifyPassword;
+    private ImageButton modifyPhoto;
     private CircleImageView civProfilePic;
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_CAPTURE = 234;
@@ -66,9 +64,10 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         FirebaseUser user = mAuth.getCurrentUser();
         mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
-        userEmail = (EditText) findViewById(R.id.editTextChangeEmail);
+        userEmail = (EditText) findViewById(R.id.editTextModifyEmail);
         civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
-        userName = (EditText) findViewById(R.id.editTextChangePseudo);
+        userName = (EditText) findViewById(R.id.editTextModifyPseudo);
+        userPointure = (EditText) findViewById(R.id.editTextModifyEmail);
 
 
         String pseudo = user.getDisplayName();
@@ -79,16 +78,16 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         userName.setText(pseudo);
         civProfilePic.setImageURI(photoUrl);
 
-        modifyProfil = (Button) findViewById(R.id.buttonModify);
+        modifyProfil = (ImageButton) findViewById(R.id.imageButtonRegister);
         modifyProfil.setOnClickListener(this);
 
-        deleteProfil = (TextView) findViewById(R.id.textViewDeleteProfil);
+        deleteProfil = (ImageButton) findViewById(R.id.imageButtonRemoveAccount);
         deleteProfil.setOnClickListener(this);
 
-        modifyPassword = (TextView) findViewById(R.id.textViewModifyPassword);
+        modifyPassword = (ImageButton) findViewById(R.id.imageButtonModifyPassword);
         modifyPassword.setOnClickListener(this);
 
-        modifyPhoto = (TextView) findViewById(R.id.textViewModifyPhoto);
+        modifyPhoto = (ImageButton) findViewById(R.id.imageButtonModifyPicture);
         modifyPhoto.setOnClickListener(this);
 
         downloadPicture();

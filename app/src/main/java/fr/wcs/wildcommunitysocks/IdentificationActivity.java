@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +21,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class IdentificationActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button buttonLogIn;
-    private TextView textViewSignUp;
+    private ImageButton buttonLogIn;
+    private ImageView imageViewSignUp;
     private EditText editTextUserPwd;
     private EditText editTextuserEmail;
-    private TextView textViewModifyPwd;
+    private ImageView imageViewModifyPwd;
+
 
     private ProgressDialog progressDialog;
 
@@ -47,17 +50,17 @@ public class IdentificationActivity extends AppCompatActivity implements View.On
         }
 
 
-        buttonLogIn = (Button) findViewById(R.id.buttonLogin);
-        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
+        buttonLogIn = (ImageButton) findViewById(R.id.imageButtonConnect);
+        imageViewSignUp = (ImageView) findViewById(R.id.imageViewCreateAccount);
         editTextUserPwd =(EditText) findViewById(R.id.editUserPwd);
         editTextuserEmail=(EditText) findViewById(R.id.editUserEmail);
-        textViewModifyPwd = (TextView) findViewById(R.id.textViewModifyPwd);
+        imageViewModifyPwd = (ImageView) findViewById(R.id.imageViewPasswordForget);
 
         progressDialog = new ProgressDialog(this);
 
         buttonLogIn.setOnClickListener(this);
-        textViewSignUp.setOnClickListener(this);
-        textViewModifyPwd.setOnClickListener(this);
+        imageViewSignUp.setOnClickListener(this);
+        imageViewModifyPwd.setOnClickListener(this);
     }
 
     public void userLogin(){
@@ -104,10 +107,10 @@ public class IdentificationActivity extends AppCompatActivity implements View.On
         if(v==buttonLogIn){
             userLogin();
         }
-        if(v==textViewSignUp){
+        if(v==imageViewSignUp){
             startActivity(new Intent(IdentificationActivity.this,NewAccountActivity.class));
         }
-        if (v == textViewModifyPwd) {
+        if (v == imageViewModifyPwd) {
             startActivity(new Intent(IdentificationActivity.this,ModifyPassword.class));
         }
     }

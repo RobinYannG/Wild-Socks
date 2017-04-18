@@ -98,6 +98,7 @@
     <string name="text_thanks">Woah! Merci pour ta note !</string>
     <string name="text_KickUp">Kick Up cette photo !</string>
     <string name="noCommentDeletion">Tu n\'as pas le droit de supprimer ce commentaire!</string>
+    <string name="pointure">Pointure</string>
 
 
 </resources>

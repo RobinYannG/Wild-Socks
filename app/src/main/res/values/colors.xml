@@ -15,5 +15,6 @@
     <color name="colorWCSRed">#B9184D</color>
     <color name="colorWCSBM">#876DFF</color>
     <color name="colorWCSGrey">#565656</color>
+    <color name="colorWhite">#FFFFFF</color>
 
 </resources>

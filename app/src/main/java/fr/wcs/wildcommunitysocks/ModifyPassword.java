@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,11 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-
 public class ModifyPassword extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextEmail;
-    private Button buttonSend;
+    private ImageButton buttonSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class ModifyPassword extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_modify_password);
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        buttonSend = (Button) findViewById(R.id.buttonSend);
+        buttonSend = (ImageButton) findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(this);
 
     }

@@ -73,6 +73,7 @@ public class RankingResult extends AppCompatActivity {
 
         if(flag.equals("a0")){
              query = mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).orderByChild("mSubNote");
+
         }
         if(flag.equals("a1")){
             query = mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_1).orderByChild("mSubNote");
