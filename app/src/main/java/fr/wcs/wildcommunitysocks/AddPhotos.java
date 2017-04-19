@@ -51,21 +51,23 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private static final int REQUEST_IMAGE_CAPTURE = 234;
 
     ImageView showPhoto;
-    private Uri imageUri, newUri;
+    private Uri imageUri;
     private ImageButton buttonTakePicture;
     private ImageButton buttonSelectFromGallery;
     private ImageButton buttonUpload;
+    public  ImageButton buttonRotate;
     private String mCurrentPhotoPath;
     private StorageReference mStorageRef;
     private Chaussette mChaussette;
     private EditText mEditTextLegende;
     private TextView textViewLegend;
     private FirebaseAuth firebaseAuth;
-    private static String uploadId;
-    private static String legend;
-    private static String urlSock;
-    private static String idUser;
-    private static String displayName;
+    private String uploadId;
+    private String legend;
+    private String urlSock;
+    private String idUser;
+    private String displayName;
+    public Bitmap bitmapOrg;
 
 
 
@@ -93,6 +95,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonSelectFromGallery = (ImageButton) view.findViewById(R.id.galleryButton);
         buttonTakePicture=(ImageButton) view.findViewById(R.id.cameraButton);
         buttonUpload=(ImageButton) view.findViewById(R.id.buttonUpload);
+        buttonRotate=(ImageButton) view.findViewById(R.id.rotateButton);
         mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
         textViewLegend =(TextView) view.findViewById(R.id.sockName);
         uploadId = mDatabase.push().getKey();
@@ -100,6 +103,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonTakePicture.setOnClickListener(this);
         buttonSelectFromGallery.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+        buttonRotate.setOnClickListener(this);
 
         idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
@@ -156,9 +160,11 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
 
             imageUri = data.getData();
+
             try {
-                Bitmap bitmapOrg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                showPhoto.setImageBitmap(getResizedBitmap(bitmapOrg,300,300));
+                bitmapOrg = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+                bitmapOrg = getResizedBitmap(bitmapOrg,300,300);
+                showPhoto.setImageBitmap(bitmapOrg);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -170,9 +176,10 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
             imageUri = data.getData();
             Bundle extras = data.getExtras();
 
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            bitmapOrg = (Bitmap) extras.get("data");
+            bitmapOrg = getResizedBitmap(bitmapOrg,300,300);
+            showPhoto.setImageBitmap(bitmapOrg);
 
-            showPhoto.setImageBitmap(getResizedBitmap(imageBitmap,300,300));
 
             galleryAddPic();
             return;
@@ -212,15 +219,13 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
     private void uploadFile(){
-        showPhoto.setDrawingCacheEnabled(true);
-        Bitmap imagebitmap = showPhoto.getDrawingCache();
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Chargement en cours...");
         progressDialog.show();
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmapOrg.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
         StorageReference picRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS + uploadId );
         UploadTask uploadTask = picRef.putBytes(data);
@@ -253,6 +258,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
 
 
     }
+
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
@@ -270,6 +276,15 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         bm.recycle();
         return resizedBitmap;
     }
+
+    public Bitmap rotateBitmap(){
+        Matrix matrix = new Matrix();
+        matrix.setRotate(Constants.BITMAP_ROTATE);
+        bitmapOrg = Bitmap.createBitmap(bitmapOrg, 0, 0, bitmapOrg.getWidth(),bitmapOrg.getHeight(), matrix, true);
+        showPhoto.setImageBitmap(bitmapOrg);
+        return bitmapOrg;
+    }
+
     @Override
     public void onClick(View v) {
         if (v == buttonTakePicture) {
@@ -277,6 +292,10 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         }
         if (v == buttonSelectFromGallery) {
             openGallery();
+        }
+
+        if(v==buttonRotate){
+            rotateBitmap();
         }
         if (v == buttonUpload) {
             legend=mEditTextLegende.getText().toString().trim();
