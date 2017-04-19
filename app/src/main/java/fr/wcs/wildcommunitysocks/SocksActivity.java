@@ -271,7 +271,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
                                 // reuse previous dialog instance, keep widget user state, reset them if you need
-                                sDialog.setTitleText(getString(R.string.moderatorAlertRemove))
+                                sDialog.setTitleText(getString(R.string.moderatorAlertNoRemove))
                                         .setContentText("!!!")
                                         .showCancelButton(false)
                                         .setCancelClickListener(null)

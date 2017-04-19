@@ -111,7 +111,7 @@
     <string name="removeAlertDialogQuestion">Es tu sûr de vouloir supprimer ta photo ?</string>
     <string name="removeAlertDialogGo">TOP</string>
     <string name="moderatorAlertTitle">Moderator!!!</string>
-    <string name="moderatorAlertQuestion">Il faut supprimer?</string>
+    <string name="moderatorAlertNoRemove">Ok, On garde</string>
     <string name="moderatorAlertRemove">Chérie ça va trancher</string>
 
 
