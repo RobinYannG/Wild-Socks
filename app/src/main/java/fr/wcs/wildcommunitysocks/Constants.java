@@ -24,6 +24,7 @@ public class Constants {
     public static final int DATABASE_PATH_CATEGORY_2INT = 2;
     public static final int DATABASE_PATH_CATEGORY_3INT = 3;
     public static final int BITMAP_ROTATE = 90;
+    public static final int MY_REQUEST_CODE=237;
 
 
 }

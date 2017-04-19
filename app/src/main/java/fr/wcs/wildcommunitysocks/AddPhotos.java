@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -41,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
+import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 import static fr.wcs.wildcommunitysocks.R.id.imageView;
 
 public class AddPhotos extends Fragment implements View.OnClickListener{
@@ -130,6 +132,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     }
 
     private void dispatchTakePictureIntent() {
+
+
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         /**Ensure there is a camera activity to handle the Intent*/
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -286,9 +291,30 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Constants.MY_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            }
+            else {
+                // Your app will not have this permission. Turn off all functions
+                // that require this permission or it will force close like your
+                // original question
+            }
+        }
+    }
+    @Override
     public void onClick(View v) {
         if (v == buttonTakePicture) {
-            dispatchTakePictureIntent();
+            if (checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[]{android.Manifest.permission.CAMERA},
+                        Constants.MY_REQUEST_CODE);
+            }else{
+                dispatchTakePictureIntent();
+            }
         }
         if (v == buttonSelectFromGallery) {
             openGallery();
