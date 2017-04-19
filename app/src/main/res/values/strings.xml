@@ -100,5 +100,19 @@
     <string name="noCommentDeletion">Tu n\'as pas le droit de supprimer ce commentaire!</string>
     <string name="pointure">Pointure</string>
 
+    //AlertDialogs
+    <string name="reportAlertDialogTitle">Signaler une photo</string>
+    <string name="reportAlertDialogQuestion">Cette publication est inappropriée ?</string>
+    <string name="alertDialogueCancel">Non</string>
+    <string name="alertDialogConfirm">Oui</string>
+    <string name="reportAlertDialogBack">ok</string>
+    <string name="reportAlertDialogEnd">Merci de l\'info !</string>
+    <string name="removeAlertDialogTitle">Tu changes de Chaussettes ?</string>
+    <string name="removeAlertDialogQuestion">Es tu sûr de vouloir supprimer ta photo ?</string>
+    <string name="removeAlertDialogGo">TOP</string>
+    <string name="moderatorAlertTitle">Moderator!!!</string>
+    <string name="moderatorAlertQuestion">Il faut supprimer?</string>
+    <string name="moderatorAlertRemove">Chérie ça va trancher</string>
+
 
 </resources>
