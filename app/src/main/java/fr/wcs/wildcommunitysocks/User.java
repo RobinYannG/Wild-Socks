@@ -1,8 +1,7 @@
 package fr.wcs.wildcommunitysocks;
 
 
-import android.media.Image;
-
+/**
 public class User {
 
     private char [] mPassword;
@@ -48,3 +47,4 @@ public class User {
     }
 
 }
+**/
