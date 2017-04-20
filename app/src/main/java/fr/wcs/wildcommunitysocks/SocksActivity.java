@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +38,7 @@ import java.net.HttpURLConnection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static fr.wcs.wildcommunitysocks.Constants.DATABASE_PATH_COMMENTS;
 
@@ -52,11 +56,13 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     @BindView(R.id.txtComments) EditText txtComments;
     @BindView(R.id.lblThanksFeedback) TextView txtThanks;
     @BindView(R.id.note) TextView note;
+    @BindView(R.id.reportImage) ImageButton reportImage;
 
 
     //Firebase references
     private DatabaseReference mDatabase;
-
+    public DatabaseReference mCommentsDataBase;
+    public FirebaseAuth mAuth;
 
     //progress dialog
     private ProgressDialog progressDialog;
@@ -67,8 +73,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     private float initialRate;
     private static Chaussette result;
 
-    public DatabaseReference mCommentsDataBase;
-    public FirebaseAuth mAuth;
+
     public static String uploadId;
     public String sockId;
     public String userName;
@@ -77,6 +82,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     public ImageButton buttonViewComments;
 
     boolean isAnimated = false;
+    public boolean isModerator = false;
 
 
     @Override
@@ -90,6 +96,11 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         buttonViewComments = (ImageButton) findViewById(R.id.commentView);
         buttonViewComments.setOnClickListener(this);
 
+        reportImage =(ImageButton) findViewById(R.id.reportImage);
+        reportImage.setOnClickListener(this);
+
+
+
         //initializing Firebase authentification objects
         mAuth = FirebaseAuth.getInstance();
 
@@ -99,7 +110,18 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
             finish();
             //starting login activity
             startActivity(new Intent(this, IdentificationActivity.class));
+        }else{
+            userId=mAuth.getCurrentUser().getUid();
         }
+
+        for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
+            if(Constants.WILD_SOCKS_MODERATOR[i].equals(userId)){
+                isModerator=true;
+                return;
+            }
+        }
+
+
 
         initializeUI();
 
@@ -197,6 +219,36 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         }
     }
 
+    public void reportSock(){
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_REPORTS).child(result.getmIdChaussette());
+        mDatabase.setValue(result);
+    }
+
+
+    public void removeButton() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+        Intent onStart = getIntent();
+        Chaussette result = onStart.getParcelableExtra("sock");
+        mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(result.getmIdChaussette()).removeValue();
+        mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(result.getmIdChaussette()).removeValue();
+
+        StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
+        StorageReference desertRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS).child(result.getmIdChaussette());
+        desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+            }
+        });
+    }
+
     public void onClick(View v) {
         if (v == btnSubmit) {
             onSubmitClick();
@@ -206,7 +258,89 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
             intent.putExtra("sock",result);
             startActivity(intent);
         }
+
+        if(v==reportImage){
+            if(isModerator){
+                new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(getString(R.string.moderatorAlertTitle))
+                        .setContentText(getString(R.string.moderatorAlertRemove))
+                        .setCancelText(getString(R.string.alertDialogueCancel))
+                        .setConfirmText(getString(R.string.alertDialogConfirm))
+                        .showCancelButton(true)
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                // reuse previous dialog instance, keep widget user state, reset them if you need
+                                sDialog.setTitleText(getString(R.string.moderatorAlertNoRemove))
+                                        .setContentText("!!!")
+                                        .showCancelButton(false)
+                                        .setCancelClickListener(null)
+                                        .setConfirmClickListener(null)
+                                        .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                            }
+                        })
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                removeButton();
+                                sDialog.setTitleText("Supprimer !")
+                                        .setContentText("...")
+                                        .showCancelButton(false)
+                                        .setCancelClickListener(null)
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                finish();
+                                                //startActivity(new Intent(MySocksActivity.this,Navigation.class));
+                                            }
+                                        })
+                                        .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                            }
+                        })
+                        .show();
+                return;
+            }
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.reportAlertDialogTitle))
+                    .setContentText(getString(R.string.reportAlertDialogQuestion))
+                    .setCancelText(getString(R.string.alertDialogueCancel))
+                    .setConfirmText(getString(R.string.alertDialogConfirm))
+                    .showCancelButton(true)
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            // reuse previous dialog instance, keep widget user state, reset them if you need
+                            sDialog.setTitleText(getString(R.string.reportAlertDialogBack))
+                                    .setContentText("!!!")
+                                    .showCancelButton(false)
+                                    .setCancelClickListener(null)
+                                    .setConfirmClickListener(null)
+                                    .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                        }
+                    })
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            reportSock();
+                            sDialog.setTitleText(getString(R.string.reportAlertDialogEnd))
+                                    .setContentText("...")
+                                    .showCancelButton(false)
+                                    .setCancelClickListener(null)
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            finish();
+                                            //startActivity(new Intent(MySocksActivity.this,Navigation.class));
+                                        }
+                                    })
+                                    .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        }
+                    })
+                    .show();
+        }
     }
+
+
 
     public void onSubmitClick() {
 
@@ -312,6 +446,8 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
             return null;
         }
     }
+
+
 
     public void upDateRate(Chaussette ratedSock, float rate){
 
