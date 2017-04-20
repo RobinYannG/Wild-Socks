@@ -21,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class NewAccountActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,15 +30,27 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextUserName;
+    private EditText editTextPointure;
+
     private ImageView textViewSignIn;
     private ImageButton buttonSignup;
     private ProgressDialog progressDialog;
 
+
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference mDatabase;
+
 
     private String email;
     private String password;
     private String userName;
+    private String pointure;
+
+    private Pointure mPointure;
+
+
+    private static String idUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +76,16 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         editTextEmail = (EditText) findViewById(R.id.editEmail);
         editTextPassword = (EditText) findViewById(R.id.editPwd);
         editTextUserName=(EditText) findViewById(R.id.editPseudo);
+        editTextPointure = (EditText) findViewById(R.id.editPointure);
+
 
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
         buttonSignup.setOnClickListener(this);
         textViewSignIn.setOnClickListener(this);
+
+
     }
 
     public void registerUser(){
@@ -75,6 +93,10 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         email = editTextEmail.getText().toString().trim();
         password  = editTextPassword.getText().toString().trim();
         userName = editTextUserName.getText().toString().trim();
+        pointure = editTextPointure.getText().toString().trim();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+
 
 
         //checking if email and passwords are empty
@@ -119,7 +141,11 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
                                     }
                                 }
                             });
-                        }else{
+                            mPointure = new Pointure (pointure);
+                            idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            mDatabase.child(idUser).setValue(mPointure);
+
+                        } else{
                             //display some message here
                            // Log.e(TAG, "Sign-in Failed: " + task.getException().getMessage());
                             // If the connection keeps failing un comment this :
@@ -138,6 +164,7 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v==buttonSignup){
             registerUser();
+
         }
         if(v==textViewSignIn){
             startActivity(new Intent(NewAccountActivity.this,IdentificationActivity.class));

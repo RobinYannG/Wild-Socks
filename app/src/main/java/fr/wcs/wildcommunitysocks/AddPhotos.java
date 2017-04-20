@@ -101,13 +101,14 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonSelectFromGallery.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
 
+        int i = (int) (new Date().getTime()/1000);
         idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        mChaussette = new Chaussette(uploadId,"none","legend",
+        mChaussette = new Chaussette(uploadId,"none","",
                 idUser,
                 displayName,
                 0,
-                "");
+                "", i );
 
         return view;
     }
