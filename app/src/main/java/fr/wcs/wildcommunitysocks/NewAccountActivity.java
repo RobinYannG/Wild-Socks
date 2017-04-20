@@ -45,8 +45,10 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     private String password;
     private String userName;
     private String pointure;
+    private String startKickUp;
 
     private Pointure mPointure;
+    private MyKick mKickUp;
 
 
     private static String idUser;
@@ -144,6 +146,10 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
                             mPointure = new Pointure (pointure);
                             idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             mDatabase.child(idUser).setValue(mPointure);
+
+                            startKickUp = "0";
+                            mKickUp = new MyKick(startKickUp);
+                            mDatabase.child(idUser).child("MyKickUp").setValue(mKickUp);
 
                         } else{
                             //display some message here

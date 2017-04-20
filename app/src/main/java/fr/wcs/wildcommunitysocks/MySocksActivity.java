@@ -36,8 +36,8 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
 
 
     //Layout elements
-    private ImageView thisSock;
-    private TextView thisLegend, owner, thisRating, seeComments;
+    private ImageView thisSock, seeComments;
+    private TextView thisLegend, owner, thisRating;
     private String url;
     private float initialRate;
     private Button modifyButton;
@@ -56,7 +56,7 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
         thisLegend = (TextView) findViewById(R.id.sockLegend);
         owner = (TextView) findViewById(R.id.sockOwner);
         thisRating = (TextView) findViewById(R.id.sockRating);
-        seeComments =(TextView) findViewById(R.id.textViewComment);
+        seeComments =(ImageView) findViewById(R.id.imageViewComments);
         seeComments.setOnClickListener(this);
 
         modifyButton = (Button) findViewById(R.id.buttonModify);

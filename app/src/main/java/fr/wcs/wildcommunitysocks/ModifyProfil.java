@@ -97,10 +97,6 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         modifyPhoto = (ImageButton) findViewById(R.id.imageButtonModifyPicture);
         modifyPhoto.setOnClickListener(this);
 
-
-
-
-
         downloadPicture();
     }
 

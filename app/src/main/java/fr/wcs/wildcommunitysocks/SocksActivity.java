@@ -27,8 +27,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -72,6 +76,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     private float myRate=0;
     private float initialRate;
     private static Chaussette result;
+    private static MyKick add;
 
 
     public static String uploadId;
@@ -117,25 +122,12 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
             if(Constants.WILD_SOCKS_MODERATOR[i].equals(userId)){
                 isModerator=true;
-                return;
             }
         }
 
 
 
         initializeUI();
-
-        /* seeComments.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent comments = new Intent(SocksActivity.this,CommentActivity.class);
-                 comments.putExtra("sock",result);
-                 startActivity(comments);
-             }
-         });*/
-
-
-
 
     }
 
@@ -150,6 +142,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         /**Retrieve the object**/
         Intent onStart = getIntent();
         result = onStart.getParcelableExtra("sock");
+
 
         String leg = result.getmLegende();
         String author = result.getmDisplayNameUser();
@@ -362,6 +355,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
             mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_MYKICKS).child(result.getmIdChaussette()).setValue(result);
 
 
+
         } else {
             //Increase the rate attribute of the object
             upDateRate(result, myRate);
@@ -449,19 +443,39 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
 
 
 
-    public void upDateRate(Chaussette ratedSock, float rate){
+    public void upDateRate(Chaussette ratedSock, final float rate){
 
         String uploadId = ratedSock.getmIdChaussette();
         String idU = ratedSock.getmIdUser();
-        ratedSock.setmNote(ratedSock.getmNote()+rate);
-        ratedSock.setmSubNote(ratedSock.getmSubNote()-rate);
+        ratedSock.setmNote(ratedSock.getmNote() + rate);
+        ratedSock.setmSubNote(ratedSock.getmSubNote() - rate);
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
+
         initialRate = ratedSock.getmNote();
         ratingBar.setRating(0);
         thisRating.setText(String.valueOf(initialRate));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS).child(result.getmIdUser()).child("MyKickUp").child("mKickUp");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String kick = dataSnapshot.getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
     }
     
 
