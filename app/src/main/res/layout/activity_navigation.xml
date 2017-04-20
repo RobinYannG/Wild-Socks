@@ -66,6 +66,15 @@
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_editor_absoluteY="76dp" />
 
+        <ImageButton
+            android:id="@+id/reportView"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/exclamation_mark"
+            app:layout_constraintRight_toLeftOf="@id/buttonModifyProfil"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/buttonModifyProfil" />
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
