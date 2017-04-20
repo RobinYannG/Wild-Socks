@@ -6,22 +6,21 @@
     tools:context="fr.wcs.wildcommunitysocks.MyProfil"
     android:background="@color/colorWhite">
 
+<!-- TODO: Update blank fragment layout -->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewMyProfile"
-        android:layout_width="match_parent"
-        android:layout_height="473dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:stretchMode="spacingWidthUniform"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recyclerViewMyProfile"
+    android:layout_width="362dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="10dp"
+    android:stretchMode="spacingWidthUniform"
+    app:layout_constraintHorizontal_bias="0.466"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
 
-    </android.support.v7.widget.RecyclerView>
+</android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>
-

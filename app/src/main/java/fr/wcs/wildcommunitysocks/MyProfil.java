@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -42,25 +44,17 @@ public class MyProfil extends Fragment {
         return fragment;
     }
 
-    //recyclerview object
     private RecyclerView rView;
-
     private GridLayoutManager lLayout;
-
-    //adapter object
-    AdapterFlux rcAdapter;
-
-    //database reference
+    public AdapterFlux rcAdapter;
     private DatabaseReference mDatabase;
-
-    //progress dialog
     private ProgressDialog progressDialog;
-
-    //list to hold all the uploaded images
     private List<Chaussette> rowListItem;
-
-
     private FirebaseAuth firebaseAuth;
+    private ImageButton imageButtonNoPicture;
+    private ImageView imageViewNoPicture;
+
+    public static int numberPublish;
 
 
 
@@ -77,7 +71,6 @@ public class MyProfil extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-
 
         final List<Chaussette> rowListItem = getAllItemList();
         lLayout = new GridLayoutManager(getActivity(), 3);
@@ -156,11 +149,10 @@ public class MyProfil extends Fragment {
 
         );
 
-        if (query == null) {
 
-            rView.setBackground(getResources().getDrawable(R.mipmap.first_post));
 
-        }
+
+
 
         return view;
     }

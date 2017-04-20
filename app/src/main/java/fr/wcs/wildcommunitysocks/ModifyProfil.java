@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,6 +49,8 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
     private ImageButton modifyPhoto;
     private CircleImageView civProfilePic;
     private String mCurrentPhotoPath;
+
+
     private static final int REQUEST_IMAGE_CAPTURE = 234;
 
 
@@ -65,9 +69,12 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
         userEmail = (EditText) findViewById(R.id.editTextModifyEmail);
-        civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
         userName = (EditText) findViewById(R.id.editTextModifyPseudo);
         userPointure = (EditText) findViewById(R.id.editTextModifyEmail);
+
+        civProfilePic = (CircleImageView)findViewById(R.id.profile_image);
+        civProfilePic.setOnClickListener(this);
+
 
 
         String pseudo = user.getDisplayName();
@@ -90,6 +97,10 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
         modifyPhoto = (ImageButton) findViewById(R.id.imageButtonModifyPicture);
         modifyPhoto.setOnClickListener(this);
 
+
+
+
+
         downloadPicture();
     }
 
@@ -97,8 +108,10 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
         String newEmail = userEmail.getText().toString().trim();
         String newPseudo = userName.getText().toString().trim();
+
         //Uri newPhoto = userImg.
 
         //Update Pseudo & Photo
@@ -125,6 +138,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
 
     }
 
@@ -376,7 +390,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
                     })
                     .show();
         }
-        if (v == modifyPassword){
+        if (v == modifyPassword || v == civProfilePic){
             finish();
             startActivity(new Intent(ModifyProfil.this,ModifyPassword.class));
         }

@@ -160,16 +160,16 @@ public class MySocksActivity extends AppCompatActivity implements View.OnClickLi
 
         if (v == removeButton) {
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("Tu changes de Chaussettes ?")
-                    .setContentText("Es tu sûr de vouloir supprimer ta photo ?")
-                    .setCancelText("Non")
-                    .setConfirmText("Oui")
+                    .setTitleText(getString(R.string.removeAlertDialogTitle))
+                    .setContentText(getString(R.string.removeAlertDialogQuestion))
+                    .setCancelText(getString(R.string.alertDialogueCancel))
+                    .setConfirmText(getString(R.string.alertDialogConfirm))
                     .showCancelButton(true)
                     .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
                             // reuse previous dialog instance, keep widget user state, reset them if you need
-                            sDialog.setTitleText("TOP")
+                            sDialog.setTitleText(getString(R.string.removeAlertDialogGo))
                                     .setContentText("!!!")
                                     .showCancelButton(false)
                                     .setCancelClickListener(null)

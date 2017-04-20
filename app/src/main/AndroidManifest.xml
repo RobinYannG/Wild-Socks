@@ -21,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
@@ -39,38 +38,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewAccountActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".IdentificationActivity"
-                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".NewAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IdentificationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Navigation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransNav" />
+        <activity
+            android:name=".SocksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ModifyProfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ModifyPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MySocksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ModifyMySocksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RankingResult"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".SocksActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".ModifyProfil"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".ModifyPassword"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".MySocksActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".ModifyMySocksActivity"
-                  android:screenOrientation="portrait" />
-
-        <activity android:name=".CommentActivity"
-                  android:screenOrientation="portrait"/>
-
-
-        <activity android:name=".RankingResult"
-            android:screenOrientation="portrait"/>
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

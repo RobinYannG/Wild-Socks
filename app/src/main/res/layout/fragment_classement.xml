@@ -54,7 +54,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintVertical_bias="0.832"
             app:srcCompat="@drawable/tong"
-            android:layout_marginEnd="40dp" />
+            android:layout_marginEnd="40dp"/>
 
         <ImageView
             android:id="@+id/imageViewCategory2"
@@ -67,7 +67,6 @@
             app:layout_constraintVertical_bias="0.813"
             app:srcCompat="@drawable/chausson"
             android:layout_marginEnd="24dp" />
-
 
     </android.support.constraint.ConstraintLayout>
 

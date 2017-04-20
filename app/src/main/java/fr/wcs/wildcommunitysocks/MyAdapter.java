@@ -44,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 .into(holder.imageView);
 
         String myNote = Float.toString(sock.getmNote());
-        holder.textView.setText(myNote + " Kicks Up");
+        holder.textView.setText(myNote);
     }
 
     @Override

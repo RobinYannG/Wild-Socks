@@ -3,6 +3,11 @@ package fr.wcs.wildcommunitysocks;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
+
+import java.util.HashMap;
+
 public class Chaussette implements Parcelable {
 
     private String mImgChaussette;
@@ -13,21 +18,24 @@ public class Chaussette implements Parcelable {
     private String mCategory;
     private float mNote;
     private float mSubNote;
+    private int mTime;
 
 
 
     private Chaussette () {
     }
 
-    public Chaussette (String idChaussette, String urlChaussette, String legende, String idUser, String displayNameUser,float note,String category){
+    public Chaussette (String idChaussette, String urlChaussette, String legende, String idUser, String displayNameUser,float note,String category, int time){
         mImgChaussette = urlChaussette;
         mLegende = legende;
         mIdChaussette =idChaussette;
         mIdUser = idUser;
         mDisplayNameUser = displayNameUser;
-        mNote=note;
-        mSubNote=-note;
-        mCategory=category;
+        mNote = note;
+        mSubNote = -note;
+        mCategory = category;
+        mTime = time;
+
     }
 
     protected Chaussette(Parcel in) {
@@ -137,6 +145,10 @@ public class Chaussette implements Parcelable {
         dest.writeFloat(mSubNote);
         dest.writeString(mCategory);
     }
+
+
+
+
 }
 
 

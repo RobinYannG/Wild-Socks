@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -38,12 +41,15 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
     private BottomBar bottomBar;
 
     private TextView textViewDisplayName;
-    private TextView textViewPointure;
+
     private TextView textViewPublish;
     private TextView textViewNbrKickUp;
     private Button buttonModifyProfil;
     private CircleImageView profile_image;
     private ImageView imageViewLogOut;
+    private TextView textViewPointure;
+    private DatabaseReference mDatabase;
+    private static String idUser;
 
     private FirebaseAuth firebaseAuth;
     private StorageReference mStorageRef;
@@ -60,9 +66,11 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         textViewNbrKickUp = (TextView) findViewById(R.id.textViewNbrKickUp);
         buttonModifyProfil = (Button) findViewById(R.id.buttonModifyProfil);
         imageViewLogOut = (ImageView) findViewById(R.id.imageViewLogOut);
+        textViewPointure = (TextView) findViewById(R.id.textViewPointure);
 
         buttonModifyProfil.setOnClickListener(this);
         imageViewLogOut.setOnClickListener(this);
+        //profile_image.setOnClickListener(this);
 
         //initializing Firebase authentification objects
         firebaseAuth = FirebaseAuth.getInstance();
@@ -71,6 +79,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         textViewDisplayName.setText(user.getDisplayName());
+        
 
         downloadPicture();
 
@@ -112,6 +121,33 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
                 transaction.commit();
+
+                idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+                mDatabase.child(idUser).child("mPointure").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String userPointure = dataSnapshot.getValue(String.class);
+                        textViewPointure.setText(userPointure);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                mDatabase.child(idUser).child(Constants.DATABASE_PATH_UPLOADS).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        textViewPublish.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });
