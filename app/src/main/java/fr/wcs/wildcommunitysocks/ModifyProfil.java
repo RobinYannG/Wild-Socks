@@ -384,8 +384,9 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
 
             new SweetAlertDialog(this)
-                    .setCancelText("Ma bibliothèque")
-                    .setConfirmText("Appareil Photo")
+                    .setTitleText("Alors tu ressembles à quoi!")
+                    .setCancelText("Gallery")
+                    .setConfirmText("Camera")
                     .showCancelButton(true)
                     .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override

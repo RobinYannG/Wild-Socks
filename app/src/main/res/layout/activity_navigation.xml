@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="fr.wcs.wildcommunitysocks.Navigation"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF">
+    android:background="@color/colorWhite">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="380dp"
@@ -18,7 +18,8 @@
         android:id="@+id/constraintLayout"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        app:layout_constraintHorizontal_bias="0.5">
 
         <TextView
             android:id="@+id/textViewDisplayName"

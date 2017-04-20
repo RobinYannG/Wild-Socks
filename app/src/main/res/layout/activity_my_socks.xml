@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.wcs.wildcommunitysocks.MySocksActivity">
+    tools:context="fr.wcs.wildcommunitysocks.MySocksActivity"
+    android:background="@color/colorWhite">
 
     <ImageView
         android:id="@+id/sockImage"

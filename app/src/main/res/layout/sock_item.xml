@@ -10,8 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        card_view:cardBackgroundColor="@color/card_view_initial_background"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardBackgroundColor="@color/card_view_initial_background">
 
         <ImageView
             android:id="@+id/sockImage"

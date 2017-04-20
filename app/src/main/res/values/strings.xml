@@ -80,7 +80,7 @@
 
 
     //Dialog box category
-    <string name="pick_category">Choisi la catégorie de ta photo :</string>
+    <string name="pick_category"><b><i>Choisi la catégorie de ta photo :</i></b></string>
     <string name="category_1">Chaussettes</string>
     <string name="category_2">Chaussons</string>
     <string name="ranking_all">Classement général</string>
