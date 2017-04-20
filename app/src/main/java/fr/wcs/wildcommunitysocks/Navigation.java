@@ -2,12 +2,12 @@ package fr.wcs.wildcommunitysocks;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +49,8 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
     private TextView textViewPointure;
     private DatabaseReference mDatabase;
     private static String idUser;
+    private ImageButton reports;
+    private boolean isModerator = false;
 
     private FirebaseAuth firebaseAuth;
     private StorageReference mStorageRef;
@@ -68,18 +69,33 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         imageViewLogOut = (ImageView) findViewById(R.id.imageViewLogOut);
         textViewPointure = (TextView) findViewById(R.id.textViewPointure);
 
+
+
         buttonModifyProfil.setOnClickListener(this);
         imageViewLogOut.setOnClickListener(this);
-        //profile_image.setOnClickListener(this);
+        reports = (ImageButton) findViewById(R.id.reportView);
+        reports.setVisibility(View.INVISIBLE);
 
         //initializing Firebase authentification objects
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
+
         mStorageRef = FirebaseStorage.getInstance().getReference("users_avatar");
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         textViewDisplayName.setText(user.getDisplayName());
-        
+
+        String uId = user.getUid();
+        for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
+            if(Constants.WILD_SOCKS_MODERATOR[i].equals(uId)){
+                isModerator=true;
+            }
+        }
+
+
+        if(isModerator){
+            reports.setVisibility(View.VISIBLE);
+            reports.setOnClickListener(this);
+        }
 
         downloadPicture();
 
@@ -224,6 +240,10 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent (this, MainActivity.class));
             finish();
+        }
+
+        if(v==reports){
+            startActivity(new Intent(Navigation.this,ReportsActivity.class));
         }
     }
 
