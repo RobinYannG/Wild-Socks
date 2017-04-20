@@ -117,7 +117,6 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
             if(Constants.WILD_SOCKS_MODERATOR[i].equals(userId)){
                 isModerator=true;
-                return;
             }
         }
 
