@@ -221,7 +221,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(result);
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(result);
-        if(result.getmCategory().equals("")){
+        if(result.getmCategory()!=""){
             mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(result);
         }
 
@@ -470,6 +470,11 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
+
+        /**Category**/
+        if(ratedSock.getmCategory()!=""){
+            mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(ratedSock);
+        }
         initialRate = ratedSock.getmNote();
         ratingBar.setRating(0);
         thisRating.setText(String.valueOf(initialRate));
