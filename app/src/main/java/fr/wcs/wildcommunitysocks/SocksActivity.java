@@ -113,17 +113,12 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         }else{
             userId=mAuth.getCurrentUser().getUid();
         }
-
+        initializeUI();
         for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
             if(Constants.WILD_SOCKS_MODERATOR[i].equals(userId)){
                 isModerator=true;
-                return;
             }
         }
-
-
-
-        initializeUI();
 
         /* seeComments.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -133,10 +128,6 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
                  startActivity(comments);
              }
          });*/
-
-
-
-
     }
 
     public void initializeUI() {
@@ -220,8 +211,20 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     }
 
     public void reportSock(){
+
+
+        String uploadId = result.getmIdChaussette();
+        String idU = result.getmIdUser();
+        result.setmReported(true);
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_REPORTS).child(result.getmIdChaussette());
         mDatabase.setValue(result);
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+        mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(result);
+        mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(result);
+        if(result.getmCategory()!=""){
+            mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(result);
+        }
+
     }
 
 
@@ -229,11 +232,19 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
-        Intent onStart = getIntent();
-        Chaussette result = onStart.getParcelableExtra("sock");
+        String category =result.getmCategory();
+
         mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(result.getmIdChaussette()).removeValue();
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(result.getmIdChaussette()).removeValue();
 
+        if(result.ismReported()){
+            mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_REPORTS);
+            mDatabase.child(result.getmIdChaussette()).removeValue();
+        }
+       if(category!=""){
+           mDatabase= FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+           mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(category).child(result.getmIdChaussette()).removeValue();
+        }
         StorageReference mStorageRef= FirebaseStorage.getInstance().getReference();
         StorageReference desertRef = mStorageRef.child(Constants.STORAGE_PATH_UPLOADS).child(result.getmIdChaussette());
         desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -459,6 +470,11 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
         mDatabase.child(idU).child(Constants.DATABASE_PATH_UPLOADS).child(uploadId).setValue(ratedSock);
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
+
+        /**Category**/
+        if(ratedSock.getmCategory()!=""){
+            mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(ratedSock);
+        }
         initialRate = ratedSock.getmNote();
         ratingBar.setRating(0);
         thisRating.setText(String.valueOf(initialRate));

@@ -3,11 +3,6 @@ package fr.wcs.wildcommunitysocks;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.database.Exclude;
-import com.google.firebase.database.ServerValue;
-
-import java.util.HashMap;
-
 public class Chaussette implements Parcelable {
 
     private String mImgChaussette;
@@ -19,6 +14,7 @@ public class Chaussette implements Parcelable {
     private float mNote;
     private float mSubNote;
     private int mTime;
+    private boolean mReported;
 
 
 
@@ -35,31 +31,8 @@ public class Chaussette implements Parcelable {
         mSubNote = -note;
         mCategory = category;
         mTime = time;
-
+        mReported=false;
     }
-
-    protected Chaussette(Parcel in) {
-        mImgChaussette = in.readString();
-        mLegende = in.readString();
-        mIdUser = in.readString();
-        mDisplayNameUser = in.readString();
-        mIdChaussette = in.readString();
-        mNote = in.readFloat();
-        mSubNote = in.readFloat();
-        mCategory=in.readString();
-    }
-
-    public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
-        @Override
-        public Chaussette createFromParcel(Parcel in) {
-            return new Chaussette(in);
-        }
-
-        @Override
-        public Chaussette[] newArray(int size) {
-            return new Chaussette[size];
-        }
-    };
 
     public String getmImgChaussette() {
         return mImgChaussette;
@@ -85,18 +58,6 @@ public class Chaussette implements Parcelable {
         this.mIdUser = mIdUser;
     }
 
-    public String getmCategory() {
-        return mCategory;
-    }
-
-    public void setmCategory(String mCategory) {
-        this.mCategory = mCategory;
-    }
-
-    public static Creator<Chaussette> getCREATOR() {
-        return CREATOR;
-    }
-
     public String getmDisplayNameUser() {
         return mDisplayNameUser;
     }
@@ -111,6 +72,14 @@ public class Chaussette implements Parcelable {
 
     public void setmIdChaussette(String mIdChaussette) {
         this.mIdChaussette = mIdChaussette;
+    }
+
+    public String getmCategory() {
+        return mCategory;
+    }
+
+    public void setmCategory(String mCategory) {
+        this.mCategory = mCategory;
     }
 
     public float getmNote() {
@@ -129,6 +98,51 @@ public class Chaussette implements Parcelable {
         this.mSubNote = mSubNote;
     }
 
+    public int getmTime() {
+        return mTime;
+    }
+
+    public void setmTime(int mTime) {
+        this.mTime = mTime;
+    }
+
+    public boolean ismReported() {
+        return mReported;
+    }
+
+    public void setmReported(boolean mReported) {
+        this.mReported = mReported;
+    }
+
+    public static Creator<Chaussette> getCREATOR() {
+        return CREATOR;
+    }
+
+    protected Chaussette(Parcel in) {
+        mImgChaussette = in.readString();
+        mLegende = in.readString();
+        mIdUser = in.readString();
+        mDisplayNameUser = in.readString();
+        mIdChaussette = in.readString();
+        mCategory = in.readString();
+        mNote = in.readFloat();
+        mSubNote = in.readFloat();
+        mTime = in.readInt();
+        mReported = in.readByte() != 0;
+    }
+
+    public static final Creator<Chaussette> CREATOR = new Creator<Chaussette>() {
+        @Override
+        public Chaussette createFromParcel(Parcel in) {
+            return new Chaussette(in);
+        }
+
+        @Override
+        public Chaussette[] newArray(int size) {
+            return new Chaussette[size];
+        }
+    };
+
     @Override
     public int describeContents() {
         return 0;
@@ -141,14 +155,12 @@ public class Chaussette implements Parcelable {
         dest.writeString(mIdUser);
         dest.writeString(mDisplayNameUser);
         dest.writeString(mIdChaussette);
+        dest.writeString(mCategory);
         dest.writeFloat(mNote);
         dest.writeFloat(mSubNote);
-        dest.writeString(mCategory);
+        dest.writeInt(mTime);
+        dest.writeByte((byte) (mReported ? 1 : 0));
     }
-
-
-
-
 }
 
 
