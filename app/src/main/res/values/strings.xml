@@ -114,5 +114,18 @@
     <string name="moderatorAlertNoRemove">Ok, On garde</string>
     <string name="moderatorAlertRemove">Chérie ça va trancher</string>
 
+    <string name="acceptConditions">
+        <u>J\'ai lu et j\'accepte les conditions générales d\'utilisation.</u>
+    </string>
+    <string name="acceptConditionsToast">Tu dois accepter les conditions générales d\'utilisation !</string>
+
+    <string name="conditions">Wild Socks Community, s’adresse à tous les amoureux du détail de l’accessorisation à l’extrême, de tous ce qui pourra rendre nos plus fidèles compagnons de route confortables.
+                            Parce que après tout, on est tous un peu fétichiste de la chaussette!
+                    Cette application a été développée dans le cadre d’un projet scolaire au sein de la Wild Code School Toulouse par Marion Fontaine, Antoine Lebiam, Robin Goudy. Tout droit réservé aux auteurs.
+                    Les données personnelles de l’utilisateur, photos, adresses e-mail et contenus édités, ne seront pas utilisées à des fins commerciales et serons supprimées de la base de donnée des la suppression de ces dernières ou lors de la désinscription.
+            Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr</string>
+    <string name="toast_pointure">Merci d\'indiquer ta pointure</string>
+    <string name="toast_accept_conditions">Tu dois accepter les conditions générales d\'utilisation.</string>
+
 
 </resources>

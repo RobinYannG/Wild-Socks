@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +26,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class NewAccountActivity extends AppCompatActivity implements View.OnClickListener{
 
     //defining view objects
@@ -35,6 +39,9 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     private ImageView textViewSignIn;
     private ImageButton buttonSignup;
     private ProgressDialog progressDialog;
+
+    private CheckBox checkBoxLegal;
+    private TextView textViewAcceptConditions;
 
 
     private FirebaseAuth firebaseAuth;
@@ -77,6 +84,8 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         editTextPassword = (EditText) findViewById(R.id.editPwd);
         editTextUserName=(EditText) findViewById(R.id.editPseudo);
         editTextPointure = (EditText) findViewById(R.id.editPointure);
+        textViewAcceptConditions = (TextView) findViewById(R.id.textViewAcceptConditions);
+        checkBoxLegal = (CheckBox) findViewById(R.id.checkBoxLegal);
 
 
         progressDialog = new ProgressDialog(this);
@@ -84,6 +93,10 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         //attaching listener to button
         buttonSignup.setOnClickListener(this);
         textViewSignIn.setOnClickListener(this);
+        textViewAcceptConditions.setOnClickListener(this);
+
+
+
 
 
     }
@@ -98,7 +111,10 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
 
 
-
+        if (!checkBoxLegal.isChecked()) {
+            Toast.makeText(NewAccountActivity.this, R.string.toast_accept_conditions,Toast.LENGTH_LONG).show();
+            return;
+        }
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(NewAccountActivity.this,getString(R.string.toastDefaultEmail),Toast.LENGTH_SHORT).show();
@@ -109,6 +125,14 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
             Toast.makeText(NewAccountActivity.this,getString(R.string.toastDefaultPwd),Toast.LENGTH_LONG).show();
             return;
         }
+
+        if(TextUtils.isEmpty(pointure)) {
+            Toast.makeText(NewAccountActivity.this, R.string.toast_pointure,Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+
 
         //if the email and password are not empty
         //displaying a progress dialog
@@ -160,14 +184,31 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     }
 
 
+
     @Override
     public void onClick(View v) {
         if(v==buttonSignup){
             registerUser();
-
         }
+
         if(v==textViewSignIn){
             startActivity(new Intent(NewAccountActivity.this,IdentificationActivity.class));
+        }
+
+        if (v==textViewAcceptConditions){
+
+            new SweetAlertDialog(this)
+                    .setTitleText("Les conditions générales d'utilisation.")
+                    .setContentText("Wild Socks Community, s’adresse à tous les amoureux du détail de l’accessorisation à l’extrême, de tous ce qui pourra rendre nos plus fidèles compagnons de route confortables.\n" +
+                            "\n" +
+                            "Parce que après tout, on est tous un peu fétichiste de la chaussette!\n" +
+                            "\n" +
+                            "Cette application a été développée dans le cadre d’un projet scolaire au sein de la Wild Code School Toulouse par Marion Fontaine, Antoine Biamouret, Robin Goudy. Tout droit réservé aux auteurs.\n" +
+                            "\n" +
+                            "Les données personnelles de l’utilisateur, photos, adresses e-mail et contenus édités, ne seront pas utilisées à des fins commerciales et serons supprimées de la base de donnée dès la suppression de ces dernières ou lors de la désinscription.\n" +
+                            "\n" +
+                            "Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr")
+                    .show();
         }
     }
 }
