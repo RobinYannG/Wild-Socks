@@ -1,33 +1,27 @@
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+tools:context="fr.wcs.wildcommunitysocks.Flux"
+android:background="#FFFFFF">
+
+<!-- TODO: Update blank fragment layout -->
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recyclerViewMyProfile"
+    android:layout_width="362dp"
     android:layout_height="match_parent"
-    tools:context="fr.wcs.wildcommunitysocks.MyProfil"
-    android:background="#FFFFFF">
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="10dp"
+    android:stretchMode="spacingWidthUniform"
+    app:layout_constraintHorizontal_bias="0.466"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent">
 
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewMyProfile"
-        android:layout_width="match_parent"
-        android:layout_height="570dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:stretchMode="spacingWidthUniform"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-    </android.support.v7.widget.RecyclerView>
+</android.support.v7.widget.RecyclerView>
 
 
 </FrameLayout>
-

@@ -70,7 +70,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
         buttonModifyProfil.setOnClickListener(this);
         imageViewLogOut.setOnClickListener(this);
-        profile_image.setOnClickListener(this);
+        //profile_image.setOnClickListener(this);
 
         //initializing Firebase authentification objects
         firebaseAuth = FirebaseAuth.getInstance();
@@ -167,7 +167,6 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
             public void onSuccess(Uri uri) {
                 Glide.with(Navigation.this)
                         .load(uri)
-                        .placeholder(R.mipmap.placeholder)
                         .into(profile_image);
 
             }
@@ -218,7 +217,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
     }
 
     public void onClick (View v) {
-        if (v == buttonModifyProfil || v == profile_image) {
+        if (v == buttonModifyProfil ) {
             startActivity(new Intent(this, ModifyProfil.class));
         }
         if ( v == imageViewLogOut) {

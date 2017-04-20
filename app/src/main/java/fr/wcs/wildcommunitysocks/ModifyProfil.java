@@ -274,7 +274,6 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             public void onSuccess(Uri uri) {
                 Glide.with(ModifyProfil.this)
                         .load(uri)
-                        .placeholder(R.mipmap.placeholder)
                         .into(civProfilePic);
             }
         }).addOnFailureListener(new OnFailureListener() {
