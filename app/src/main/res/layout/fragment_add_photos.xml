@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/newSocks"
             android:layout_width="wrap_content"
@@ -21,13 +22,15 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:hint="@string/newSocks"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.014" />
+            app:layout_constraintVertical_bias="0.014"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <ImageButton
             android:id="@+id/galleryButton"
@@ -37,16 +40,18 @@
             android:background="@android:color/transparent"
             android:src="@drawable/album"
             android:text="@string/gallery"
-            android:layout_marginRight="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginRight="52dp"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/rotateButton"
             android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.929"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
-            app:layout_constraintVertical_bias="0.683" />
+            app:layout_constraintHorizontal_bias="0.327"
+            app:layout_constraintVertical_bias="0.71" />
 
 
         <android.support.design.widget.TextInputLayout
@@ -75,68 +80,74 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="262dp"
-            android:layout_height="260dp"
+            android:layout_width="224dp"
+            android:layout_height="224dp"
             android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
-            app:layout_constraintVertical_bias="0.218" />
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.11" />
 
         <ImageButton
             android:id="@+id/cameraButton"
-            android:layout_width="68dp"
-            android:layout_height="66dp"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
             android:layout_gravity="bottom"
             android:background="@android:color/transparent"
             android:src="@drawable/photo_camera"
             android:text="@string/gallery"
-            android:layout_marginLeft="52dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="54dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.007"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.686" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.707"
+            app:layout_constraintRight_toLeftOf="@+id/rotateButton"
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.0" />
 
         <ImageView
             android:id="@+id/rotateButton"
             android:layout_width="53dp"
             android:layout_height="46dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
+            app:srcCompat="@drawable/rotate"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.037"
-            app:layout_constraintLeft_toRightOf="@+id/cameraButton"
-            app:layout_constraintRight_toLeftOf="@+id/galleryButton"
+            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.675"
-            app:srcCompat="@drawable/rotate" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.707"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.377" />
 
         <ImageView
             android:id="@+id/buttonUpload"
             android:layout_width="53dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/textInputName"
+            app:srcCompat="@drawable/rocket"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/textInputName"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/galleryButton"
-            app:layout_constraintVertical_bias="0.489"
-            app:srcCompat="@drawable/rocket" />
+            app:layout_constraintHorizontal_bias="0.282"
+            app:layout_constraintVertical_bias="0.895"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
     </android.support.constraint.ConstraintLayout>
 
     <!--

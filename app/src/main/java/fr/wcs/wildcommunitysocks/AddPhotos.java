@@ -105,6 +105,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         buttonUpload.setOnClickListener(this);
         buttonRotate.setOnClickListener(this);
 
+        buttonRotate.setClickable(false);
+
         int i = (int) (new Date().getTime()/1000);
         idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         displayName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
@@ -161,6 +163,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode,data);
+        buttonRotate.setClickable(true);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
 
             imageUri = data.getData();
@@ -356,7 +359,6 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                     });
             builder.show();
             mEditTextLegende.setEnabled(false);
-            
         }
 
     }
