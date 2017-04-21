@@ -72,6 +72,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
     private float myRate=0;
     private float initialRate;
     private static Chaussette result;
+    private String category;
 
 
     public static String uploadId;
@@ -144,6 +145,7 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
 
         String leg = result.getmLegende();
         String author = result.getmDisplayNameUser();
+        category = result.getmCategory();
 
         url = result.getmImgChaussette();
         initialRate = result.getmNote();
@@ -472,9 +474,10 @@ public class SocksActivity extends AppCompatActivity implements RatingBar.OnRati
         mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(ratedSock);
 
         /**Category**/
-        if(ratedSock.getmCategory()!=""){
-            mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(ratedSock);
+        if(category!=""){
+         mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(uploadId).setValue(ratedSock);
         }
+
         initialRate = ratedSock.getmNote();
         ratingBar.setRating(0);
         thisRating.setText(String.valueOf(initialRate));

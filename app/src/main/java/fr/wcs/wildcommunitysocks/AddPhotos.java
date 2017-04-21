@@ -334,14 +334,20 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                                 case 0:
                                     mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_1);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_1).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 case 1:
                                     mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_2);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_2).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 case 2:
                                     mChaussette.setmCategory(Constants.DATABASE_PATH_CATEGORY_3);
                                     mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(Constants.DATABASE_PATH_CATEGORY_3).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
+                                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 default:
                                     break;
@@ -350,7 +356,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                     });
             builder.show();
             mEditTextLegende.setEnabled(false);
-            textViewLegend.setText(R.string.textViewLeg);
+            
         }
 
     }
