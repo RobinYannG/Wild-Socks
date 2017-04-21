@@ -176,7 +176,8 @@
         app:bb_tabXmlResource="@xml/bottombar_tabs_color_changing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:bb_behavior="shifting"/>
 
     <ImageView
         android:id="@+id/imageViewLogOut"
@@ -192,7 +193,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.285"
-        app:srcCompat="@drawable/disconnect" />
+        app:srcCompat="@drawable/disconnect"
+        />
 
     <FrameLayout
         android:id="@+id/frame_layout"
