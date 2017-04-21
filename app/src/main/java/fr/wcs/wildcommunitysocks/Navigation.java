@@ -54,6 +54,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
     private FirebaseAuth firebaseAuth;
     private StorageReference mStorageRef;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +231,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
                 }
             });
         }
+
     }
 
     public void onClick (View v) {

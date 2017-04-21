@@ -7,23 +7,139 @@
     tools:context="fr.wcs.wildcommunitysocks.AddPhotos"
     android:background="@color/colorWhite">
 
-    <TextView
-        android:id="@+id/newSocks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/newSocks"
-        android:layout_gravity="center_horizontal"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/newSocks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/newSocks"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.014" />
 
-<!--
+        <ImageButton
+            android:id="@+id/galleryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:src="@drawable/album"
+            android:text="@string/gallery"
+            android:layout_marginRight="42dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.929"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.683" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.896">
+        <EditText
+            android:id="@+id/editsockName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:ems="10"
+            android:hint="Légende"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteY="533dp"
+            tools:layout_editor_absoluteX="39dp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="262dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.218" />
+
+        <ImageButton
+            android:id="@+id/cameraButton"
+            android:layout_width="68dp"
+            android:layout_height="66dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:src="@drawable/photo_camera"
+            android:text="@string/gallery"
+            android:layout_marginLeft="52dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.007"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.686" />
+
+        <ImageView
+            android:id="@+id/rotateButton"
+            android:layout_width="53dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.037"
+            app:layout_constraintLeft_toRightOf="@+id/cameraButton"
+            app:layout_constraintRight_toLeftOf="@+id/galleryButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.675"
+            app:srcCompat="@drawable/rotate" />
+
+        <ImageView
+            android:id="@+id/buttonUpload"
+            android:layout_width="53dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/textInputName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/galleryButton"
+            app:layout_constraintVertical_bias="0.489"
+            app:srcCompat="@drawable/rocket" />
+    </android.support.constraint.ConstraintLayout>
+
+    <!--
     <ImageView
         android:id="@+id/imageViewFrame"
         android:layout_marginTop="120dp"
@@ -32,71 +148,6 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/frame_shape2"/>
         -->
-
-    <ImageButton
-        android:id="@+id/cameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gallery"
-        android:src="@drawable/photo_camera"
-        android:layout_marginBottom="130dp"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="50dp"
-        android:layout_gravity="bottom"/>
-
-    <ImageButton
-        android:id="@+id/rotateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="150dp"
-        android:layout_marginBottom="130dp"
-        android:background="@android:color/transparent"
-        android:src="@mipmap/rotating_circular_arrow64"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/sockName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/sockName"
-        android:layout_marginBottom="85dp"
-        android:layout_marginLeft="40dp"
-        android:layout_gravity="bottom"/>
-
-    <EditText
-        android:id="@+id/editsockName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint=""
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="30dp"
-        android:layout_gravity="bottom"/>
-
-    <ImageButton
-        android:id="@+id/buttonUpload"
-        android:layout_width="50dp"
-        android:layout_height="54dp"
-        android:src="@drawable/rocket"
-        android:text="@string/createSocks"
-        android:layout_marginLeft="260dp"
-        android:layout_marginBottom="60dp"
-        android:background="@android:color/transparent"
-        android:textColor="#FFFFFF"
-        android:layout_gravity="bottom"/>
-
-    <ImageButton
-        android:id="@+id/galleryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="130dp"
-        android:layout_marginLeft="250dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/album"
-        android:text="@string/gallery" />
 
 
 </FrameLayout>

@@ -56,8 +56,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private Uri imageUri;
     private ImageButton buttonTakePicture;
     private ImageButton buttonSelectFromGallery;
-    private ImageButton buttonUpload;
-    public  ImageButton buttonRotate;
+    private ImageView buttonUpload, buttonRotate;
     private String mCurrentPhotoPath;
     private StorageReference mStorageRef;
     private Chaussette mChaussette;
@@ -96,10 +95,9 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
         showPhoto = (ImageView) view.findViewById(imageView);
         buttonSelectFromGallery = (ImageButton) view.findViewById(R.id.galleryButton);
         buttonTakePicture=(ImageButton) view.findViewById(R.id.cameraButton);
-        buttonUpload=(ImageButton) view.findViewById(R.id.buttonUpload);
-        buttonRotate=(ImageButton) view.findViewById(R.id.rotateButton);
+        buttonUpload=(ImageView) view.findViewById(R.id.buttonUpload);
+        buttonRotate=(ImageView) view.findViewById(R.id.rotateButton);
         mEditTextLegende = (EditText) view.findViewById(R.id.editsockName);
-        textViewLegend =(TextView) view.findViewById(R.id.sockName);
         uploadId = mDatabase.push().getKey();
 
         buttonTakePicture.setOnClickListener(this);
