@@ -352,6 +352,8 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                                     mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                                 default:
+                                    mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(uploadId).setValue(mChaussette);
+                                    mDatabase.child(mChaussette.getmIdUser()).child(Constants.DATABASE_PATH_UPLOADS).child(mChaussette.getmIdChaussette()).setValue(mChaussette);
                                     break;
                             }
                         }
