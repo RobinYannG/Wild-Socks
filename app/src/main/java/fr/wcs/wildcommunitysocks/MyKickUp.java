@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MyKickUp extends Fragment {
     public static MyKickUp newInstance() {
         MyKickUp fragment = new MyKickUp();
@@ -120,18 +122,48 @@ public class MyKickUp extends Fragment {
                         int itemPosition = rView.getChildLayoutPosition(view);
                         final Chaussette item = rowListItem.get(itemPosition);
 
-                        AlertDialog.Builder unlike = new AlertDialog.Builder(getActivity());
-                        unlike.setTitle(getString(R.string.longClickkick));
-                        unlike.setMessage(getString(R.string.like_or_not));
-                        unlike.setNegativeButton(getString(R.string.still_like), null);
-                        unlike.setPositiveButton(getString(R.string.like_no_more), new AlertDialog.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //rowListItem.add(sock);
-                                mDatabase.child(mAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_MYKICKS).child(item.getmIdChaussette()).removeValue();
-                            }
-                        });
-                        unlike.show();
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("Es-tu sûre ?")
+                                .setContentText("Tu veux supprimer ton Kick Up ?")
+                                .setCancelText("Non")
+                                .setConfirmText("Yes")
+                                .showCancelButton(true)
+                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        // reuse previous dialog instance, keep widget user state, reset them if you need
+                                        sDialog.setTitleText("Super choix !")
+                                                .setContentText("Cette photo mérite vraiment ton Kick Up.")
+                                                .setConfirmText("Continuer")
+                                                .showCancelButton(false)
+                                                .setCancelClickListener(null)
+                                                .setConfirmClickListener(null)
+                                                .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                    }
+                                })
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.setTitleText("Suppression !")
+                                                .setContentText("Tu as supprimer ce Kick Up.")
+                                                .setConfirmText("Continuer")
+                                                .showCancelButton(false)
+                                                .setCancelClickListener(null)
+                                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                                        mDatabase.child(mAuth.getCurrentUser().getUid()).child(Constants.DATABASE_PATH_MYKICKS).child(item.getmIdChaussette()).removeValue();
+
+                                                    }
+                                                })
+                                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+
+                                    }
+
+                                })
+                                .show();
                     }
                 })
         );
