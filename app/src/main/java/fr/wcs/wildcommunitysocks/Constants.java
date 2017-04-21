@@ -27,9 +27,9 @@ public class Constants {
     public static final int MY_REQUEST_CODE=237;
     public static final String DATABASE_PATH_REPORTS ="reports";
     public static final String[] WILD_SOCKS_MODERATOR = {
-            "ITRxdlyykoadJnwjNOxDQjvSRar1",
-            "PwMq8sMXOFbdYiszpchBeyLlqSx2",
-            "d4YAfiYppbOXIIRSv7z7PyzPQNo2"};
+            "nSBK1quYomPK5pmONJGlXIwWxaY2",
+            "vYMqupa8EfbTYL5hksr7nAPVZmn1",
+            "EzpFnv0WN3Py7OUN88gEp6vdcZA3"};
 
 
 }
