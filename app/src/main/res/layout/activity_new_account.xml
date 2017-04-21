@@ -128,15 +128,15 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.393"
+        app:layout_constraintVertical_bias="0.395"
         app:layout_constraintRight_toLeftOf="@+id/textInputPseudo"
         android:layout_marginRight="8dp"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.9" />
 
     <ImageView
         android:id="@+id/imageView17"
-        android:layout_width="29dp"
-        android:layout_height="25dp"
+        android:layout_width="26dp"
+        android:layout_height="24dp"
         app:srcCompat="@drawable/ic_mail"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
@@ -146,7 +146,8 @@
         android:layout_marginRight="12dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        tools:layout_editor_absoluteY="285dp" />
 
     <ImageView
         android:id="@+id/imageView18"
@@ -161,8 +162,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/textInputPassword"
         android:layout_marginRight="8dp"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintVertical_bias="0.595" />
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintVertical_bias="0.604" />
 
     <ImageView
         android:id="@+id/imageView19"
@@ -177,7 +178,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintVertical_bias="0.714" />
 
     <android.support.design.widget.TextInputLayout
@@ -237,7 +238,7 @@
         android:id="@+id/checkBoxLegal"
         android:layout_width="31dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="44dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/imageView19"
