@@ -5,18 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.wcs.wildcommunitysocks.SplashScreen"
-    android:background="#33FFBF">
+    android:background="@drawable/splashscreen">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="0dp"
-        android:layout_height="667dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/splashscreen"
+    <TextView
+        android:id="@+id/textViewCommunity"
+        android:layout_width="447dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Wild Sock Community"
+        android:textColor="@color/colorWhite"
+        android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintVertical_bias="0.194"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.101" />
+
 </android.support.constraint.ConstraintLayout>
