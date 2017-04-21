@@ -168,24 +168,25 @@
 
     <ImageButton
         android:id="@+id/commentView"
-        android:layout_width="64dp"
-        android:layout_height="59dp"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
         android:src="@drawable/commenting"
         app:layout_constraintLeft_toRightOf="@id/ratingBar"
         app:layout_constraintBottom_toTopOf="@id/ratingBar"
         android:background="@android:color/transparent"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="19dp" />
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="19dp"
+        tools:layout_editor_absoluteY="402dp" />
 
     <ImageButton
         android:id="@+id/reportImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="38dp"
+        android:layout_height="32dp"
         android:src="@drawable/exclamation_mark"
         app:layout_constraintRight_toLeftOf="@id/ratingBar"
         app:layout_constraintBottom_toTopOf="@id/ratingBar"
         android:background="@android:color/transparent"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="19dp" />
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="33dp" />
 
 </android.support.constraint.ConstraintLayout>

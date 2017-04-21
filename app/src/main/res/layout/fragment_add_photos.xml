@@ -34,17 +34,6 @@
         -->
 
     <ImageButton
-        android:id="@+id/galleryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gallery"
-        android:src="@drawable/album"
-        android:layout_marginBottom="130dp"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="250dp"
-        android:layout_gravity="bottom"/>
-
-    <ImageButton
         android:id="@+id/cameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,8 +77,8 @@
 
     <ImageButton
         android:id="@+id/buttonUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="54dp"
         android:src="@drawable/rocket"
         android:text="@string/createSocks"
         android:layout_marginLeft="260dp"
@@ -98,7 +87,16 @@
         android:textColor="#FFFFFF"
         android:layout_gravity="bottom"/>
 
-
+    <ImageButton
+        android:id="@+id/galleryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="130dp"
+        android:layout_marginLeft="250dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/album"
+        android:text="@string/gallery" />
 
 
 </FrameLayout>

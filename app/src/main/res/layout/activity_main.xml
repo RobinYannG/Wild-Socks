@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.97"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.934" />
+        app:layout_constraintHorizontal_bias="0.996" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
