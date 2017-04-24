@@ -2,8 +2,8 @@
 
 
     <string name="app_name">WildSocksCommunity</string>
-    <string name="button_start_id">Se Connecter</string>
-    <string name="button_start_new">S\'inscrire</string>
+    <string name="button_start_id">Connexion</string>
+    <string name="button_start_new">Inscription</string>
     <string name="confirm">Ok</string>
     <string name="cancel">Annuler</string>
     <string name="title_activity_main">MainActivity</string>
