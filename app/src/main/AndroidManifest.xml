@@ -31,9 +31,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".NewAccountActivity"
             android:screenOrientation="portrait" />
@@ -72,7 +70,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReportsActivity"></activity>
+        <activity android:name=".ReportsActivity" />
+        <activity android:name=".Credits"></activity>
     </application>
 
 </manifest>
