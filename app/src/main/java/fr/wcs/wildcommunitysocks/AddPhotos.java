@@ -22,7 +22,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,7 +47,6 @@ import static fr.wcs.wildcommunitysocks.R.id.imageView;
 public class AddPhotos extends Fragment implements View.OnClickListener{
 
     //private StorageReference mStorageRef;
-    private static final int PICK_PHOTO = 100;
     private static final int PICK_IMAGE_REQUEST=255;
     private static final int REQUEST_IMAGE_CAPTURE = 234;
 
@@ -61,8 +59,7 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
     private StorageReference mStorageRef;
     private Chaussette mChaussette;
     private EditText mEditTextLegende;
-    private TextView textViewLegend;
-    private FirebaseAuth firebaseAuth;
+
     private String uploadId;
     private String legend;
     private String urlSock;
