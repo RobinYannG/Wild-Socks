@@ -68,6 +68,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:text="Wild Socks Community"
+        android:gravity="center"
         android:textColor="#1FA597"
         android:textSize="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
