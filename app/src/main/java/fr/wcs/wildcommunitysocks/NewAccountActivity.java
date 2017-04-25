@@ -194,7 +194,20 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
 
         if (v==textViewAcceptConditions){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(getString(R.string.terms_of_use))
+            builder.setMessage(getString(R.string.terms_of_use0)
+                    +"\n"+getString(R.string.terms_of_use1)
+                    +"\n"+getString(R.string.terms_of_use2)
+                    +"\n"+getString(R.string.terms_of_use3)
+                    +"\n"+getString(R.string.terms_of_use4)
+                    +"\n"+getString(R.string.terms_of_use5)
+                    +"\n"+getString(R.string.terms_of_use6)
+                    +"\n"+getString(R.string.terms_of_use7)
+                    +"\n"+getString(R.string.terms_of_use8)
+                    +"\n"+getString(R.string.terms_of_use9)
+                    +"\n"+getString(R.string.terms_of_use10)
+                    +"\n"+getString(R.string.terms_of_use11)
+                    +"\n"+getString(R.string.terms_of_use12)
+                    +"\n"+getString(R.string.terms_of_use13))
                     .setTitle(getString(R.string.conditions_title))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
