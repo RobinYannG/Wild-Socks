@@ -45,6 +45,7 @@ public class CommentActivity extends AppCompatActivity {
     private String uploadId;
     private String removeId;
     private String userId;
+    private boolean isModerator;
 
 
     @Override
@@ -57,6 +58,11 @@ public class CommentActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         authorName = mAuth.getCurrentUser().getDisplayName();
         userId =mAuth.getCurrentUser().getUid();
+        for(int i=0;i<Constants.WILD_SOCKS_MODERATOR.length;i++){
+            if(Constants.WILD_SOCKS_MODERATOR[i].equals(userId)){
+                isModerator=true;
+            }
+        }
 
         /**Retrieve the object**/
 
@@ -87,7 +93,7 @@ public class CommentActivity extends AppCompatActivity {
                 removeId = comment.getmIdComment();
 
 
-                if(userId==comment.getmAuthorId()||userId==sock.getmIdUser()){
+                if(userId==comment.getmAuthorId()||userId==sock.getmIdUser()||isModerator){
                     AlertDialog.Builder delete = new AlertDialog.Builder(CommentActivity.this);
                     delete.setTitle(getString(R.string.longClick));
                     delete.setMessage(getString(R.string.deleteComment));
