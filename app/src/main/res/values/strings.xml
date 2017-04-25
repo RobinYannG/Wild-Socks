@@ -118,14 +118,147 @@
         <u>J\'ai lu et j\'accepte les conditions générales d\'utilisation.</u>
     </string>
     <string name="acceptConditionsToast">Tu dois accepter les conditions générales d\'utilisation !</string>
-
-    <string name="conditions">Wild Socks Community, s’adresse à tous les amoureux du détail de l’accessorisation à l’extrême, de tous ce qui pourra rendre nos plus fidèles compagnons de route confortables.
-                            Parce que après tout, on est tous un peu fétichiste de la chaussette!
-                    Cette application a été développée dans le cadre d’un projet scolaire au sein de la Wild Code School Toulouse par Marion Fontaine, Antoine Lebiam, Robin Goudy. Tout droit réservé aux auteurs.
-                    Les données personnelles de l’utilisateur, photos, adresses e-mail et contenus édités, ne seront pas utilisées à des fins commerciales et serons supprimées de la base de donnée des la suppression de ces dernières ou lors de la désinscription.
-            Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr</string>
+    <string name="conditions_title">Terms of Use</string>
     <string name="toast_pointure">Merci d\'indiquer ta pointure</string>
     <string name="toast_accept_conditions">Tu dois accepter les conditions générales d\'utilisation.</string>
 
 
+    <string name="terms_of_use">WILD SOCKS COMMUNITY
+L’application Wild Socks Community (« l’application ») est l’aboutissement du projet de 3 étudiants de WCS : Antoine BIAMOURET, Marion FONTAINE, Robin GOUDY.
+Cette application est la propriété exclusive de la Wild Code School (« WCS »).Pour toute quesition relative a l’application ou aux CGU ci-dessous, tu peux contacter la WCS (https://wildcodeschool.fr, Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr)
+
+REGLES DE BONNE UTILISATION DE WILD SOCKS COMMUNITY
+Je ne poste que des contenus (photos ou commentaires) qui respectent la loi.
+Je respecte l’ensemble des utilisateurs de la Wild Socks Community.
+Je ne poste aucune photo contenant de la nudité.
+Je partage des photos que j’ai prises ou pour lesquelles je dispose des droits.
+Je poste des contenus adaptés à une large audience.
+
+POLITIQUE DE CONFIDENTIALITE
+1. Information collectée
+Ton nom d’utilisateur, ton e-mail et ton mot de passe à la création du compte.
+Les informations que tu fournis pour ton profil(avatar et pointure).
+Les contenus que tu ajoutes (photos et commentaires).
+Communication entre toi et WCS : nous pourrons être amenés à t’envoyer des e-mails en lien avec l’application (modification de mot de passe, mise à jour du service ou des CGU, ...)
+
+2. Utilisations des informations
+Nous pourrons être amenés à retenir les informations de connexion reçues pour te permettre de rester connecté sur le device utilisé.
+
+3.Partage d’information
+WCS ne revend aucune information collectée via Wild Socks Community.
+
+CONDITIONS GENERALES D’UTILISATION (CGU)
+Tu dois avoir au moins 16 ans pour utiliser l’application.
+Tu t’engages à ne poster aucun contenu, photo ou commentaire, violent, raciste, discriminatoire, haineux, illégal, en infraction avec la loi, à caractère pornographique, sexuel, ou contenant de la nudité.
+Tu es responsable de toute activité réalisée sur ton compte.
+Tu es responsable des contenus que tu postes ou partages via l’application.
+Tu t’engages à ne pas récupérer ou utiliser les informations de connexion des autres utilisateurs de l’application.
+Tu es responsable de la préservation de la confidentialité de ton mot de passe.
+Tu ne dois en aucun cas en aucun cas utiliser l’application pour diffamer, harceler, blesser, intimider ou menacer d’autres personnes ou pour poster des informations confidentielles ou d’ordre privé.
+Tu ne dois en aucun cas utiliser l’application dans un but illégal ou non-autorisé. Tu t’engages à respecter les lois et règles applicables à l’utilisation de l’application et de tes contenus y compris en regard du copyright.
+Tu ne dois en aucun cas modifier, altérer ou adapter l’application ou altérer un autre service dans le but de donner l’impression qu’il est lié à l’application ou à WCS.
+Tu ne dois pas envoyer d’e-mail, ou toute forme de démarchage commercial à tout utilisateur de l’application.
+Tu ne dois en aucun cas entraver ou bloquer le fonctionnement de l’application par la transmission de virus, spyware,ou tout autre code de nature malveillante.
+
+Toute violation de ces CGU pourra entraîner de la part de WCS la suppression de ton compte utilisateur ou de tout contenu que tu pourrais avoir posté sur l’application.
+
+WCS se réserve le droit de modifier ou terminer l’application ou ton accès à l’application sans notification préalable.
+Tu peux à tout moment supprimer ton compte Wild Socks Community en de connectant et demandant la destruction de ton compte. Tes photos et autres données personnelles ne seront plus accessibles via ton compte.
+Tes photos et commentaires pourront persister sur l’application (via les kicks des autres utilisateurs par exemple : les photos resteront dans leur page personnelle « MyKicks »)
+
+Wcs se réserve le droit de modifier ces CGU dans le temps. Tu acceptes de recevoir une mise à jour des CGU. Ton utilisation de l’application après cette mise à jour vaudra acceptation de des nouvelles CGU.
+
+WCS se réserve le droit de refuser l’accès à l’application à tout utilisateur à tout moment sans voir à s’en justifier.
+
+WCS pourra, supprimer, bloquer, ou modifier tout contenu qui ne respecterait pas, selon elle, les présentes CGU, mais n’est en aucun cas tenue de le faire.
+
+WCS ne revendique aucune propriété des contenus que tu postes sur l’application. En postant du contenu sur l’application, tu accordes à WCS une licence illimitée non-exclusive et gratuite sur ces-dits contenus.
+
+L’application renferme des contenus appartenant à WCS ou pour lesquels WCS dispose d’une licence(contenus WCS). Ces contenus sont sous copyright et ne peuvent être reproduits exploités ou adaptés.
+
+WCS souhaite que l’application soit aussi largement disponible que possible, cependant il peut arriver que ce service soit interrompu sans notification préalable. WCS ne pourra en aucun cas être tenu responsable de toute suspension ou interruption de service.
+
+WCS n’est en aucun cas responsable des contenus (photos ou commentaires) postés sur l’application, ni de filtrer ou retirer un contenu.
+Tu es légalement responsable de tout contenu que tu choisis de poster sur l’application.
+Tout contenu posté par un utilisateur est non-confidentiel et WCS ne pourra être tenue responsable de toute utilisation de ce contenu.
+
+Fait à Toulouse le 24 avril 2017
+    </string>
+
+    <string name="terms_of_use0">WILD SOCKS COMMUNITY
+  </string>
+    <string name="terms_of_use1">
+L’application Wild Socks Community (« l’application ») est l’aboutissement du projet de 3 étudiants de WCS : Antoine BIAMOURET, Marion FONTAINE, Robin GOUDY.
+Cette application est la propriété exclusive de la Wild Code School (« WCS »).Pour toute quesition relative a l’application ou aux CGU ci-dessous, tu peux contacter la WCS (https://wildcodeschool.fr, Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr)
+    </string>
+    <string name="terms_of_use2">REGLES DE BONNE UTILISATION DE WILD SOCKS COMMUNITY
+    </string>
+    <string name="terms_of_use3">
+Je ne poste que des contenus (photos ou commentaires) qui respectent la loi.
+Je respecte l’ensemble des utilisateurs de la Wild Socks Community.
+Je ne poste aucune photo contenant de la nudité.
+Je partage des photos que j’ai prises ou pour lesquelles je dispose des droits.
+Je poste des contenus adaptés à une large audience.
+    </string>
+    <string name="terms_of_use4">POLITIQUE DE CONFIDENTIALITE
+ </string>
+    <string name="terms_of_use5">
+1. Information collectée
+  </string>
+    <string name="terms_of_use6">
+Ton nom d’utilisateur, ton e-mail et ton mot de passe à la création du compte.
+Les informations que tu fournis pour ton profil(avatar et pointure).
+Les contenus que tu ajoutes (photos et commentaires).
+Communication entre toi et WCS : nous pourrons être amenés à t’envoyer des e-mails en lien avec l’application (modification de mot de passe, mise à jour du service ou des CGU, ...)
+    </string>
+    <string name="terms_of_use7">
+2. Utilisations des informations
+   </string>
+    <string name="terms_of_use8">
+Nous pourrons être amenés à retenir les informations de connexion reçues pour te permettre de rester connecté sur le device utilisé.
+    </string>
+    <string name="terms_of_use9">
+3.Partage d’information
+    </string>
+    <string name="terms_of_use10">
+WCS ne revend aucune information collectée via Wild Socks Community.
+    </string>
+    <string name="terms_of_use11">
+CONDITIONS GENERALES D’UTILISATION (CGU)
+    </string>
+    <string name="terms_of_use12">
+Tu dois avoir au moins 16 ans pour utiliser l’application.
+Tu t’engages à ne poster aucun contenu, photo ou commentaire, violent, raciste, discriminatoire, haineux, illégal, en infraction avec la loi, à caractère pornographique, sexuel, ou contenant de la nudité.
+Tu es responsable de toute activité réalisée sur ton compte.
+Tu es responsable des contenus que tu postes ou partages via l’application.
+Tu t’engages à ne pas récupérer ou utiliser les informations de connexion des autres utilisateurs de l’application.
+Tu es responsable de la préservation de la confidentialité de ton mot de passe.
+Tu ne dois en aucun cas en aucun cas utiliser l’application pour diffamer, harceler, blesser, intimider ou menacer d’autres personnes ou pour poster des informations confidentielles ou d’ordre privé.
+Tu ne dois en aucun cas utiliser l’application dans un but illégal ou non-autorisé. Tu t’engages à respecter les lois et règles applicables à l’utilisation de l’application et de tes contenus y compris en regard du copyright.
+Tu ne dois en aucun cas modifier, altérer ou adapter l’application ou altérer un autre service dans le but de donner l’impression qu’il est lié à l’application ou à WCS.
+Tu ne dois pas envoyer d’e-mail, ou toute forme de démarchage commercial à tout utilisateur de l’application.
+Tu ne dois en aucun cas entraver ou bloquer le fonctionnement de l’application par la transmission de virus, spyware,ou tout autre code de nature malveillante.
+        Toute violation de ces CGU pourra entraîner de la part de WCS la suppression de ton compte utilisateur ou de tout contenu que tu pourrais avoir posté sur l’application.
+WCS se réserve le droit de modifier ou terminer l’application ou ton accès à l’application sans notification préalable.
+Tu peux à tout moment supprimer ton compte Wild Socks Community en de connectant et demandant la destruction de ton compte. Tes photos et autres données personnelles ne seront plus accessibles via ton compte.
+Tes photos et commentaires pourront persister sur l’application (via les kicks des autres utilisateurs par exemple : les photos resteront dans leur page personnelle « MyKicks »)
+Wcs se réserve le droit de modifier ces CGU dans le temps. Tu acceptes de recevoir une mise à jour des CGU. Ton utilisation de l’application après cette mise à jour vaudra acceptation de des nouvelles CGU.
+
+WCS se réserve le droit de refuser l’accès à l’application à tout utilisateur à tout moment sans voir à s’en justifier.
+
+WCS pourra, supprimer, bloquer, ou modifier tout contenu qui ne respecterait pas, selon elle, les présentes CGU, mais n’est en aucun cas tenue de le faire.
+
+WCS ne revendique aucune propriété des contenus que tu postes sur l’application. En postant du contenu sur l’application, tu accordes à WCS une licence illimitée non-exclusive et gratuite sur ces-dits contenus.
+
+L’application renferme des contenus appartenant à WCS ou pour lesquels WCS dispose d’une licence(contenus WCS). Ces contenus sont sous copyright et ne peuvent être reproduits exploités ou adaptés.
+
+WCS souhaite que l’application soit aussi largement disponible que possible, cependant il peut arriver que ce service soit interrompu sans notification préalable. WCS ne pourra en aucun cas être tenu responsable de toute suspension ou interruption de service.
+
+WCS n’est en aucun cas responsable des contenus (photos ou commentaires) postés sur l’application, ni de filtrer ou retirer un contenu.
+Tu es légalement responsable de tout contenu que tu choisis de poster sur l’application.
+Tout contenu posté par un utilisateur est non-confidentiel et WCS ne pourra être tenue responsable de toute utilisation de ce contenu.
+    </string>
+    <string name="terms_of_use13">
+Fait à Toulouse le 24 avril 2017
+    </string>
 </resources>
