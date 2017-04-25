@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         //holder.textViewName.setText(sock.getmLegende());
 
         Glide.with(context).load(sock.getmImgChaussette())
-                .placeholder(R.mipmap.placeholdersocks)
+                .placeholder(R.drawable.home)
                 .into(holder.imageView);
 
         String myNote = Float.toString(sock.getmNote());

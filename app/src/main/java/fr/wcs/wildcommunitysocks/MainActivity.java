@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button button_new;
     private Button button_id;
     private TextView textViewCommunity;
+    private ImageView imageViewCredits;
 
     private FirebaseAuth firebaseAuth;
 
@@ -39,10 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_new = (Button) findViewById(R.id.button_start_new);
         button_id = (Button) findViewById(R.id.button_start_id);
         textViewCommunity = (TextView) findViewById(R.id.textViewCommunity);
+        imageViewCredits = (ImageView) findViewById(R.id.imageViewCredits);
+
 
         //Adding clickListeners
         button_id.setOnClickListener(this);
         button_new.setOnClickListener(this);
+        imageViewCredits.setOnClickListener(this);
 
         Typeface communityType = Typeface.createFromAsset(getAssets(),"OleoScript-Bold.ttf");
         textViewCommunity.setTypeface(communityType);
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(v==button_new){
             startActivity(new Intent(MainActivity.this,NewAccountActivity.class));
+        }
+        if (v==imageViewCredits){
+            startActivity(new Intent(MainActivity.this,Credits.class));
         }
 
     }
