@@ -178,7 +178,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
     public void downloadPicture () {
 
-        final StorageReference userPicture = mStorageRef.child(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar");
+        final StorageReference userPicture = mStorageRef.child(idUser+"_avatar");
         userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -202,7 +202,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
 
         // If there's an upload in progress, save the reference so you can query it later
         if (mStorageRef != null) {
-            outState.putString(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar", mStorageRef.toString());
+            outState.putString(idUser+"_avatar", mStorageRef.toString());
         }
     }
 
@@ -211,7 +211,7 @@ public class Navigation extends AppCompatActivity implements View.OnClickListene
         super.onRestoreInstanceState(savedInstanceState);
 
         // If there was an upload in progress, get its reference and create a new StorageReference
-        final String stringRef = savedInstanceState.getString(firebaseAuth.getCurrentUser().getDisplayName()+"_avatar");
+        final String stringRef = savedInstanceState.getString(idUser+"_avatar");
         if (stringRef == null) {
             return;
         }
