@@ -1,9 +1,11 @@
 package fr.wcs.wildcommunitysocks;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,8 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class NewAccountActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -182,7 +182,6 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-
     @Override
     public void onClick(View v) {
         if(v==buttonSignup){
@@ -194,19 +193,20 @@ public class NewAccountActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (v==textViewAcceptConditions){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.terms_of_use))
+                    .setTitle(getString(R.string.conditions_title))
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
-            new SweetAlertDialog(this)
-                    .setTitleText("Les conditions générales d'utilisation.")
-                    .setContentText("Wild Socks Community, s’adresse à tous les amoureux du détail de l’accessorisation à l’extrême, de tous ce qui pourra rendre nos plus fidèles compagnons de route confortables.\n" +
-                            "\n" +
-                            "Parce que après tout, on est tous un peu fétichiste de la chaussette!\n" +
-                            "\n" +
-                            "Cette application a été développée dans le cadre d’un projet scolaire au sein de la Wild Code School Toulouse par Marion Fontaine, Antoine Biamouret, Robin Goudy. Tout droit réservé aux auteurs.\n" +
-                            "\n" +
-                            "Les données personnelles de l’utilisateur, photos, adresses e-mail et contenus édités, ne seront pas utilisées à des fins commerciales et serons supprimées de la base de donnée dès la suppression de ces dernières ou lors de la désinscription.\n" +
-                            "\n" +
-                            "Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr")
-                    .show();
         }
     }
+
 }
+
+
