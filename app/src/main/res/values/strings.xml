@@ -118,14 +118,152 @@
         <u>J\'ai lu et j\'accepte les conditions générales d\'utilisation.</u>
     </string>
     <string name="acceptConditionsToast">Tu dois accepter les conditions générales d\'utilisation !</string>
+    <string name="conditions_title">Terms of Use</string>
 
-    <string name="conditions">Wild Socks Community, s’adresse à tous les amoureux du détail de l’accessorisation à l’extrême, de tous ce qui pourra rendre nos plus fidèles compagnons de route confortables.
-                            Parce que après tout, on est tous un peu fétichiste de la chaussette!
-                    Cette application a été développée dans le cadre d’un projet scolaire au sein de la Wild Code School Toulouse par Marion Fontaine, Antoine Lebiam, Robin Goudy. Tout droit réservé aux auteurs.
-                    Les données personnelles de l’utilisateur, photos, adresses e-mail et contenus édités, ne seront pas utilisées à des fins commerciales et serons supprimées de la base de donnée des la suppression de ces dernières ou lors de la désinscription.
-            Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr</string>
+    <string name="conditions_par1">The Service is owned or controlled by the Wild Code School ("WCS"). It is the outcome of a development project of three WCS students based in Toulouse </string>
+    <string name="conditions_par2">Antoine Biamouret
+        Marion Fontaine
+        Robin Goudy
+    </string>
+    <string name="conditions_par3">
+        If you have any questions about this Privacy Policy or the Service, please contact the WCS(https://wildcodeschool.fr/).
+    </string>
+    <string name="conditions_par4">
+    Community Guidelines</string>
+    <string name="conditions_par5">
+        Post only your own photos and always follow the law.
+</string>
+    <string name="conditions_par6">
+        Respect everyone on Wild Socks Community, don’t spam people or post nudity.
+</string>
+    <string name="conditions_par7">
+Share only photos that you’ve taken or have the right to share.
+</string>
+    <string name="conditions_par8">
+Post photos and videos that are appropriate for a diverse     audience.
+</string>
+    <string name="conditions_par9">
+Follow the law.
+</string>
+    <string name="conditions_par10">
+Respect other members of the Wild Socks Community.
+</string>
+    <string name="conditions_par11">
+Maintain our supportive environment by not glorifying self-injury.
+</string>
+    <string name="conditions_par12">
+Privacy Policy
+1. INFORMATION WE COLLECT
+Your username, password and e-mail address when you create your account.
+Profile information that you provide for your user profile (e.g., avatar picture and foot size).
+User Content (e.g., photos, comments) that you post to the Service.
+Communications between you and Wild Socks Community. For example, we may send you Service-related emails (e.g., account verification, changes/updates to features of the Service, technical and security notices).
+2. HOW WE USE YOUR INFORMATION
+In addition to some of the specific uses of information we describe in this Privacy Policy, we may use information that we receive to:
+remember information so you will not have to re-enter it during your visit or the next time you visit the Service;
+3. SHARING OF YOUR INFORMATION
+We will not rent or sell your information to third parties.
+</string>
+
+    <string name="conditions_par13">
+
+Terms of Use
+
+You must be at least 16 years old to use the Service
+You may not post violent, nude, partially nude, discriminatory, unlawful, infringing, hateful, pornographic or sexually suggestive photos or other content via the Service.
+You are responsible for any     activity that occurs through your account
+You agree that you will not solicit, collect or use the login credentials of other Instagram users.
+You are responsible for keeping your password secret and secure.
+You must not defame, stalk,     bully, abuse, harass, threaten, impersonate or intimidate people or entities and you must not post private or confidential information via the Service.
+You may not use the Service for any illegal or unauthorized purpose. You agree to comply with all laws, rules and regulations applicable to your use of the Service and your Content, including but not limited to, copyright laws.
+You are solely responsible for your conduct and any content or materials (collectively, "Content") that you submit, post or display on or via the Service.
+You must not change, modify, adapt or alter the Service or change, modify or alter another website so as to falsely imply that it is associated with the Service or the Wild Code School.
+You must not access Wild Socks Community private API by means other than those permitted by Wcs.
+You must not create or submit unwanted email, comments, likes or other forms of commercial or harassing communications (a/k/a "spam") to any Wild Socks Community users.
+You must not interfere or disrupt the Service or servers or networks connected to the Service, including by transmitting any worms, viruses, spyware,         malware or any other code of a destructive or disruptive nature.
+You must comply with Wild Socks Community Guidelines, available below (see Community Guidelines).
+Violation of these Terms of Use may, in WCS’ sole discretion, result in termination of your Wild Socks Community account or suppression of any Content you might have posted on Wild Socks Community.
+You understand and agree that WCS cannot and will not be responsible for the Content posted on the Service and you use the Service at your own risk. If you violate the letter or spirit of these Terms of Use, or otherwise create risk or possible legal exposure for WCS, we can stop providing the Service to you.
+</string>
+
+    <string name="conditions_par14">General Conditions
+    </string>
+    <string name="conditions_par15">We reserve the right to modify or terminate the Service or your access to the Service for any reason, without notice, at any time, and without liability to you.
+    You can deactivate your Wild Socks Community account by logging into the Service and requesting the destruction of your account. Your photos, comments, kicks and all other data will no longer be accessible through your account (e.g., users will not be able to navigate to your socks). Those materials and data may persist and appear within the Service (e.g., if your Content has been kicked by     others : they will keep it in their personnal « MyKicks » view).
+    We reserve the right, in our sole discretion, to change these Terms of Use ("Updated Terms") from time to time. You agree that we may notify you of the Updated Terms by posting them on the Service, and that    your use of the Service after the effective date of the Updated Terms constitutes your agreement to the Updated Terms.
+    We reserve the right to refuse access to the Service to anyone for any reason at any time.
+    We may, but have no obligation to, remove, edit, block, and/or monitor Content or accounts containing Content that we determine in our sole discretion         violates these Terms of Use.
+    Rights
+    7</string>
+    <string name="conditions_par16">WCS does not claim ownership of any Content that you post on or through the Service. Instead, you hereby grant to WCS a non-exclusive, fully paid and royalty-free, transferable, sub-licensable, worldwide license to use the Content     that you post on or through the Service.
+The Service contains content owned or licensed by WCS ("WCS Content"). WCS Content is protected by copyright,you will not reproduce, modify, adapt, prepare derivative works based on, perform, display, publish, distribute, transmit, broadcast, sell, license or otherwise exploit the WCS Content.
+Although it is WCS’s intention for the Service to be available as much as possible, there will be occasions when the Service may be interrupted. Also, WCS reserves the right to remove any Content from the Service for any reason, without prior notice. WCS will not be liable to you for any modification, suspension, or discontinuation of the Services, or the loss of any Content.
+You agree that WCS is not responsible for, and does not endorse, Content posted within the Service. WCS does not have any obligation to prescreen, monitor, edit, or remove any Content. If your Content violates these Terms of Use, you may bear legal responsibility for that Content.
+Any Content will be non-confidential and non-proprietary and we will not be liable for any use or disclosure of Content.
+            Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr
+    April, 24 of 2017</string>
     <string name="toast_pointure">Merci d\'indiquer ta pointure</string>
     <string name="toast_accept_conditions">Tu dois accepter les conditions générales d\'utilisation.</string>
 
+
+    <string name="terms_of_use">The Service is owned or controlled by the Wild Code School ("WCS"). It is the outcome of a development project of three WCS students based in Toulouse
+        Antoine Biamouret
+        Marion Fontaine
+        Robin Goudy
+        If you have any questions about this Privacy Policy or the Service, please contact the WCS(https://wildcodeschool.fr/).">
+    Community Guidelines
+        Post only your own photos and always follow the law.
+        Respect everyone on Wild Socks Community, don’t spam people or post nudity.
+Share only photos that you’ve taken or have the right to share.
+Post photos and videos that are appropriate for a diverse audience.
+Follow the law.
+Respect other members of the Wild Socks Community.
+Maintain our supportive environment by not glorifying self-injury.
+
+Privacy Policy
+1. INFORMATION WE COLLECT
+Your username, password and e-mail address when you create your account.
+Profile information that you provide for your user profile (e.g., avatar picture and foot size).
+User Content (e.g., photos, comments) that you post to the Service.
+Communications between you and Wild Socks Community. For example, we may send you Service-related emails (e.g., account verification, changes/updates to features of the Service, technical and security notices).
+2. HOW WE USE YOUR INFORMATION
+In addition to some of the specific uses of information we describe in this Privacy Policy, we may use information that we receive to:
+remember information so you will not have to re-enter it during your visit or the next time you visit the Service;
+3. SHARING OF YOUR INFORMATION
+We will not rent or sell your information to third parties.
+
+Terms of Use
+
+You must be at least 16 years old to use the Service
+You may not post violent, nude, partially nude, discriminatory, unlawful, infringing, hateful, pornographic or sexually suggestive photos or other content via the Service.
+You are responsible for any     activity that occurs through your account
+You agree that you will not solicit, collect or use the login credentials of other Instagram users.
+You are responsible for keeping your password secret and secure.
+You must not defame, stalk,     bully, abuse, harass, threaten, impersonate or intimidate people or entities and you must not post private or confidential information via the Service.
+You may not use the Service for any illegal or unauthorized purpose. You agree to comply with all laws, rules and regulations applicable to your use of the Service and your Content, including but not limited to, copyright laws.
+You are solely responsible for your conduct and any content or materials (collectively, "Content") that you submit, post or display on or via the Service.
+You must not change, modify, adapt or alter the Service or change, modify or alter another website so as to falsely imply that it is associated with the Service or the Wild Code School.
+You must not access Wild Socks Community private API by means other than those permitted by Wcs.
+You must not create or submit unwanted email, comments, likes or other forms of commercial or harassing communications (a/k/a "spam") to any Wild Socks Community users.
+You must not interfere or disrupt the Service or servers or networks connected to the Service, including by transmitting any worms, viruses, spyware,         malware or any other code of a destructive or disruptive nature.
+You must comply with Wild Socks Community Guidelines, available below (see Community Guidelines).
+Violation of these Terms of Use may, in WCS’ sole discretion, result in termination of your Wild Socks Community account or suppression of any Content you might have posted on Wild Socks Community.
+You understand and agree that WCS cannot and will not be responsible for the Content posted on the Service and you use the Service at your own risk. If you violate the letter or spirit of these Terms of Use, or otherwise create risk or possible legal exposure for WCS, we can stop providing the Service to you.
+General Conditions
+        We reserve the right to modify or terminate the Service or your access to the Service for any reason, without notice, at any time, and without liability to you.
+    You can deactivate your Wild Socks Community account by logging into the Service and requesting the destruction of your account. Your photos, comments, kicks and all other data will no longer be accessible through your account (e.g., users will not be able to navigate to your socks). Those materials and data may persist and appear within the Service (e.g., if your Content has been kicked by     others : they will keep it in their personnal « MyKicks » view).
+    We reserve the right, in our sole discretion, to change these Terms of Use ("Updated Terms") from time to time. You agree that we may notify you of the Updated Terms by posting them on the Service, and that    your use of the Service after the effective date of the Updated Terms constitutes your agreement to the Updated Terms.
+    We reserve the right to refuse access to the Service to anyone for any reason at any time.
+    We may, but have no obligation to, remove, edit, block, and/or monitor Content or accounts containing Content that we determine in our sole discretion         violates these Terms of Use.
+    Rights
+    7
+        WCS does not claim ownership of any Content that you post on or through the Service. Instead, you hereby grant to WCS a non-exclusive, fully paid and royalty-free, transferable, sub-licensable, worldwide license to use the Content     that you post on or through the Service.
+The Service contains content owned or licensed by WCS ("WCS Content"). WCS Content is protected by copyright,you will not reproduce, modify, adapt, prepare derivative works based on, perform, display, publish, distribute, transmit, broadcast, sell, license or otherwise exploit the WCS Content.
+Although it is WCS’s intention for the Service to be available as much as possible, there will be occasions when the Service may be interrupted. Also, WCS reserves the right to remove any Content from the Service for any reason, without prior notice. WCS will not be liable to you for any modification, suspension, or discontinuation of the Services, or the loss of any Content.
+You agree that WCS is not responsible for, and does not endorse, Content posted within the Service. WCS does not have any obligation to prescreen, monitor, edit, or remove any Content. If your Content violates these Terms of Use, you may bear legal responsibility for that Content.
+Any Content will be non-confidential and non-proprietary and we will not be liable for any use or disclosure of Content.
+            Contact : Wild Code School Toulouse - Justine Lacousse - justine@wildcodeschool.fr
+    April, 24 of 2017
+    </string>
 
 </resources>

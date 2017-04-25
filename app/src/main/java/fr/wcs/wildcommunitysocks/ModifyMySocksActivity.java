@@ -6,9 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +33,8 @@ public class ModifyMySocksActivity extends AppCompatActivity implements View.OnC
     private String url;
     private String caption;
     private TextView legend;
+    private Button modify;
+    private EditText newCaption;
 
 
     @Override
@@ -34,6 +44,8 @@ public class ModifyMySocksActivity extends AppCompatActivity implements View.OnC
 
         thisSock = (ImageView) findViewById(R.id.sockImage);
         legend = (TextView) findViewById(R.id.textViewLegend);
+        modify = (Button) findViewById(R.id.buttonModify);
+        newCaption = (EditText) findViewById(R.id.caption);
 
         Intent onStart = getIntent();
         result = onStart.getParcelableExtra("sock");
@@ -41,6 +53,8 @@ public class ModifyMySocksActivity extends AppCompatActivity implements View.OnC
         url = result.getmImgChaussette();
         caption = result.getmLegende();
         legend.setText(caption);
+
+        modify.setOnClickListener(this);
 
 
         new ModifyMySocksActivity.SockImage(thisSock).execute(url);
@@ -80,6 +94,24 @@ public class ModifyMySocksActivity extends AppCompatActivity implements View.OnC
     }
     @Override
     public void onClick(View v) {
+        if(v == modify){
+            String newLegend = newCaption.getText().toString().trim();
+            if(!TextUtils.isEmpty(newLegend)){
+                result.setmLegende(newLegend);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_SOCKS);
+                mDatabase.child(user.getUid()).child(Constants.DATABASE_PATH_UPLOADS).child(result.getmIdChaussette()).setValue(result);
+                mDatabase.child(Constants.DATABASE_PATH_ALL_UPLOADS).child(result.getmIdChaussette()).setValue(result);
+                if(result.getmCategory()!=""){
+                    mDatabase.child(Constants.DATABASE_PATH_CATEGORY).child(result.getmCategory()).child(result.getmIdChaussette()).setValue(result);
+                }
+            }
 
+            Intent goBack = new Intent(ModifyMySocksActivity.this,MySocksActivity.class);
+            goBack.putExtra("sock", result);
+            startActivity(goBack);
+            finish();
+        }
     }
 }
