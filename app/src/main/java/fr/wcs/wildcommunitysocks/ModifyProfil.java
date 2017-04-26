@@ -4,12 +4,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -24,16 +24,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -199,7 +199,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
     private void uploadPicture(final Uri uri) {
 
         if (uri!=null) {
-            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName() + "_avatar");
+            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getUid() + "_avatar");
 
             picRef.putFile(uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -235,7 +235,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imagebitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
-            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getDisplayName() + "_avatar");
+            StorageReference picRef = mStorageRef.child(mAuth.getCurrentUser().getUid() + "_avatar");
 
 
 
@@ -268,7 +268,7 @@ public class ModifyProfil extends AppCompatActivity implements View.OnClickListe
 
     private void downloadPicture () {
 
-        StorageReference userPicture = mStorageRef.child(mAuth.getCurrentUser().getDisplayName()+"_avatar");
+        StorageReference userPicture = mStorageRef.child(mAuth.getCurrentUser().getUid()+"_avatar");
         userPicture.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
