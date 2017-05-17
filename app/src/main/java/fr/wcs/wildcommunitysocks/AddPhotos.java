@@ -357,7 +357,6 @@ public class AddPhotos extends Fragment implements View.OnClickListener{
                     });
             builder.show();
             mEditTextLegende.setEnabled(false);
-
         }
 
     }
